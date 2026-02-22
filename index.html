@@ -537,13 +537,29 @@ function bindGraphInteractions(){
   window.addEventListener('mouseup',()=>{ dragging=false; });
 
   // Apple trackpad: default two-finger scroll pans the canvas.
-  // Zoom only with ctrl/cmd + wheel (or +/- buttons).
+  // Zoom only with ctrl/cmd + wheel (or +/- buttons or pinch).
+  let lastWheelTime=0, lastDeltaX=0, lastDeltaY=0;
   svg.addEventListener('wheel',(e)=>{
     e.preventDefault();
-    if(e.ctrlKey || e.metaKey){
+    const now=Date.now();
+    
+    // Detect zoom intent:
+    // 1. Explicit Ctrl/Cmd modifier key
+    // 2. macOS pinch: sometimes ctrlKey is set by browser
+    // 3. macOS pinch: simultaneous X+Y movement (pinch pattern)
+    const isZoom = e.ctrlKey || e.metaKey 
+      || (Math.abs(e.deltaX)>15 && Math.abs(e.deltaY)>15 && now-lastWheelTime<100);
+    
+    lastWheelTime=now;
+    lastDeltaX=e.deltaX;
+    lastDeltaY=e.deltaY;
+    
+    if(isZoom){
       zoom(e.deltaY<0 ? 0.88 : 1.14);
       return;
     }
+    
+    // Default: pan
     const scaleX=view.w/host.clientWidth;
     const scaleY=view.h/host.clientHeight;
     view.x += e.deltaX * scaleX;
