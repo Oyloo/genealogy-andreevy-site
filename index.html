@@ -5,203 +5,517 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Генеалогия — custom</title>
 <style>
-:root{--bg:#0b1220;--panel:#111a2b;--line:#24324d;--txt:#e8eef9;--muted:#9fb0cc;--acc:#67b0ff}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt)}
-header{padding:16px 18px;border-bottom:1px solid var(--line);background:#0b1220dd;backdrop-filter:blur(6px);position:sticky;top:0;z-index:5}
-h1{margin:0;font-size:18px}.meta{margin-top:6px;font-size:12px;color:var(--muted)}
-.layout{display:grid;grid-template-columns:310px 1fr 420px;gap:10px;padding:10px;height:calc(100vh - 72px)}
-.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden;min-height:0}
-.panel h2{margin:0;padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;color:#c6d6f2}
-.content{padding:10px;height:calc(100% - 41px);overflow:auto}
+:root{
+  --bg:#0b1220; --panel:#111a2b; --line:#24324d; --txt:#e8eef9; --muted:#9fb0cc;
+  --graph-bg:#0a1324; --edge:#87a4d4;
+  --node:#b8a8ff; --node-stroke:#8f74ff;
+  --male:#9cc8ff; --male-stroke:#3b82f6;
+  --female:#f8b4d8; --female-stroke:#db2777;
+  --node-key:#93c5fd; --node-key-stroke:#2563eb;
+  --node-mention:#fdba74; --node-mention-stroke:#ea580c;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt)}
+header{padding:14px 16px;border-bottom:1px solid var(--line);background:#0b1220eb;backdrop-filter:blur(6px);position:sticky;top:0;z-index:20}
+h1{margin:0;font-size:18px}
+.meta{margin-top:6px;font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:280px 1fr 370px;gap:10px;padding:10px;height:calc(100vh - 68px)}
+.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden;min-height:0;display:flex;flex-direction:column}
+.panel h2{margin:0;padding:9px 12px;border-bottom:1px solid var(--line);font-size:13px;color:#c6d6f2;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.content{padding:10px;overflow:auto;min-height:0;flex:1}
 input{width:100%;padding:9px 10px;border-radius:9px;border:1px solid #294063;background:#0c1628;color:#e8eef9}
 .item{margin-top:6px;border:1px solid #253754;background:#0d1728;padding:8px;border-radius:9px;cursor:pointer}
 .item.active{border-color:#67b0ff;background:#10203a}
 .small{font-size:12px;color:var(--muted)}
-#graphWrap{background:#fff;border-radius:8px;overflow:auto;height:100%}
-svg text{font-family:Arial, sans-serif}
-.node rect{rx:9;ry:9;stroke-width:1.2}
-.node:hover rect{stroke:#1d4ed8;stroke-width:2}
-.row{margin:8px 0}.k{font-size:11px;color:#9cb1d6;text-transform:uppercase}.v{margin-top:3px;white-space:pre-wrap;word-break:break-word}
-a{color:#8ec7ff} pre{white-space:pre-wrap;background:#0b1423;border:1px solid #24324d;border-radius:8px;padding:8px;font-size:12px}
-@media(max-width:1200px){.layout{grid-template-columns:1fr}.panel{height:65vh}}
+
+/* visible scrollbars */
+.content::-webkit-scrollbar{width:10px;height:10px}
+.content::-webkit-scrollbar-track{background:#0b1527;border-radius:8px}
+.content::-webkit-scrollbar-thumb{background:#35507a;border-radius:8px}
+.content::-webkit-scrollbar-thumb:hover{background:#4a6ea8}
+
+#graphHost{position:relative;height:100%;background:var(--graph-bg);border-radius:8px;border:1px solid #253b5f;overflow:hidden}
+#graphSvg{position:absolute;inset:0;width:100%;height:100%;user-select:none}
+.legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#cbd8ef}
+.dot{width:10px;height:10px;border-radius:50%}
+.ctrls{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.btn{font-size:12px;padding:4px 8px;border-radius:8px;border:1px solid #3b4c6a;background:#101a2d;color:#d9e7ff;cursor:pointer}
+.btn:hover{border-color:#67b0ff;color:#fff}
+.hint{position:absolute;left:8px;bottom:8px;background:#0b1220cf;color:#d9e7ff;font-size:11px;padding:4px 7px;border-radius:6px;pointer-events:none}
+
+svg text{font-family:Arial,sans-serif}
+.node rect{rx:10;ry:10;stroke-width:1.4;cursor:pointer}
+.node:hover rect{stroke-width:2.2}
+
+.row{margin:8px 0}
+.k{font-size:11px;color:#9cb1d6;text-transform:uppercase;letter-spacing:.04em}
+.v{margin-top:3px;white-space:pre-wrap;word-break:break-word}
+a{color:#8ec7ff}
+pre{white-space:pre-wrap;background:#0b1423;border:1px solid #24324d;border-radius:8px;padding:8px;font-size:12px;line-height:1.35;max-height:380px;overflow:auto}
+details summary{cursor:pointer;color:#b9cef4;font-size:12px}
+
+@media(max-width:1300px){.layout{grid-template-columns:250px 1fr 330px}}
+@media(max-width:1100px){.layout{grid-template-columns:1fr;height:auto}.panel{height:64vh}}
 </style>
 </head>
 <body>
 <header>
-  <h1>Генеалогия (custom renderer, без Graphviz)</h1>
+  <h1>Генеалогия (custom renderer с нуля, без Graphviz)</h1>
   <div class="meta" id="meta">Загрузка...</div>
 </header>
+
 <div class="layout">
-  <section class="panel"><h2>Люди</h2><div class="content"><input id="q" placeholder="поиск" /><div id="list"></div></div></section>
-  <section class="panel"><h2>Связи (с нуля, SVG)</h2><div class="content" id="graphWrap"><svg id="graph"></svg></div></section>
-  <section class="panel"><h2>Карточка + все поля</h2><div class="content" id="details">Выбери человека</div></section>
+  <section class="panel">
+    <h2><span>Люди</span><span class="small" id="listCount"></span></h2>
+    <div class="content">
+      <input id="q" placeholder="Поиск: имя / фамилия / ID" />
+      <div id="list"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>
+      <span>Связи</span>
+      <div class="ctrls">
+        <button class="btn" id="fitBtn">Fit</button>
+        <button class="btn" id="zoomInBtn">+</button>
+        <button class="btn" id="zoomOutBtn">−</button>
+        <button class="btn" id="centerBtn">Center selected</button>
+      </div>
+    </h2>
+    <div class="content" style="padding:8px;display:flex;flex-direction:column;gap:8px;overflow:hidden">
+      <div class="legend">
+        <span><i class="dot" style="background:var(--node-key)"></i> Эд + мама + её родители</span>
+        <span><i class="dot" style="background:var(--node-mention)"></i> Минадора/Фоманида/Фомаида/Федора</span>
+        <span><i class="dot" style="background:var(--female)"></i> Женщины</span>
+        <span><i class="dot" style="background:var(--male)"></i> Мужчины</span>
+      </div>
+      <div id="graphHost">
+        <svg id="graphSvg"></svg>
+        <div class="hint">ЛКМ drag — pan · колесо — zoom</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Карточка + все поля</h2>
+    <div class="content" id="details">Выбери человека</div>
+  </section>
 </div>
+
 <script>
-let DATA, MAP, PEOPLE, FAMS, selected=null;
-const elMeta=document.getElementById('meta'), elList=document.getElementById('list'), elQ=document.getElementById('q'), elDetails=document.getElementById('details');
-const svg=document.getElementById('graph');
-const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let DATA, MAP={}, PEOPLE=[], FAMS=[], selected=null;
+let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
+let view={x:0,y:0,w:100,h:100};
+
+const elMeta=document.getElementById('meta');
+const elList=document.getElementById('list');
+const elQ=document.getElementById('q');
+const elDetails=document.getElementById('details');
+const elCount=document.getElementById('listCount');
+const host=document.getElementById('graphHost');
+const svg=document.getElementById('graphSvg');
+
+const fitBtn=document.getElementById('fitBtn');
+const zoomInBtn=document.getElementById('zoomInBtn');
+const zoomOutBtn=document.getElementById('zoomOutBtn');
+const centerBtn=document.getElementById('centerBtn');
+
+const esc=s=>(s??'').toString().replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 function renderList(arr){
+  elCount.textContent = `${arr.length}/${PEOPLE.length}`;
   elList.innerHTML='';
   arr.forEach(p=>{
-    const d=document.createElement('div'); d.className='item'+(selected===p.id?' active':''); d.dataset.id=p.id;
+    const d=document.createElement('div');
+    d.className='item'+(selected===p.id?' active':'');
+    d.dataset.id=p.id;
     d.innerHTML=`<div><b>${esc(p.name||p.name_raw||p.id)}</b></div><div class='small'>${p.id}${p.surname?(' · '+esc(p.surname)):''}</div>`;
-    d.onclick=()=>select(p.id); elList.appendChild(d);
+    d.onclick=()=>select(p.id,true);
+    elList.appendChild(d);
   });
 }
 
-function fmtEvents(arr){ if(!arr||!arr.length) return '—'; return arr.map(e=>`${esc(e.date||'')} ${e.place?('· '+esc(e.place)):''} ${e.note?('('+esc(e.note)+')'):''}`).join('<br>'); }
-function links(ids){ if(!ids||!ids.length) return '<span class="small">—</span>'; return ids.map(id=>`<a href='#' data-j='${id}' class='j'>${id} — ${esc((MAP[id]?.name)||MAP[id]?.name_raw||'')}</a>`).join('<br>'); }
-
-function renderDetails(id){
-  const p=MAP[id]; if(!p) return; selected=id;
-  elDetails.innerHTML=`
-    <div class='row'><b style='font-size:18px'>${esc(p.name||p.name_raw||id)}</b></div>
-    <div class='row small'>${esc(p.id)} ${p.sex?(' · '+esc(p.sex)):''} ${p.rin?(' · RIN '+esc(p.rin)):''}</div>
-    <div class='row'><div class='k'>Рождение</div><div class='v'>${fmtEvents(p.birth)}</div></div>
-    <div class='row'><div class='k'>Смерть</div><div class='v'>${fmtEvents(p.death)}</div></div>
-    <div class='row'><div class='k'>Погребение</div><div class='v'>${fmtEvents(p.burial)}</div></div>
-    <div class='row'><div class='k'>Родители</div><div class='v'>${links(p.parents)}</div></div>
-    <div class='row'><div class='k'>Дети</div><div class='v'>${links(p.children)}</div></div>
-    <div class='row'><div class='k'>Супруги</div><div class='v'>${links(p.spouses)}</div></div>
-    <div class='row'><div class='k'>RAW GEDCOM</div><pre>${esc(p.raw||'')}</pre></div>
-  `;
-  elDetails.querySelectorAll('.j').forEach(a=>a.onclick=(e)=>{e.preventDefault(); select(a.dataset.j);});
+function fmtEvents(arr){
+  if(!arr||!arr.length) return '—';
+  return arr.map(e=>`${esc(e.date||'')} ${e.place?('· '+esc(e.place)):''} ${e.note?('('+esc(e.note)+')'):''}`).join('<br>');
 }
 
-function buildLayout(){
-  // parent->child edges from families
+function links(ids){
+  if(!ids||!ids.length) return '<span class="small">—</span>';
+  return ids.map(id=>`<a href='#' data-j='${id}' class='j'>${id} — ${esc((MAP[id]?.name)||MAP[id]?.name_raw||'')}</a>`).join('<br>');
+}
+
+function renderDetails(id){
+  const p=MAP[id]; if(!p) return;
+  selected=id;
+
+  const hasEvents=(arr)=>Array.isArray(arr) && arr.some(e=> (e.date||e.place||e.note||'').trim());
+  const row=(title,val)=>`<div class='row'><div class='k'>${title}</div><div class='v'>${val}</div></div>`;
+
+  let html=`
+    <div class='row'><b style='font-size:18px'>${esc(p.name||p.name_raw||id)}</b></div>
+    <div class='row small'>${esc(p.id)} ${p.sex?(' · '+esc(p.sex)):''} ${p.rin?(' · RIN '+esc(p.rin)):''}</div>
+    ${row('Рождение', fmtEvents(p.birth))}
+    ${hasEvents(p.death) ? row('Смерть', fmtEvents(p.death)) : ''}
+    ${hasEvents(p.burial) ? row('Погребение', fmtEvents(p.burial)) : ''}
+    ${hasEvents(p.residence) ? row('Проживание', fmtEvents(p.residence)) : ''}
+    ${row('Родители', links(p.parents))}
+    ${p.children?.length ? row('Дети', links(p.children)) : ''}
+    ${p.spouses?.length ? row('Супруги', links(p.spouses)) : ''}
+    <div class='row'><details><summary>RAW GEDCOM (все поля)</summary><pre>${esc(p.raw||'')}</pre></details></div>
+  `;
+
+  elDetails.innerHTML=html;
+  elDetails.querySelectorAll('.j').forEach(a=>a.onclick=(e)=>{e.preventDefault(); select(a.dataset.j,true);});
+}
+
+function shortName(raw,id,max=24){
+  const n=(raw||id||'').replaceAll('/','').trim();
+  return n.length>max ? (n.slice(0,max-1)+'…') : n;
+}
+
+function splitName2(raw,id,maxLine=16){
+  const full=(raw||id||'').replaceAll('/','').trim();
+  const words=full.split(/\s+/).filter(Boolean);
+  if(!words.length) return [id,''];
+  let l1='', l2='';
+  for(const w of words){
+    if((l1 ? l1+' '+w : w).length <= maxLine){
+      l1 = l1 ? (l1+' '+w) : w;
+    } else {
+      l2 = (l2 ? l2+' '+w : w);
+    }
+  }
+  if(!l2 && l1.length > maxLine){
+    l2 = l1.slice(maxLine-1);
+    l1 = l1.slice(0,maxLine-1);
+  }
+  if(l2.length > maxLine+2) l2 = l2.slice(0,maxLine+1)+'…';
+  return [l1, l2];
+}
+
+function years(p){
+  const b=(p.birth&&p.birth[0]&&p.birth[0].date)||'';
+  const d=(p.death&&p.death[0]&&p.death[0].date)||'';
+  const y=s=>{const m=(s||'').match(/(\d{4})/); return m?m[1]:''};
+  const by=y(b), dy=y(d);
+  if(!by && !dy) return '';
+  return `${by||'?'}—${dy||''}`;
+}
+
+function buildGraphModel(){
   const parents=new Map(), children=new Map(), indeg=new Map();
   PEOPLE.forEach(p=>{parents.set(p.id,new Set()); children.set(p.id,new Set()); indeg.set(p.id,0);});
+
   FAMS.forEach(f=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>MAP[id]);
     const ch=(f.children||[]).filter(id=>MAP[id]);
     ps.forEach(p=>ch.forEach(c=>{children.get(p).add(c); parents.get(c).add(p);}));
   });
-  PEOPLE.forEach(p=>indeg.set(p.id, parents.get(p.id).size));
 
+  PEOPLE.forEach(p=>indeg.set(p.id, parents.get(p.id).size));
   const roots=PEOPLE.filter(p=>indeg.get(p.id)===0).map(p=>p.id);
+
   const level=new Map(); roots.forEach(r=>level.set(r,0));
   const q=[...roots];
   while(q.length){
-    const u=q.shift(); const lu=level.get(u)||0;
+    const u=q.shift();
+    const lu=level.get(u)||0;
     [...children.get(u)].forEach(v=>{
-      const nv=Math.max(level.get(v)??0, lu+1); level.set(v,nv);
-      indeg.set(v, indeg.get(v)-1); if(indeg.get(v)===0) q.push(v);
+      const nv=Math.max(level.get(v)??0, lu+1);
+      level.set(v,nv);
+      indeg.set(v, indeg.get(v)-1);
+      if(indeg.get(v)===0) q.push(v);
     });
   }
   PEOPLE.forEach(p=>{ if(!level.has(p.id)) level.set(p.id,0); });
 
   const layers={};
   PEOPLE.forEach(p=>{const l=level.get(p.id); (layers[l]=layers[l]||[]).push(p.id);});
-  Object.values(layers).forEach(arr=>arr.sort((a,b)=>(MAP[a].surname||'').localeCompare(MAP[b].surname||'','ru') || (MAP[a].name||'').localeCompare(MAP[b].name||'','ru')));
+  Object.values(layers).forEach(arr=>arr.sort((a,b)=>
+    (MAP[a].surname||'').localeCompare(MAP[b].surname||'','ru') ||
+    (MAP[a].name||'').localeCompare(MAP[b].name||'','ru')
+  ));
 
-  // iterative x-order by parent barycenter
-  for(let it=0; it<3; it++){
-    Object.keys(layers).map(Number).sort((a,b)=>a-b).forEach(l=>{
-      const arr=layers[l];
-      const pos=Object.fromEntries(arr.map((id,i)=>[id,i]));
+  // reorder for fewer crossings
+  const levelKeys=Object.keys(layers).map(Number).sort((a,b)=>a-b);
+  for(let pass=0; pass<5; pass++){
+    for(const l of levelKeys){
+      const arr=layers[l], prev=layers[l-1]||[];
       arr.sort((a,b)=>{
-        const pa=[...parents.get(a)].map(x=>pos[x]).filter(v=>v!==undefined);
-        const pb=[...parents.get(b)].map(x=>pos[x]).filter(v=>v!==undefined);
-        const ba=pa.length?pa.reduce((s,v)=>s+v,0)/pa.length:999;
-        const bb=pb.length?pb.reduce((s,v)=>s+v,0)/pb.length:999;
-        return ba-bb;
+        const avg=(id)=>{
+          const pars=[...parents.get(id)];
+          if(!pars.length) return prev.length + 100;
+          return pars.reduce((s,p)=>s + (prev.indexOf(p)>=0?prev.indexOf(p):prev.length+5),0)/pars.length;
+        };
+        return avg(a)-avg(b);
       });
-    });
+    }
   }
 
-  const nodeW=170,nodeH=54,gx=30,gy=90,margin=30;
+  const margin=24;
   const maxCols=Math.max(...Object.values(layers).map(a=>a.length));
-  const depth=Math.max(...Object.keys(layers).map(Number));
-  const W=Math.max(1100, margin*2 + maxCols*(nodeW+gx));
-  const H=Math.max(700, margin*2 + (depth+1)*(nodeH+gy));
-  svg.setAttribute('width',W); svg.setAttribute('height',H);
+  const depth=Math.max(...levelKeys);
+
+  // compress base geometry so full tree stays readable on one screen more often
+  const targetW=1500, targetH=920;
+  const gx = maxCols > 9 ? 10 : 14;
+  const gy = depth > 7 ? 30 : 38;
+
+  const nodeW = Math.max(104, Math.min(170,
+    Math.floor((targetW - 2*margin - Math.max(0,maxCols-1)*gx) / maxCols)
+  ));
+  const nodeH = Math.max(46, Math.min(58,
+    Math.floor((targetH - 2*margin - Math.max(0,depth)*gy) / (depth+1))
+  ));
+
+  const worldW = Math.max(900, margin*2 + maxCols*nodeW + Math.max(0,maxCols-1)*gx);
+  const worldH = Math.max(620, margin*2 + (depth+1)*nodeH + Math.max(0,depth)*gy);
 
   const xy={};
-  Object.keys(layers).map(Number).sort((a,b)=>a-b).forEach(l=>{
+  for(const l of levelKeys){
     const arr=layers[l];
-    const rowW=arr.length*nodeW + (arr.length-1)*gx;
-    let x=(W-rowW)/2;
+    const rowW=arr.length*nodeW + Math.max(0,arr.length-1)*gx;
+    let x=(worldW-rowW)/2;
     const y=margin + l*(nodeH+gy);
-    arr.forEach(id=>{xy[id]={x,y}; x += nodeW+gx;});
-  });
-  return {xy,nodeW,nodeH,W,H};
+    arr.forEach(id=>{xy[id]={x,y}; x+=nodeW+gx;});
+  }
+
+  graph={xy,nodeW,nodeH,worldW,worldH};
 }
 
-function draw(){
-  while(svg.firstChild) svg.removeChild(svg.firstChild);
-  const {xy,nodeW,nodeH}=buildLayout();
-  // edges
-  const edgeG=document.createElementNS('http://www.w3.org/2000/svg','g');
-  edgeG.setAttribute('stroke','#94a3b8'); edgeG.setAttribute('fill','none'); edgeG.setAttribute('stroke-width','1.2');
+function applyViewBox(){
+  svg.setAttribute('viewBox',`${view.x} ${view.y} ${view.w} ${view.h}`);
+}
+
+function fitView(){
+  if(!graph) return;
+  view={x:0,y:0,w:graph.worldW,h:graph.worldH};
+  applyViewBox();
+}
+
+function clampView(){
+  if(!graph) return;
+  view.w=Math.max(graph.worldW*0.12, Math.min(graph.worldW, view.w));
+  view.h=Math.max(graph.worldH*0.12, Math.min(graph.worldH, view.h));
+  view.x=Math.max(0, Math.min(graph.worldW-view.w, view.x));
+  view.y=Math.max(0, Math.min(graph.worldH-view.h, view.y));
+}
+
+function zoom(factor){
+  if(!graph) return;
+  const cx=view.x+view.w/2, cy=view.y+view.h/2;
+  view.w*=factor; view.h*=factor;
+  clampView();
+  view.x=cx-view.w/2; view.y=cy-view.h/2;
+  clampView();
+  applyViewBox();
+}
+
+function centerOnSelected(){
+  if(!graph || !selected || !graph.xy[selected]) return;
+  const c=graph.xy[selected];
+  const cx=c.x+graph.nodeW/2, cy=c.y+graph.nodeH/2;
+  view.x=cx-view.w/2; view.y=cy-view.h/2;
+  clampView();
+  applyViewBox();
+}
+
+function drawGraph(){
+  if(!graph) return;
+  svg.innerHTML='';
+
+  const {xy,nodeW,nodeH}=graph;
+
+  const edges=document.createElementNS('http://www.w3.org/2000/svg','g');
+  edges.setAttribute('stroke', 'var(--edge)');
+  edges.setAttribute('fill','none');
+  edges.setAttribute('stroke-width','1.6');
+
   FAMS.forEach(f=>{
-    const ps=[...(f.husband||[]),...(f.wife||[])].filter(id=>xy[id]);
+    const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
     if(!ps.length || !ch.length) return;
-    const px=ps.map(id=>xy[id].x+nodeW/2); const py=ps.map(id=>xy[id].y+nodeH);
-    const cx=ch.map(id=>xy[id].x+nodeW/2); const cy=ch.map(id=>xy[id].y);
+
+    const px=ps.map(id=>xy[id].x + nodeW/2);
+    const py=ps.map(id=>xy[id].y + nodeH);
+    const cx=ch.map(id=>xy[id].x + nodeW/2);
+    const cy=ch.map(id=>xy[id].y);
+
     const yMid=(Math.max(...py)+Math.min(...cy))/2;
+
     ps.forEach((id,i)=>{
       const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-      p.setAttribute('d',`M ${px[i]} ${py[i]} V ${yMid}`); edgeG.appendChild(p);
+      p.setAttribute('d',`M ${px[i]} ${py[i]} V ${yMid}`); edges.appendChild(p);
     });
+
     const h1=document.createElementNS('http://www.w3.org/2000/svg','path');
-    h1.setAttribute('d',`M ${Math.min(...px)} ${yMid} H ${Math.max(...px)}`); edgeG.appendChild(h1);
+    h1.setAttribute('d',`M ${Math.min(...px)} ${yMid} H ${Math.max(...px)}`); edges.appendChild(h1);
+
     const hub=(Math.min(...px)+Math.max(...px))/2;
-    const v=document.createElementNS('http://www.w3.org/2000/svg','path');
-    v.setAttribute('d',`M ${hub} ${yMid} V ${yMid+14}`); edgeG.appendChild(v);
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',hub); dot.setAttribute('cy',yMid); dot.setAttribute('r','2.4'); dot.setAttribute('fill','#c4d7f6');
+    edges.appendChild(dot);
+
+    const down=document.createElementNS('http://www.w3.org/2000/svg','path');
+    down.setAttribute('d',`M ${hub} ${yMid} V ${yMid+10}`); edges.appendChild(down);
+
     const h2=document.createElementNS('http://www.w3.org/2000/svg','path');
-    h2.setAttribute('d',`M ${Math.min(...cx)} ${yMid+14} H ${Math.max(...cx)}`); edgeG.appendChild(h2);
+    h2.setAttribute('d',`M ${Math.min(...cx)} ${yMid+10} H ${Math.max(...cx)}`); edges.appendChild(h2);
+
     ch.forEach(id=>{
-      const c=document.createElementNS('http://www.w3.org/2000/svg','path');
-      c.setAttribute('d',`M ${xy[id].x+nodeW/2} ${yMid+14} V ${xy[id].y}`); edgeG.appendChild(c);
+      const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d',`M ${xy[id].x+nodeW/2} ${yMid+10} V ${xy[id].y}`); edges.appendChild(p);
     });
   });
-  svg.appendChild(edgeG);
 
-  // nodes
-  const nodeG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  svg.appendChild(edges);
+
+  const nodes=document.createElementNS('http://www.w3.org/2000/svg','g');
   PEOPLE.forEach(p=>{
     const pos=xy[p.id]; if(!pos) return;
-    const g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.classList.add('node'); g.setAttribute('data-id',p.id);
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.classList.add('node'); g.dataset.id=p.id;
+
     const isKey=['I0001','I0007','I0016','I0017'].includes(p.id);
     const isMention=['I0135','I0263','I0265','I0268'].includes(p.id);
-    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    r.setAttribute('x',pos.x); r.setAttribute('y',pos.y); r.setAttribute('width',nodeW); r.setAttribute('height',nodeH);
-    r.setAttribute('fill', isKey ? '#dbeafe' : (isMention ? '#ffedd5' : '#ede9fe'));
-    r.setAttribute('stroke', isKey ? '#1d4ed8' : (isMention ? '#ea580c' : '#7c3aed'));
-    g.appendChild(r);
+
+    let fill='var(--node)', stroke='var(--node-stroke)';
+    if(isKey){ fill='var(--node-key)'; stroke='var(--node-key-stroke)'; }
+    else if(isMention){ fill='var(--node-mention)'; stroke='var(--node-mention-stroke)'; }
+    else if((p.sex||'').toUpperCase()==='M'){ fill='var(--male)'; stroke='var(--male-stroke)'; }
+    else if((p.sex||'').toUpperCase()==='F'){ fill='var(--female)'; stroke='var(--female-stroke)'; }
+
+    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x',pos.x); rect.setAttribute('y',pos.y);
+    rect.setAttribute('width',nodeW); rect.setAttribute('height',nodeH);
+    rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
+
+    const [line1, line2] = splitName2(p.name||p.name_raw,p.id, Math.max(12, Math.floor((nodeW-16)/7.6)));
 
     const t1=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1.setAttribute('x',pos.x+8); t1.setAttribute('y',pos.y+22); t1.setAttribute('font-size','12'); t1.setAttribute('fill','#0f172a');
-    const nm=(p.name||p.name_raw||p.id); t1.textContent=nm.length>28?nm.slice(0,28)+'…':nm; g.appendChild(t1);
-    const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t2.setAttribute('x',pos.x+8); t2.setAttribute('y',pos.y+40); t2.setAttribute('font-size','11'); t2.setAttribute('fill','#334155');
-    t2.textContent=p.id; g.appendChild(t2);
-    g.addEventListener('click',()=>select(p.id));
-    nodeG.appendChild(g);
-  });
-  svg.appendChild(nodeG);
+    t1.setAttribute('x',pos.x+8); t1.setAttribute('y',pos.y+18);
+    t1.setAttribute('font-size', nodeW<120 ? '10.2' : '11.5');
+    t1.setAttribute('fill','#121a27');
+    t1.textContent=line1;
 
-  // highlight selected
-  if(selected){
-    const n=[...svg.querySelectorAll('.node')].find(x=>x.getAttribute('data-id')===selected);
-    if(n){ const rr=n.querySelector('rect'); rr.setAttribute('stroke','#ef4444'); rr.setAttribute('stroke-width','2.4'); }
-  }
+    const t1b=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t1b.setAttribute('x',pos.x+8); t1b.setAttribute('y',pos.y+32);
+    t1b.setAttribute('font-size', nodeW<120 ? '10.2' : '11.5');
+    t1b.setAttribute('fill','#121a27');
+    t1b.textContent=line2 || '';
+
+    const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t2.setAttribute('x',pos.x+8); t2.setAttribute('y',pos.y+nodeH-8);
+    t2.setAttribute('font-size', nodeW<120 ? '9.6' : '10.6');
+    t2.setAttribute('fill','#314764');
+    const yy=years(p);
+    t2.textContent=yy ? `${p.id} · ${yy}` : p.id;
+
+    const title=document.createElementNS('http://www.w3.org/2000/svg','title');
+    title.textContent=`${(p.name||p.name_raw||p.id).replaceAll('/','').trim()}\n${p.id}${yy?(' · '+yy):''}`;
+
+    g.appendChild(rect); g.appendChild(t1); g.appendChild(t1b); g.appendChild(t2); g.appendChild(title);
+    g.onclick=()=>select(p.id,true);
+    nodes.appendChild(g);
+  });
+
+  svg.appendChild(nodes);
+  applyViewBox();
+  highlightSelected();
 }
 
-function select(id){ selected=id; renderDetails(id); renderList(PEOPLE); draw(); }
+function highlightSelected(){
+  svg.querySelectorAll('.node rect').forEach(r=>r.setAttribute('stroke-width','1.4'));
+  if(!selected) return;
+  const n=svg.querySelector(`.node[data-id='${selected}'] rect`);
+  if(n){ n.setAttribute('stroke','#ef4444'); n.setAttribute('stroke-width','3'); }
+}
+
+function select(id,center=false){
+  selected=id;
+  renderDetails(id);
+  renderList(PEOPLE);
+  highlightSelected();
+  if(center) centerOnSelected();
+}
+
+function bindGraphInteractions(){
+  let dragging=false, start=null, startView=null;
+
+  svg.addEventListener('mousedown',(e)=>{
+    if(e.button!==0) return;
+    dragging=true;
+    start={x:e.clientX,y:e.clientY};
+    startView={...view};
+  });
+
+  window.addEventListener('mousemove',(e)=>{
+    if(!dragging) return;
+    const dxPx=e.clientX-start.x;
+    const dyPx=e.clientY-start.y;
+    const scaleX=startView.w/host.clientWidth;
+    const scaleY=startView.h/host.clientHeight;
+    view.x=startView.x - dxPx*scaleX;
+    view.y=startView.y - dyPx*scaleY;
+    clampView();
+    applyViewBox();
+  });
+
+  window.addEventListener('mouseup',()=>{ dragging=false; });
+
+  svg.addEventListener('wheel',(e)=>{
+    e.preventDefault();
+    zoom(e.deltaY<0 ? 0.88 : 1.14);
+  }, {passive:false});
+
+  fitBtn.onclick=()=>fitView();
+  zoomInBtn.onclick=()=>zoom(0.88);
+  zoomOutBtn.onclick=()=>zoom(1.14);
+  centerBtn.onclick=()=>centerOnSelected();
+
+  window.addEventListener('resize',()=>{
+    // keep same center while resizing
+    const cx=view.x+view.w/2, cy=view.y+view.h/2;
+    drawGraph();
+    view.x=cx-view.w/2; view.y=cy-view.h/2;
+    clampView();
+    applyViewBox();
+  });
+}
 
 async function init(){
-  const r=await fetch('data.json'); DATA=await r.json(); PEOPLE=DATA.people; FAMS=DATA.families; MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
-  elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · renderer: ${DATA.meta.generator}`;
+  const r=await fetch('data.json');
+  DATA=await r.json();
+  PEOPLE=DATA.people;
+  FAMS=DATA.families;
+  MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
+
+  elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · ${DATA.meta.generator}`;
+
   renderList(PEOPLE);
-  select(MAP['I0001']?'I0001':PEOPLE[0].id);
-  elQ.oninput=()=>{const q=elQ.value.trim().toLowerCase(); const arr=!q?PEOPLE:PEOPLE.filter(p=>(`${p.id} ${p.name} ${p.name_raw} ${p.surname} ${p.given}`).toLowerCase().includes(q)); renderList(arr);} 
+  buildGraphModel();
+  fitView();
+  drawGraph();
+  bindGraphInteractions();
+
+  const start = MAP['I0001'] ? 'I0001' : PEOPLE[0]?.id;
+  if(start) select(start,true);
+
+  elQ.oninput=()=>{
+    const q=elQ.value.trim().toLowerCase();
+    const arr=!q ? PEOPLE : PEOPLE.filter(p=>`${p.id} ${p.name} ${p.name_raw} ${p.surname} ${p.given}`.toLowerCase().includes(q));
+    renderList(arr);
+  };
 }
-init();
+
+init().catch(err=>{
+  console.error(err);
+  elMeta.textContent='Ошибка загрузки data.json';
+});
 </script>
 </body>
 </html>
