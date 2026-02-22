@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Генеалогия — Ильины/Амбросовы/Андреевы</title>
+  <style>
+    :root{--bg:#0b1220;--card:#111a2b;--muted:#9fb0cc;--txt:#e8eef9;--accent:#67b0ff;--line:#24324d}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt)}
+    header{padding:18px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1220d9;backdrop-filter:blur(6px);z-index:10}
+    h1{margin:0;font-size:20px}
+    .meta{font-size:13px;color:var(--muted);margin-top:6px}
+    .layout{display:grid;grid-template-columns:330px 1fr 420px;gap:12px;padding:12px;height:calc(100vh - 80px)}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:0}
+    .panel h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px;color:#c6d6f2}
+    .content{padding:10px;overflow:auto;height:calc(100% - 46px)}
+    input[type="search"]{width:100%;background:#0e1627;border:1px solid #2a3c5c;color:var(--txt);border-radius:10px;padding:10px}
+    .person{padding:8px 10px;margin-top:6px;border:1px solid #24324d;border-radius:10px;cursor:pointer;background:#0e1627}
+    .person:hover{border-color:#3f78bf}
+    .person.active{border-color:#67b0ff;background:#10203a}
+    .small{font-size:12px;color:var(--muted)}
+    .pill{display:inline-block;padding:3px 8px;border:1px solid #35507a;border-radius:999px;font-size:12px;margin-right:6px;margin-top:4px}
+    .row{margin:8px 0}
+    .k{color:#9cb1d6;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+    .v{margin-top:3px;white-space:pre-wrap;word-break:break-word}
+    pre{background:#0b1423;border:1px solid #24324d;border-radius:10px;padding:10px;white-space:pre-wrap;font-size:12px;line-height:1.35}
+    .graph-wrap{overflow:auto;height:100%;background:white}
+    .graph-wrap img{display:block;max-width:none}
+    a{color:#8ec7ff}
+    @media(max-width:1400px){.layout{grid-template-columns:290px 1fr 360px}}
+    @media(max-width:1100px){.layout{grid-template-columns:1fr;height:auto}.panel{height:65vh}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Генеалогия: Ильины / Амбросовы / Андреевы</h1>
+    <div class="meta" id="meta">Загрузка…</div>
+  </header>
+  <div class="layout">
+    <section class="panel">
+      <h2>Люди</h2>
+      <div class="content">
+        <input id="q" type="search" placeholder="Поиск: имя, фамилия, ID (например I0135)" />
+        <div id="list"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Граф (Graphviz v4 clean)</h2>
+      <div class="content graph-wrap">
+        <img src="graph.svg" alt="genealogy graph" />
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Карточка + все поля</h2>
+      <div class="content" id="details">
+        Выбери человека слева.
+      </div>
+    </section>
+  </div>
+
+<script>
+let DATA=null, PEOPLE=[], MAP={};
+const elList=document.getElementById('list');
+const elMeta=document.getElementById('meta');
+const elDetails=document.getElementById('details');
+const elQ=document.getElementById('q');
+
+function esc(s){return (s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function linkPeople(ids){ if(!ids||!ids.length) return '<span class="small">—</span>'; return ids.map(id=>`<a href="#" data-id="${id}" class="jump">${id} — ${esc((MAP[id]?.name)||MAP[id]?.name_raw||'')}</a>`).join('<br>'); }
+function fmtEvents(arr){ if(!arr||!arr.length) return '—'; return arr.map(e=>`${esc(e.date||'')} ${e.place?('· '+esc(e.place)):''} ${e.note?('('+esc(e.note)+')'):''}`).join('<br>'); }
+
+function renderList(items){
+  elList.innerHTML='';
+  for(const p of items){
+    const d=document.createElement('div');
+    d.className='person'; d.dataset.id=p.id;
+    d.innerHTML=`<div><strong>${esc(p.name||p.name_raw||p.id)}</strong></div><div class="small">${p.id}${p.surname?(' · '+esc(p.surname)):''}${p.birth?.[0]?.date?(' · b. '+esc(p.birth[0].date)):''}</div>`;
+    d.onclick=()=>selectPerson(p.id);
+    elList.appendChild(d);
+  }
+}
+
+function selectPerson(id){
+  const p=MAP[id]; if(!p) return;
+  document.querySelectorAll('.person').forEach(n=>n.classList.toggle('active', n.dataset.id===id));
+  elDetails.innerHTML=`
+    <div class="row"><strong style="font-size:18px">${esc(p.name||p.name_raw||id)}</strong></div>
+    <div class="row small">ID: ${esc(p.id)} ${p.sex?(' · SEX: '+esc(p.sex)):''} ${p.rin?(' · RIN: '+esc(p.rin)):''}</div>
+    <div class="row">${p.surname?`<span class="pill">Фамилия: ${esc(p.surname)}</span>`:''}${p.given?`<span class="pill">Имя: ${esc(p.given)}</span>`:''}${p.marnm?`<span class="pill">После брака: ${esc(p.marnm)}</span>`:''}</div>
+    <div class="row"><div class="k">Рождение</div><div class="v">${fmtEvents(p.birth)}</div></div>
+    <div class="row"><div class="k">Смерть</div><div class="v">${fmtEvents(p.death)}</div></div>
+    <div class="row"><div class="k">Погребение</div><div class="v">${fmtEvents(p.burial)}</div></div>
+    <div class="row"><div class="k">Проживание</div><div class="v">${fmtEvents(p.residence)}</div></div>
+    <div class="row"><div class="k">Родители</div><div class="v">${linkPeople(p.parents)}</div></div>
+    <div class="row"><div class="k">Супруги</div><div class="v">${linkPeople(p.spouses)}</div></div>
+    <div class="row"><div class="k">Дети</div><div class="v">${linkPeople(p.children)}</div></div>
+    <div class="row"><div class="k">FAMC / FAMS</div><div class="v">FAMC: ${esc((p.famc||[]).join(', ')||'—')}<br>FAMS: ${esc((p.fams||[]).join(', ')||'—')}</div></div>
+    <div class="row"><div class="k">RAW GEDCOM (все поля записи)</div><pre>${esc(p.raw||'')}</pre></div>
+  `;
+  elDetails.querySelectorAll('.jump').forEach(a=>a.onclick=(e)=>{e.preventDefault(); selectPerson(a.dataset.id);});
+}
+
+async function init(){
+  const res=await fetch('data.json');
+  DATA=await res.json(); PEOPLE=DATA.people; MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
+  elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · Источник: ${DATA.meta.source_file.split('/').slice(-1)[0]}`;
+  renderList(PEOPLE);
+  selectPerson('I0001' in MAP ? 'I0001' : PEOPLE[0].id);
+  elQ.addEventListener('input',()=>{
+    const q=elQ.value.trim().toLowerCase();
+    if(!q) return renderList(PEOPLE);
+    const filtered=PEOPLE.filter(p=>{
+      const hay=[p.id,p.name,p.name_raw,p.given,p.surname,p.marnm].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+    renderList(filtered);
+  });
+}
+init();
+</script>
+</body>
+</html>
