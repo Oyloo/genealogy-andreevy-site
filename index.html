@@ -1,123 +1,205 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Генеалогия — Ильины/Амбросовы/Андреевы</title>
-  <style>
-    :root{--bg:#0b1220;--card:#111a2b;--muted:#9fb0cc;--txt:#e8eef9;--accent:#67b0ff;--line:#24324d}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt)}
-    header{padding:18px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1220d9;backdrop-filter:blur(6px);z-index:10}
-    h1{margin:0;font-size:20px}
-    .meta{font-size:13px;color:var(--muted);margin-top:6px}
-    .layout{display:grid;grid-template-columns:330px 1fr 420px;gap:12px;padding:12px;height:calc(100vh - 80px)}
-    .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:0}
-    .panel h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px;color:#c6d6f2}
-    .content{padding:10px;overflow:auto;height:calc(100% - 46px)}
-    input[type="search"]{width:100%;background:#0e1627;border:1px solid #2a3c5c;color:var(--txt);border-radius:10px;padding:10px}
-    .person{padding:8px 10px;margin-top:6px;border:1px solid #24324d;border-radius:10px;cursor:pointer;background:#0e1627}
-    .person:hover{border-color:#3f78bf}
-    .person.active{border-color:#67b0ff;background:#10203a}
-    .small{font-size:12px;color:var(--muted)}
-    .pill{display:inline-block;padding:3px 8px;border:1px solid #35507a;border-radius:999px;font-size:12px;margin-right:6px;margin-top:4px}
-    .row{margin:8px 0}
-    .k{color:#9cb1d6;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
-    .v{margin-top:3px;white-space:pre-wrap;word-break:break-word}
-    pre{background:#0b1423;border:1px solid #24324d;border-radius:10px;padding:10px;white-space:pre-wrap;font-size:12px;line-height:1.35}
-    .graph-wrap{overflow:auto;height:100%;background:white}
-    .graph-wrap img{display:block;max-width:none}
-    a{color:#8ec7ff}
-    @media(max-width:1400px){.layout{grid-template-columns:290px 1fr 360px}}
-    @media(max-width:1100px){.layout{grid-template-columns:1fr;height:auto}.panel{height:65vh}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Генеалогия — custom</title>
+<style>
+:root{--bg:#0b1220;--panel:#111a2b;--line:#24324d;--txt:#e8eef9;--muted:#9fb0cc;--acc:#67b0ff}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt)}
+header{padding:16px 18px;border-bottom:1px solid var(--line);background:#0b1220dd;backdrop-filter:blur(6px);position:sticky;top:0;z-index:5}
+h1{margin:0;font-size:18px}.meta{margin-top:6px;font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:310px 1fr 420px;gap:10px;padding:10px;height:calc(100vh - 72px)}
+.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden;min-height:0}
+.panel h2{margin:0;padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;color:#c6d6f2}
+.content{padding:10px;height:calc(100% - 41px);overflow:auto}
+input{width:100%;padding:9px 10px;border-radius:9px;border:1px solid #294063;background:#0c1628;color:#e8eef9}
+.item{margin-top:6px;border:1px solid #253754;background:#0d1728;padding:8px;border-radius:9px;cursor:pointer}
+.item.active{border-color:#67b0ff;background:#10203a}
+.small{font-size:12px;color:var(--muted)}
+#graphWrap{background:#fff;border-radius:8px;overflow:auto;height:100%}
+svg text{font-family:Arial, sans-serif}
+.node rect{rx:9;ry:9;stroke-width:1.2}
+.node:hover rect{stroke:#1d4ed8;stroke-width:2}
+.row{margin:8px 0}.k{font-size:11px;color:#9cb1d6;text-transform:uppercase}.v{margin-top:3px;white-space:pre-wrap;word-break:break-word}
+a{color:#8ec7ff} pre{white-space:pre-wrap;background:#0b1423;border:1px solid #24324d;border-radius:8px;padding:8px;font-size:12px}
+@media(max-width:1200px){.layout{grid-template-columns:1fr}.panel{height:65vh}}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Генеалогия: Ильины / Амбросовы / Андреевы</h1>
-    <div class="meta" id="meta">Загрузка…</div>
-  </header>
-  <div class="layout">
-    <section class="panel">
-      <h2>Люди</h2>
-      <div class="content">
-        <input id="q" type="search" placeholder="Поиск: имя, фамилия, ID (например I0135)" />
-        <div id="list"></div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>Граф (Graphviz v4 clean)</h2>
-      <div class="content graph-wrap">
-        <img src="graph.svg" alt="genealogy graph" />
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>Карточка + все поля</h2>
-      <div class="content" id="details">
-        Выбери человека слева.
-      </div>
-    </section>
-  </div>
-
+<header>
+  <h1>Генеалогия (custom renderer, без Graphviz)</h1>
+  <div class="meta" id="meta">Загрузка...</div>
+</header>
+<div class="layout">
+  <section class="panel"><h2>Люди</h2><div class="content"><input id="q" placeholder="поиск" /><div id="list"></div></div></section>
+  <section class="panel"><h2>Связи (с нуля, SVG)</h2><div class="content" id="graphWrap"><svg id="graph"></svg></div></section>
+  <section class="panel"><h2>Карточка + все поля</h2><div class="content" id="details">Выбери человека</div></section>
+</div>
 <script>
-let DATA=null, PEOPLE=[], MAP={};
-const elList=document.getElementById('list');
-const elMeta=document.getElementById('meta');
-const elDetails=document.getElementById('details');
-const elQ=document.getElementById('q');
+let DATA, MAP, PEOPLE, FAMS, selected=null;
+const elMeta=document.getElementById('meta'), elList=document.getElementById('list'), elQ=document.getElementById('q'), elDetails=document.getElementById('details');
+const svg=document.getElementById('graph');
+const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function esc(s){return (s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function linkPeople(ids){ if(!ids||!ids.length) return '<span class="small">—</span>'; return ids.map(id=>`<a href="#" data-id="${id}" class="jump">${id} — ${esc((MAP[id]?.name)||MAP[id]?.name_raw||'')}</a>`).join('<br>'); }
-function fmtEvents(arr){ if(!arr||!arr.length) return '—'; return arr.map(e=>`${esc(e.date||'')} ${e.place?('· '+esc(e.place)):''} ${e.note?('('+esc(e.note)+')'):''}`).join('<br>'); }
-
-function renderList(items){
+function renderList(arr){
   elList.innerHTML='';
-  for(const p of items){
-    const d=document.createElement('div');
-    d.className='person'; d.dataset.id=p.id;
-    d.innerHTML=`<div><strong>${esc(p.name||p.name_raw||p.id)}</strong></div><div class="small">${p.id}${p.surname?(' · '+esc(p.surname)):''}${p.birth?.[0]?.date?(' · b. '+esc(p.birth[0].date)):''}</div>`;
-    d.onclick=()=>selectPerson(p.id);
-    elList.appendChild(d);
+  arr.forEach(p=>{
+    const d=document.createElement('div'); d.className='item'+(selected===p.id?' active':''); d.dataset.id=p.id;
+    d.innerHTML=`<div><b>${esc(p.name||p.name_raw||p.id)}</b></div><div class='small'>${p.id}${p.surname?(' · '+esc(p.surname)):''}</div>`;
+    d.onclick=()=>select(p.id); elList.appendChild(d);
+  });
+}
+
+function fmtEvents(arr){ if(!arr||!arr.length) return '—'; return arr.map(e=>`${esc(e.date||'')} ${e.place?('· '+esc(e.place)):''} ${e.note?('('+esc(e.note)+')'):''}`).join('<br>'); }
+function links(ids){ if(!ids||!ids.length) return '<span class="small">—</span>'; return ids.map(id=>`<a href='#' data-j='${id}' class='j'>${id} — ${esc((MAP[id]?.name)||MAP[id]?.name_raw||'')}</a>`).join('<br>'); }
+
+function renderDetails(id){
+  const p=MAP[id]; if(!p) return; selected=id;
+  elDetails.innerHTML=`
+    <div class='row'><b style='font-size:18px'>${esc(p.name||p.name_raw||id)}</b></div>
+    <div class='row small'>${esc(p.id)} ${p.sex?(' · '+esc(p.sex)):''} ${p.rin?(' · RIN '+esc(p.rin)):''}</div>
+    <div class='row'><div class='k'>Рождение</div><div class='v'>${fmtEvents(p.birth)}</div></div>
+    <div class='row'><div class='k'>Смерть</div><div class='v'>${fmtEvents(p.death)}</div></div>
+    <div class='row'><div class='k'>Погребение</div><div class='v'>${fmtEvents(p.burial)}</div></div>
+    <div class='row'><div class='k'>Родители</div><div class='v'>${links(p.parents)}</div></div>
+    <div class='row'><div class='k'>Дети</div><div class='v'>${links(p.children)}</div></div>
+    <div class='row'><div class='k'>Супруги</div><div class='v'>${links(p.spouses)}</div></div>
+    <div class='row'><div class='k'>RAW GEDCOM</div><pre>${esc(p.raw||'')}</pre></div>
+  `;
+  elDetails.querySelectorAll('.j').forEach(a=>a.onclick=(e)=>{e.preventDefault(); select(a.dataset.j);});
+}
+
+function buildLayout(){
+  // parent->child edges from families
+  const parents=new Map(), children=new Map(), indeg=new Map();
+  PEOPLE.forEach(p=>{parents.set(p.id,new Set()); children.set(p.id,new Set()); indeg.set(p.id,0);});
+  FAMS.forEach(f=>{
+    const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>MAP[id]);
+    const ch=(f.children||[]).filter(id=>MAP[id]);
+    ps.forEach(p=>ch.forEach(c=>{children.get(p).add(c); parents.get(c).add(p);}));
+  });
+  PEOPLE.forEach(p=>indeg.set(p.id, parents.get(p.id).size));
+
+  const roots=PEOPLE.filter(p=>indeg.get(p.id)===0).map(p=>p.id);
+  const level=new Map(); roots.forEach(r=>level.set(r,0));
+  const q=[...roots];
+  while(q.length){
+    const u=q.shift(); const lu=level.get(u)||0;
+    [...children.get(u)].forEach(v=>{
+      const nv=Math.max(level.get(v)??0, lu+1); level.set(v,nv);
+      indeg.set(v, indeg.get(v)-1); if(indeg.get(v)===0) q.push(v);
+    });
+  }
+  PEOPLE.forEach(p=>{ if(!level.has(p.id)) level.set(p.id,0); });
+
+  const layers={};
+  PEOPLE.forEach(p=>{const l=level.get(p.id); (layers[l]=layers[l]||[]).push(p.id);});
+  Object.values(layers).forEach(arr=>arr.sort((a,b)=>(MAP[a].surname||'').localeCompare(MAP[b].surname||'','ru') || (MAP[a].name||'').localeCompare(MAP[b].name||'','ru')));
+
+  // iterative x-order by parent barycenter
+  for(let it=0; it<3; it++){
+    Object.keys(layers).map(Number).sort((a,b)=>a-b).forEach(l=>{
+      const arr=layers[l];
+      const pos=Object.fromEntries(arr.map((id,i)=>[id,i]));
+      arr.sort((a,b)=>{
+        const pa=[...parents.get(a)].map(x=>pos[x]).filter(v=>v!==undefined);
+        const pb=[...parents.get(b)].map(x=>pos[x]).filter(v=>v!==undefined);
+        const ba=pa.length?pa.reduce((s,v)=>s+v,0)/pa.length:999;
+        const bb=pb.length?pb.reduce((s,v)=>s+v,0)/pb.length:999;
+        return ba-bb;
+      });
+    });
+  }
+
+  const nodeW=170,nodeH=54,gx=30,gy=90,margin=30;
+  const maxCols=Math.max(...Object.values(layers).map(a=>a.length));
+  const depth=Math.max(...Object.keys(layers).map(Number));
+  const W=Math.max(1100, margin*2 + maxCols*(nodeW+gx));
+  const H=Math.max(700, margin*2 + (depth+1)*(nodeH+gy));
+  svg.setAttribute('width',W); svg.setAttribute('height',H);
+
+  const xy={};
+  Object.keys(layers).map(Number).sort((a,b)=>a-b).forEach(l=>{
+    const arr=layers[l];
+    const rowW=arr.length*nodeW + (arr.length-1)*gx;
+    let x=(W-rowW)/2;
+    const y=margin + l*(nodeH+gy);
+    arr.forEach(id=>{xy[id]={x,y}; x += nodeW+gx;});
+  });
+  return {xy,nodeW,nodeH,W,H};
+}
+
+function draw(){
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const {xy,nodeW,nodeH}=buildLayout();
+  // edges
+  const edgeG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  edgeG.setAttribute('stroke','#94a3b8'); edgeG.setAttribute('fill','none'); edgeG.setAttribute('stroke-width','1.2');
+  FAMS.forEach(f=>{
+    const ps=[...(f.husband||[]),...(f.wife||[])].filter(id=>xy[id]);
+    const ch=(f.children||[]).filter(id=>xy[id]);
+    if(!ps.length || !ch.length) return;
+    const px=ps.map(id=>xy[id].x+nodeW/2); const py=ps.map(id=>xy[id].y+nodeH);
+    const cx=ch.map(id=>xy[id].x+nodeW/2); const cy=ch.map(id=>xy[id].y);
+    const yMid=(Math.max(...py)+Math.min(...cy))/2;
+    ps.forEach((id,i)=>{
+      const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d',`M ${px[i]} ${py[i]} V ${yMid}`); edgeG.appendChild(p);
+    });
+    const h1=document.createElementNS('http://www.w3.org/2000/svg','path');
+    h1.setAttribute('d',`M ${Math.min(...px)} ${yMid} H ${Math.max(...px)}`); edgeG.appendChild(h1);
+    const hub=(Math.min(...px)+Math.max(...px))/2;
+    const v=document.createElementNS('http://www.w3.org/2000/svg','path');
+    v.setAttribute('d',`M ${hub} ${yMid} V ${yMid+14}`); edgeG.appendChild(v);
+    const h2=document.createElementNS('http://www.w3.org/2000/svg','path');
+    h2.setAttribute('d',`M ${Math.min(...cx)} ${yMid+14} H ${Math.max(...cx)}`); edgeG.appendChild(h2);
+    ch.forEach(id=>{
+      const c=document.createElementNS('http://www.w3.org/2000/svg','path');
+      c.setAttribute('d',`M ${xy[id].x+nodeW/2} ${yMid+14} V ${xy[id].y}`); edgeG.appendChild(c);
+    });
+  });
+  svg.appendChild(edgeG);
+
+  // nodes
+  const nodeG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  PEOPLE.forEach(p=>{
+    const pos=xy[p.id]; if(!pos) return;
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.classList.add('node'); g.setAttribute('data-id',p.id);
+    const isKey=['I0001','I0007','I0016','I0017'].includes(p.id);
+    const isMention=['I0135','I0263','I0265','I0268'].includes(p.id);
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',pos.x); r.setAttribute('y',pos.y); r.setAttribute('width',nodeW); r.setAttribute('height',nodeH);
+    r.setAttribute('fill', isKey ? '#dbeafe' : (isMention ? '#ffedd5' : '#ede9fe'));
+    r.setAttribute('stroke', isKey ? '#1d4ed8' : (isMention ? '#ea580c' : '#7c3aed'));
+    g.appendChild(r);
+
+    const t1=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t1.setAttribute('x',pos.x+8); t1.setAttribute('y',pos.y+22); t1.setAttribute('font-size','12'); t1.setAttribute('fill','#0f172a');
+    const nm=(p.name||p.name_raw||p.id); t1.textContent=nm.length>28?nm.slice(0,28)+'…':nm; g.appendChild(t1);
+    const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t2.setAttribute('x',pos.x+8); t2.setAttribute('y',pos.y+40); t2.setAttribute('font-size','11'); t2.setAttribute('fill','#334155');
+    t2.textContent=p.id; g.appendChild(t2);
+    g.addEventListener('click',()=>select(p.id));
+    nodeG.appendChild(g);
+  });
+  svg.appendChild(nodeG);
+
+  // highlight selected
+  if(selected){
+    const n=[...svg.querySelectorAll('.node')].find(x=>x.getAttribute('data-id')===selected);
+    if(n){ const rr=n.querySelector('rect'); rr.setAttribute('stroke','#ef4444'); rr.setAttribute('stroke-width','2.4'); }
   }
 }
 
-function selectPerson(id){
-  const p=MAP[id]; if(!p) return;
-  document.querySelectorAll('.person').forEach(n=>n.classList.toggle('active', n.dataset.id===id));
-  elDetails.innerHTML=`
-    <div class="row"><strong style="font-size:18px">${esc(p.name||p.name_raw||id)}</strong></div>
-    <div class="row small">ID: ${esc(p.id)} ${p.sex?(' · SEX: '+esc(p.sex)):''} ${p.rin?(' · RIN: '+esc(p.rin)):''}</div>
-    <div class="row">${p.surname?`<span class="pill">Фамилия: ${esc(p.surname)}</span>`:''}${p.given?`<span class="pill">Имя: ${esc(p.given)}</span>`:''}${p.marnm?`<span class="pill">После брака: ${esc(p.marnm)}</span>`:''}</div>
-    <div class="row"><div class="k">Рождение</div><div class="v">${fmtEvents(p.birth)}</div></div>
-    <div class="row"><div class="k">Смерть</div><div class="v">${fmtEvents(p.death)}</div></div>
-    <div class="row"><div class="k">Погребение</div><div class="v">${fmtEvents(p.burial)}</div></div>
-    <div class="row"><div class="k">Проживание</div><div class="v">${fmtEvents(p.residence)}</div></div>
-    <div class="row"><div class="k">Родители</div><div class="v">${linkPeople(p.parents)}</div></div>
-    <div class="row"><div class="k">Супруги</div><div class="v">${linkPeople(p.spouses)}</div></div>
-    <div class="row"><div class="k">Дети</div><div class="v">${linkPeople(p.children)}</div></div>
-    <div class="row"><div class="k">FAMC / FAMS</div><div class="v">FAMC: ${esc((p.famc||[]).join(', ')||'—')}<br>FAMS: ${esc((p.fams||[]).join(', ')||'—')}</div></div>
-    <div class="row"><div class="k">RAW GEDCOM (все поля записи)</div><pre>${esc(p.raw||'')}</pre></div>
-  `;
-  elDetails.querySelectorAll('.jump').forEach(a=>a.onclick=(e)=>{e.preventDefault(); selectPerson(a.dataset.id);});
-}
+function select(id){ selected=id; renderDetails(id); renderList(PEOPLE); draw(); }
 
 async function init(){
-  const res=await fetch('data.json');
-  DATA=await res.json(); PEOPLE=DATA.people; MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
-  elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · Источник: ${DATA.meta.source_file.split('/').slice(-1)[0]}`;
+  const r=await fetch('data.json'); DATA=await r.json(); PEOPLE=DATA.people; FAMS=DATA.families; MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
+  elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · renderer: ${DATA.meta.generator}`;
   renderList(PEOPLE);
-  selectPerson('I0001' in MAP ? 'I0001' : PEOPLE[0].id);
-  elQ.addEventListener('input',()=>{
-    const q=elQ.value.trim().toLowerCase();
-    if(!q) return renderList(PEOPLE);
-    const filtered=PEOPLE.filter(p=>{
-      const hay=[p.id,p.name,p.name_raw,p.given,p.surname,p.marnm].join(' ').toLowerCase();
-      return hay.includes(q);
-    });
-    renderList(filtered);
-  });
+  select(MAP['I0001']?'I0001':PEOPLE[0].id);
+  elQ.oninput=()=>{const q=elQ.value.trim().toLowerCase(); const arr=!q?PEOPLE:PEOPLE.filter(p=>(`${p.id} ${p.name} ${p.name_raw} ${p.surname} ${p.given}`).toLowerCase().includes(q)); renderList(arr);} 
 }
 init();
 </script>
