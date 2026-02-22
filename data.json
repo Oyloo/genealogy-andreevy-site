@@ -2,9 +2,9 @@
   "meta": {
     "title": "Ильины / Амбросовы / Андреевы — custom graph",
     "source_file": "/Users/oyloo/.openclaw/workspace/data/genealogy/myheritage-ilyiny-ambrosovy/latest/subset-andreevy/ed-mom-andreevy-subset.v2.ged",
-    "people_count": 40,
-    "families_count": 16,
-    "generator": "custom-js-layout-v1"
+    "people_count": 44,
+    "families_count": 17,
+    "generator": "custom-js-layout-v2"
   },
   "people": [
     {
@@ -235,6 +235,55 @@
       "raw": "0 @I481@ INDI\n1 _UPD 8 JUN 2025 09:58:33 GMT -0600 \n1 NAME Спиридон //\n2 GIVN Спиридон\n1 SEX M\n1 FAMS @F178@\n1 RIN MH:I481\n1 _UID 67C8160F7875D32C4025E5A60AF7F2E8"
     },
     {
+      "id": "I48",
+      "name_raw": "Фетиния Игнатьевна //",
+      "name": "Фетиния Игнатьевна",
+      "given": "",
+      "surname": "",
+      "sex": "F",
+      "marnm": "",
+      "rin": "MH:I48",
+      "uid": "67C8160F6F4EF310C025E5A60AF7F2E8",
+      "birth": [
+        {
+          "date": "1884",
+          "place": "",
+          "note": ""
+        }
+      ],
+      "death": [
+        {
+          "date": "1963",
+          "place": "",
+          "note": ""
+        }
+      ],
+      "burial": [],
+      "residence": [],
+      "occupation": [
+        {
+          "date": "",
+          "place": "",
+          "note": ""
+        }
+      ],
+      "baptism": [],
+      "famc": [
+        "F141"
+      ],
+      "fams": [
+        "F19"
+      ],
+      "parents": [],
+      "children": [
+        "I16"
+      ],
+      "spouses": [
+        "I47"
+      ],
+      "raw": "0 @I48@ INDI\n1 _UPD 8 JUN 2025 10:58:18 GMT -0600 \n1 NAME Фетиния Игнатьевна //\n2 GIVN Фетиния Игнатьевна\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 1884\n1 DEAT Y\n2 DATE 1963\n2 AGE 78-79\n1 OCCU Домохозяйка\n1 FAMS @F19@\n1 FAMC @F141@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 1884&amp;lt;br&amp;gt;Занятие: Домох�\n4 CONC �зяйка&amp;lt;br&amp;gt;Смерть: 1963&amp;lt;br&amp;gt;Отец: Агап Богданов&amp;lt;br&amp;gt;Муж: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Д\n4 CONC ети: Мария Дмитриевна Семёнова (Амбросова), Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Ефр\n4 CONC осиния Бриц (Амбросова), Анфим Димитриевич Амбросов, Иван Димитривич Амбросов&amp;lt;br&amp;gt;Родные брат/сестра: Ек\n4 CONC атерина Игнатьевна Карпова (Богданова), Февруса Агаповна Рыхлова (Богданова), Милания Богданова\n2 EVEN Record\n3 ROLE 40000:26093243:\n1 NOTE Жила и работала в Vārkavas pagasta Znutiņu s.\n1 RIN MH:I48\n1 _UID 67C8160F6F4EF310C025E5A60AF7F2E8"
+    },
+    {
       "id": "I441",
       "name_raw": "Харлам //",
       "name": "Харлам",
@@ -260,6 +309,56 @@
       ],
       "spouses": [],
       "raw": "0 @I441@ INDI\n1 NAME Харлам //\n2 GIVN Харлам\n1 SEX M\n1 FAMS @F160@\n1 RIN MH:I441\n1 _UID 67C8160F77D98329B025E5A60AF7F2E8"
+    },
+    {
+      "id": "I47",
+      "name_raw": "Димитрий Данильевич /Амбросов/",
+      "name": "Димитрий Данильевич Амбросов",
+      "given": "",
+      "surname": "Амбросов",
+      "sex": "M",
+      "marnm": "",
+      "rin": "MH:I47",
+      "uid": "67C8160F6F43E310A025E5A60AF7F2E8",
+      "birth": [
+        {
+          "date": "1880",
+          "place": "Viški",
+          "note": ""
+        }
+      ],
+      "death": [
+        {
+          "date": "29 DEC 1953",
+          "place": "",
+          "note": ""
+        }
+      ],
+      "burial": [],
+      "residence": [],
+      "occupation": [
+        {
+          "date": "",
+          "place": "",
+          "note": ""
+        }
+      ],
+      "baptism": [],
+      "famc": [
+        "F44"
+      ],
+      "fams": [
+        "F19",
+        "F500039"
+      ],
+      "parents": [],
+      "children": [
+        "I16"
+      ],
+      "spouses": [
+        "I48"
+      ],
+      "raw": "0 @I47@ INDI\n1 _UPD 4 APR 2025 03:50:33 GMT -0600 \n1 NAME Димитрий Данильевич /Амбросов/\n2 GIVN Димитрий Данильевич\n2 SURN Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1880\n2 PLAC Viški\n1 DEAT Y\n2 DATE 29 DEC 1953\n2 AGE 72-73\n1 OCCU Плотник. Мастерил колёса\n1 FAMS @F19@\n1 FAMS @F500039@\n1 FAMC @F44@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1880&amp;lt;br&amp;gt;Занятие: Плотник. Мастерил\n4 CONC  колёса&amp;lt;br&amp;gt;Смерть: 29 дек 1953&amp;lt;br&amp;gt;Отец: Даниил Амбросов&amp;lt;br&amp;gt;Мать: Неизвестно Амбросова&amp;lt;br&amp;gt\n4 CONC ;Жена: Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Дети: Мария Дмитриевна Семёнова (Амбросова), Иван Дим\n4 CONC итривич Амбросов, Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, \n4 CONC Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093242:\n1 RIN MH:I47\n1 _UID 67C8160F6F43E310A025E5A60AF7F2E8"
     },
     {
       "id": "I16",
@@ -301,7 +400,10 @@
       "fams": [
         "F6"
       ],
-      "parents": [],
+      "parents": [
+        "I47",
+        "I48"
+      ],
       "children": [
         "I7"
       ],
@@ -367,7 +469,9 @@
       "children": [
         "I1"
       ],
-      "spouses": [],
+      "spouses": [
+        "I6"
+      ],
       "raw": "0 @I7@ INDI\n1 _UPD 29 MAR 2025 14:46:43 GMT -0600 \n1 NAME Людмила Кузьминична /Амбросова/\n2 GIVN Людмила Кузьминична\n2 SURN Амбросова\n2 _MARNM Ильина\n1 SEX F\n1 BIRT\n2 DATE 10 AUG 1948\n1 RESI\n2 ADDR\n3 CITY Riga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n3 ADR1 Ludmila.Iljina@live.com\n1 RESI\n2 ADDR\n3 ADR1 Riga, Латвия\n1 RESI\n2 EMAIL ludmila.iljina@@live.com\n1 FAMS @F2@\n1 FAMS @F5@\n1 FAMC @F6@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Кузьма Амбросов&amp;lt;br&amp;gt;Мать: Ма\n4 CONC нефа Амбросова (Васильева)&amp;lt;br&amp;gt;Муж: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Фактический(-ая) супруг(-а): &lt;&lt;Priva\n4 CONC te&gt;&gt; Paja&amp;lt;br&amp;gt;Дети: Виктория Митрофанова (Ильина), Эдуард Валентинович Ильин\n2 EVEN Record\n3 ROLE 40000:26093227:\n1 RIN MH:I7\n1 _UID 67C8160F6DFDC30E0025E5A60AF7F2E8"
     },
     {
@@ -1060,7 +1164,9 @@
       "children": [
         "I17"
       ],
-      "spouses": [],
+      "spouses": [
+        "I56"
+      ],
       "raw": "0 @I57@ INDI\n1 _UPD 4 JUN 2025 13:34:47 GMT -0600 \n1 NAME Евдокия Петровна /Андреева/\n2 GIVN Евдокия Петровна\n2 SURN Андреева\n2 _MARNM Васильева\n1 SEX F\n1 BIRT\n2 DATE 1892\n2 PLAC Клапары, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Клапары, Латвия\n2 AGE 76-77\n1 FAMS @F21@\n1 FAMS @F54@\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1892 - Клапары&amp;lt;br&amp\n4 CONC ;gt;Смерть: Примерно в 1969 - Клапары&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андр�\n4 CONC �ева&amp;lt;br&amp;gt;Муж: Иван Петрович Васильев&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Васильев, Таиси\n4 CONC я Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев, Степанида Архипова?&amp;lt;br&amp;gt;Родные бра\n4 CONC т/сестра: Агафия Петровна Егорова, Марфа Петровна Андреева, Рипинья Петровна Иванова (Андреева), Манефа Андре�\n4 CONC �ва\n2 EVEN Record\n3 ROLE 40000:26093247:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500215/%D0%B5%D0%B2%D0%B4%D0%BE%D0%BA%D0%B8%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B2%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=R\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500215\n1 RIN MH:I57\n1 _UID 67C8160F6FB1B3115025E5A60AF7F2E8"
     },
     {
@@ -1489,6 +1595,55 @@
       "raw": "0 @I263@ INDI\n1 _UPD 19 MAR 2025 14:48:58 GMT -0600 \n1 NAME Фоманида /Андреева/\n2 GIVN Фоманида\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n1 FAMC @F97@\n1 RIN MH:I263\n1 _UID 67C8160F74A0D31E8025E5A60AF7F2E8"
     },
     {
+      "id": "I56",
+      "name_raw": "Иван Петрович /Васильев/",
+      "name": "Иван Петрович Васильев",
+      "given": "",
+      "surname": "Васильев",
+      "sex": "M",
+      "marnm": "",
+      "rin": "MH:I56",
+      "uid": "67C8160F6FA693114025E5A60AF7F2E8",
+      "birth": [
+        {
+          "date": "1897",
+          "place": "д. Гай, Латвия",
+          "note": ""
+        }
+      ],
+      "death": [
+        {
+          "date": "1969",
+          "place": "Varkava, Латвия",
+          "note": ""
+        }
+      ],
+      "burial": [
+        {
+          "date": "",
+          "place": "Klapari",
+          "note": ""
+        }
+      ],
+      "residence": [],
+      "occupation": [],
+      "baptism": [],
+      "famc": [
+        "F53"
+      ],
+      "fams": [
+        "F21"
+      ],
+      "parents": [],
+      "children": [
+        "I17"
+      ],
+      "spouses": [
+        "I57"
+      ],
+      "raw": "0 @I56@ INDI\n1 _UPD 5 MAR 2025 03:31:21 GMT -0600 \n1 NAME Иван Петрович /Васильев/\n2 GIVN Иван Петрович\n2 SURN Васильев\n2 _MARNM Васильев\n1 SEX M\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 1897\n2 PLAC д. Гай, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Varkava, Латвия\n2 AGE 71-72\n1 FAMS @F21@\n1 FAMC @F53@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Иван Петрович Васильев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1897 - д. Гай, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в\n4 CONC  1969 - Varkava, Латвия&amp;lt;br&amp;gt;Захоронение: Klapari&amp;lt;br&amp;gt;Отец: Пётр Васильев&amp;lt;br&amp;gt;Мать: Матрена Васильева&amp;lt;\n4 CONC br&amp;gt;Жена: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Василье\n4 CONC в, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев&amp;lt;br&amp;gt;Родные брат/сестра: Ник�\n4 CONC �нор Васильев, Агафон Васильев, Анисия Васильева, Семен Васильев, Василий Васильев, Савелий Васильев, Стюшка В\n4 CONC асильев, Матрена Васильева, Степан Васильев\n2 EVEN Record\n3 ROLE 40000:26093246:\n1 RIN MH:I56\n1 _UID 67C8160F6FA693114025E5A60AF7F2E8"
+    },
+    {
       "id": "I17",
       "name_raw": "Манефа /Васильева/",
       "name": "Манефа Васильева",
@@ -1523,6 +1678,7 @@
         "F6"
       ],
       "parents": [
+        "I56",
         "I57"
       ],
       "children": [
@@ -1532,6 +1688,49 @@
         "I16"
       ],
       "raw": "0 @I17@ INDI\n1 _UPD 12 MAY 2025 04:04:06 GMT -0600 \n1 NAME Манефа /Васильева/\n2 GIVN Манефа\n2 SURN Васильева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 6 NOV 1924\n2 PLAC д.Аньчкино, Варкавская волость, Латвия\n1 DEAT Y\n2 DATE 10 MAY 2000\n2 PLAC Avotu iela 5 - 9, Rīga, Latvija\n2 AGE 75\n2 CAUS Инсульт\n1 FAMS @F6@\n1 FAMC @F21@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 6 ноя 1924 - д.Аньчкино, Варкавская волость\n4 CONC , Латвия&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Кузьма Амбросов - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Развод: Супруг(-а\n4 CONC ): Дмитрий Федосеевич Егоров - Примерно в 1946&amp;lt;br&amp;gt;Смерть: 10 май 2000&amp;lt;br&amp;gt;Отец: Иван Петрович Васильев&amp;l\n4 CONC t;br&amp;gt;Мать: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Муж: Кузьма Амбросов&amp;lt;br&amp;gt;Бывший муж: Дмитрий \n4 CONC Федосеевич Егоров&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Родные брат/сестра: Васи\n4 CONC лий Васильев, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев\n2 EVEN Record\n3 ROLE 40000:26093230:\n1 SOUR @S500003@\n2 PAGE https://www.myheritage.com/profile-OYYV7UKW6UKEWOKBADCPFBP3SWQKL5A-1500134/%D0%BC%D0%B0%D0%BD%D0%B5%D1%84%D0%B0-%D0%B2%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500134\n1 RIN MH:I17\n1 _UID 67C8160F6E6BE30EA025E5A60AF7F2E8"
+    },
+    {
+      "id": "I6",
+      "name_raw": "Валентин Фёдорович /Ильин/",
+      "name": "Валентин Фёдорович Ильин",
+      "given": "",
+      "surname": "Ильин",
+      "sex": "M",
+      "marnm": "",
+      "rin": "MH:I6",
+      "uid": "67C8160F6DF2A30DF025E5A60AF7F2E8",
+      "birth": [
+        {
+          "date": "22 MAR 1949",
+          "place": "Щигровский район, Озерский с/с, Курская область, Россия",
+          "note": ""
+        }
+      ],
+      "death": [
+        {
+          "date": "18 DEC 1995",
+          "place": "152 Kurzemes prospekts, Rīga LV-1069, Latvija",
+          "note": ""
+        }
+      ],
+      "burial": [],
+      "residence": [],
+      "occupation": [],
+      "baptism": [],
+      "famc": [
+        "F4"
+      ],
+      "fams": [
+        "F2"
+      ],
+      "parents": [],
+      "children": [
+        "I1"
+      ],
+      "spouses": [
+        "I7"
+      ],
+      "raw": "0 @I6@ INDI\n1 _UPD 5 MAR 2025 03:30:50 GMT -0600 \n1 NAME Валентин Фёдорович /Ильин/\n2 GIVN Валентин Фёдорович\n2 SURN Ильин\n2 _MARNM Ильин\n1 SEX M\n1 BIRT\n2 DATE 22 MAR 1949\n2 PLAC Щигровский район, Озерский с/с, Курская область, Россия\n1 DEAT Y\n2 DATE 18 DEC 1995\n2 PLAC 152 Kurzemes prospekts, Rīga LV-1069, Latvija\n2 AGE 46\n1 FAMS @F2@\n1 FAMC @F4@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 22 мар 1949 - Щигровский район, Озерский с/с, Ку\n4 CONC рская область, Россия&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Людмила Кузьминична Ильина (Амбросова) - 6 мар 1971\n4 CONC  - Латвия&amp;lt;br&amp;gt;Смерть: 18 дек 1995 - 152 Kurzemes prospekts, Rīga LV-1069, Latvija&amp;lt;br&amp;gt;Отец: Фёдор Никифорович Ильин&amp;lt;br&amp;gt;\n4 CONC Мать: Галина Романовна Ильина (Полякова)&amp;lt;br&amp;gt;Жена: Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Дети: \n4 CONC Виктория Митрофанова (Ильина), Эдуард Валентинович Ильин&amp;lt;br&amp;gt;Родные брат/сестра: Валерий Фёдорович Ильи\n4 CONC н, &amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Ильин\n2 EVEN Record\n3 ROLE 40000:26093226:\n1 RIN MH:I6\n1 _UID 67C8160F6DF2A30DF025E5A60AF7F2E8"
     },
     {
       "id": "I1",
@@ -1619,6 +1818,7 @@
         "F1"
       ],
       "parents": [
+        "I6",
         "I7"
       ],
       "children": [],
@@ -1629,7 +1829,9 @@
   "families": [
     {
       "id": "F2",
-      "husband": [],
+      "husband": [
+        "I6"
+      ],
       "wife": [
         "I7"
       ],
@@ -1652,8 +1854,23 @@
       "raw": "0 @F6@ FAM\n1 HUSB @I16@\n1 WIFE @I17@\n1 CHIL @I7@\n1 RIN MH:F6\n1 _UID 67C8160F81D0C3539025E5A60AF7F2E8\n1 MARR\n2 DATE 8 MAY 1948\n2 PLAC Varkavas pagasts\n2 NOTE Супруг(-а): Манефа Амбросова (Васильева)"
     },
     {
+      "id": "F19",
+      "husband": [
+        "I47"
+      ],
+      "wife": [
+        "I48"
+      ],
+      "children": [
+        "I16"
+      ],
+      "raw": "0 @F19@ FAM\n1 HUSB @I47@\n1 WIFE @I48@\n1 CHIL @I49@\n1 CHIL @I52@\n1 CHIL @I53@\n1 CHIL @I54@\n1 CHIL @I50@\n1 CHIL @I16@\n1 CHIL @I51@\n1 RIN MH:F19\n1 _UID 67C8160F81E0A3546025E5A60AF7F2E8"
+    },
+    {
       "id": "F21",
-      "husband": [],
+      "husband": [
+        "I56"
+      ],
       "wife": [
         "I57"
       ],

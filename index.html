@@ -380,8 +380,8 @@ function drawGraph(){
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.classList.add('node'); g.dataset.id=p.id;
 
-    const isKey=['I0001','I0007','I0016','I0017'].includes(p.id);
-    const isMention=['I0135','I0263','I0265','I0268'].includes(p.id);
+    const isKey=['I1','I7','I16','I17'].includes(p.id);
+    const isMention=['I135','I263','I265','I268'].includes(p.id);
 
     let fill='var(--node)', stroke='var(--node-stroke)';
     if(isKey){ fill='var(--node-key)'; stroke='var(--node-key-stroke)'; }
@@ -502,7 +502,7 @@ async function init(){
   drawGraph();
   bindGraphInteractions();
 
-  const start = MAP['I0001'] ? 'I0001' : PEOPLE[0]?.id;
+  const start = MAP['I1'] ? 'I1' : PEOPLE[0]?.id;
   if(start) select(start,true);
 
   elQ.oninput=()=>{
