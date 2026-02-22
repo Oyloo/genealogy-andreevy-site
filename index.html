@@ -94,7 +94,7 @@ details summary{cursor:pointer;color:#b9cef4;font-size:12px}
       </div>
       <div id="graphHost">
         <svg id="graphSvg"></svg>
-        <div class="hint">ЛКМ drag — pan · колесо — zoom</div>
+        <div class="hint">ЛКМ drag — pan · 2 пальца на трекпаде — pan · pinch или Cmd/Ctrl+колесо — zoom</div>
       </div>
     </div>
   </section>
@@ -233,6 +233,36 @@ function buildGraphModel(){
   }
   PEOPLE.forEach(p=>{ if(!level.has(p.id)) level.set(p.id,0); });
 
+  // Align spouses/parents of same family on one generation row.
+  // This avoids cases where one parent floats far above and creates misleading edges.
+  let changedAlign = true;
+  let guard = 0;
+  while (changedAlign && guard < 20) {
+    changedAlign = false;
+    guard++;
+    FAMS.forEach(f=>{
+      const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>MAP[id]);
+      const ch=(f.children||[]).filter(id=>MAP[id]);
+      if(!ps.length || !ch.length) return;
+
+      const parentLevel=Math.max(...ps.map(id=>level.get(id)||0));
+      ps.forEach(id=>{
+        if((level.get(id)||0)!==parentLevel){
+          level.set(id,parentLevel);
+          changedAlign=true;
+        }
+      });
+
+      const childMin = parentLevel + 1;
+      ch.forEach(id=>{
+        if((level.get(id)||0) < childMin){
+          level.set(id, childMin);
+          changedAlign=true;
+        }
+      });
+    });
+  }
+
   const layers={};
   PEOPLE.forEach(p=>{const l=level.get(p.id); (layers[l]=layers[l]||[]).push(p.id);});
   Object.values(layers).forEach(arr=>arr.sort((a,b)=>
@@ -240,9 +270,10 @@ function buildGraphModel(){
     (MAP[a].name||'').localeCompare(MAP[b].name||'','ru')
   ));
 
-  // reorder for fewer crossings
+  // reorder for fewer crossings (top-down by parents + bottom-up by children)
   const levelKeys=Object.keys(layers).map(Number).sort((a,b)=>a-b);
-  for(let pass=0; pass<5; pass++){
+  for(let pass=0; pass<6; pass++){
+    // top-down (parent barycenter)
     for(const l of levelKeys){
       const arr=layers[l], prev=layers[l-1]||[];
       arr.sort((a,b)=>{
@@ -250,6 +281,19 @@ function buildGraphModel(){
           const pars=[...parents.get(id)];
           if(!pars.length) return prev.length + 100;
           return pars.reduce((s,p)=>s + (prev.indexOf(p)>=0?prev.indexOf(p):prev.length+5),0)/pars.length;
+        };
+        return avg(a)-avg(b);
+      });
+    }
+
+    // bottom-up (child barycenter)
+    for(const l of [...levelKeys].reverse()){
+      const arr=layers[l], next=layers[l+1]||[];
+      arr.sort((a,b)=>{
+        const avg=(id)=>{
+          const ch=[...children.get(id)];
+          if(!ch.length) return next.length + 100;
+          return ch.reduce((s,c)=>s + (next.indexOf(c)>=0?next.indexOf(c):next.length+5),0)/ch.length;
         };
         return avg(a)-avg(b);
       });
@@ -276,12 +320,37 @@ function buildGraphModel(){
   const worldH = Math.max(620, margin*2 + (depth+1)*nodeH + Math.max(0,depth)*gy);
 
   const xy={};
+  const minLevel = Math.min(...levelKeys);
+  const step = nodeW + gx;
+
   for(const l of levelKeys){
     const arr=layers[l];
     const rowW=arr.length*nodeW + Math.max(0,arr.length-1)*gx;
-    let x=(worldW-rowW)/2;
     const y=margin + l*(nodeH+gy);
-    arr.forEach(id=>{xy[id]={x,y}; x+=nodeW+gx;});
+
+    let baseX = (worldW-rowW)/2;
+
+    // Shift row toward parent barycenter so children sit under their parents.
+    if(l !== minLevel){
+      const candidates=[];
+      arr.forEach((id,idx)=>{
+        const pars=[...parents.get(id)].filter(pid=>xy[pid]);
+        if(!pars.length) return;
+        const parentCenter = pars.reduce((s,pid)=>s + (xy[pid].x + nodeW/2), 0) / pars.length;
+        const offset = parentCenter - (idx*step + nodeW/2);
+        candidates.push(offset);
+      });
+      if(candidates.length){
+        baseX = candidates.reduce((s,v)=>s+v,0)/candidates.length;
+      }
+    }
+
+    const minX=margin;
+    const maxX=Math.max(minX, worldW - rowW - margin);
+    baseX=Math.max(minX, Math.min(maxX, baseX));
+
+    let x=baseX;
+    arr.forEach(id=>{xy[id]={x,y}; x+=step;});
   }
 
   graph={xy,nodeW,nodeH,worldW,worldH};
@@ -467,9 +536,20 @@ function bindGraphInteractions(){
 
   window.addEventListener('mouseup',()=>{ dragging=false; });
 
+  // Apple trackpad: default two-finger scroll pans the canvas.
+  // Zoom only with ctrl/cmd + wheel (or +/- buttons).
   svg.addEventListener('wheel',(e)=>{
     e.preventDefault();
-    zoom(e.deltaY<0 ? 0.88 : 1.14);
+    if(e.ctrlKey || e.metaKey){
+      zoom(e.deltaY<0 ? 0.88 : 1.14);
+      return;
+    }
+    const scaleX=view.w/host.clientWidth;
+    const scaleY=view.h/host.clientHeight;
+    view.x += e.deltaX * scaleX;
+    view.y += e.deltaY * scaleY;
+    clampView();
+    applyViewBox();
   }, {passive:false});
 
   fitBtn.onclick=()=>fitView();
