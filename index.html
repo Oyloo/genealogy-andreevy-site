@@ -403,18 +403,23 @@ function drawGraph(){
   edges.setAttribute('stroke', 'var(--edge)');
   edges.setAttribute('fill','none');
   edges.setAttribute('stroke-width','1.6');
+  edges.setAttribute('stroke-linecap','round');
+  edges.setAttribute('stroke-linejoin','round');
+
+  const snap=v=>Math.round(v)+0.5;
+  const overlap=2; // overlap into node borders to avoid visual micro-gaps on mobile rasterization
 
   FAMS.forEach(f=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
     if(!ps.length || !ch.length) return;
 
-    const px=ps.map(id=>xy[id].x + nodeW/2);
-    const py=ps.map(id=>xy[id].y + nodeH);
-    const cx=ch.map(id=>xy[id].x + nodeW/2);
-    const cy=ch.map(id=>xy[id].y);
+    const px=ps.map(id=>snap(xy[id].x + nodeW/2));
+    const py=ps.map(id=>snap(xy[id].y + nodeH - overlap));
+    const cx=ch.map(id=>snap(xy[id].x + nodeW/2));
+    const cy=ch.map(id=>snap(xy[id].y + overlap));
 
-    const yMid=(Math.max(...py)+Math.min(...cy))/2;
+    const yMid=snap((Math.max(...py)+Math.min(...cy))/2);
 
     ps.forEach((id,i)=>{
       const p=document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -422,22 +427,23 @@ function drawGraph(){
     });
 
     const h1=document.createElementNS('http://www.w3.org/2000/svg','path');
-    h1.setAttribute('d',`M ${Math.min(...px)} ${yMid} H ${Math.max(...px)}`); edges.appendChild(h1);
+    h1.setAttribute('d',`M ${snap(Math.min(...px))} ${yMid} H ${snap(Math.max(...px))}`); edges.appendChild(h1);
 
-    const hub=(Math.min(...px)+Math.max(...px))/2;
+    const hub=snap((Math.min(...px)+Math.max(...px))/2);
     const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx',hub); dot.setAttribute('cy',yMid); dot.setAttribute('r','2.4'); dot.setAttribute('fill','#c4d7f6');
+    dot.setAttribute('cx',hub); dot.setAttribute('cy',yMid); dot.setAttribute('r','2.6'); dot.setAttribute('fill','#c4d7f6');
     edges.appendChild(dot);
 
+    const yChildrenBar=snap(yMid+10);
     const down=document.createElementNS('http://www.w3.org/2000/svg','path');
-    down.setAttribute('d',`M ${hub} ${yMid} V ${yMid+10}`); edges.appendChild(down);
+    down.setAttribute('d',`M ${hub} ${yMid} V ${yChildrenBar}`); edges.appendChild(down);
 
     const h2=document.createElementNS('http://www.w3.org/2000/svg','path');
-    h2.setAttribute('d',`M ${Math.min(...cx)} ${yMid+10} H ${Math.max(...cx)}`); edges.appendChild(h2);
+    h2.setAttribute('d',`M ${snap(Math.min(...cx))} ${yChildrenBar} H ${snap(Math.max(...cx))}`); edges.appendChild(h2);
 
     ch.forEach(id=>{
       const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-      p.setAttribute('d',`M ${xy[id].x+nodeW/2} ${yMid+10} V ${xy[id].y}`); edges.appendChild(p);
+      p.setAttribute('d',`M ${snap(xy[id].x+nodeW/2)} ${yChildrenBar} V ${snap(xy[id].y+overlap)}`); edges.appendChild(p);
     });
   });
 
