@@ -2,9 +2,10 @@
  "meta": {
   "title": "Ильины / Амбросовы / Андреевы — custom graph",
   "source_file": "/Users/oyloo/.openclaw/workspace/data/genealogy/myheritage-ilyiny-ambrosovy/latest/subset-andreevy/ed-mom-andreevy-subset.v2.ged",
-  "people_count": 43,
+  "people_count": 48,
   "families_count": 17,
-  "generator": "custom-js-layout-v2"
+  "generator": "custom-js-layout-v2",
+  "family_count": 19
  },
  "people": [
   {
@@ -559,8 +560,8 @@
    ],
    "fams": [],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -778,8 +779,8 @@
    ],
    "fams": [],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -818,8 +819,8 @@
    ],
    "fams": [],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -1356,8 +1357,8 @@
     "F50"
    ],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -1398,8 +1399,8 @@
     "F500047"
    ],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -1472,8 +1473,8 @@
    ],
    "fams": [],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -1547,8 +1548,8 @@
     "F500046"
    ],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -1587,8 +1588,8 @@
    ],
    "fams": [],
    "parents": [
-    "I261",
-    "I262"
+    "I262",
+    "I261"
    ],
    "children": [],
    "spouses": [],
@@ -1780,6 +1781,108 @@
    "children": [],
    "spouses": [],
    "raw": "0 @I1@ INDI\n1 NAME Эдуард Валентинович /Ильин/\n2 GIVN Эдуард Валентинович\n2 SURN Ильин\n1 SEX M\n1 BIRT\n2 DATE 20 MAR 1978\n2 PLAC Rīga, Latvia\n1 GRAD\n2 DATE ABT 1 JUN 1996\n2 PLAC Рижская средняя школа № 9, Rīga, Latvia\n2 AGE 18\n1 GRAD\n2 DATE 1999\n2 PLAC Rīgas tehniskas universitātes transporta tehnoloģiju institūts, Rīga, Latvia\n2 AGE 20-21\n1 OCCU ITI Solutuions Consultant\n2 DATE 3 JUL 2002\n2 PLAC HORTUS Digital, Rīga, Latvia\n2 AGE 24\n1 GRAD\n2 DATE 2003\n2 PLAC Transporta un sakaru institūts\n2 AGE 24-25\n1 OCCU ITI Systems Engineer\n1 RESI\n2 ADDR\n3 CITY Rīga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n3 ADR1 Ed.Il@live.com\n1 RESI\n2 PHON (371) 29168716\n1 RESI\n2 ADDR\n3 ADR1 (371) 29168716\n1 RESI\n2 PHON (371) 67412860\n1 RESI\n2 ADDR\n3 ADR1 (371) 67412860\n1 RESI\n2 PHON (371) 67339292\n1 RESI\n2 ADDR\n3 ADR1 (371) 67339292\n1 DSCR <DSCR><HAIR>Brown</HAIR><EYES>Brown</EYES></DSCR>\n1 RESI\n2 EMAIL ed.adult@@gmail.com\n1 FAMS @F1@\n1 FAMC @F2@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Эдуард Валентинович Ильин&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Отец: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Мать: Людми\n4 CONC ла Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Супруг(-а): &lt;&lt;Private&gt;&gt; Ильина (Сумбаева)&amp;lt;br&amp;gt;Братья / сестры: \n4 CONC Виктория Митрофанова (Ильина)\n2 EVEN Record\n3 ROLE 40000:26090289:\n1 RIN MH:I1\n1 _UID 67C8160F6DBD430DA025E5A60AF7F2E8"
+  },
+  {
+   "id": "I54",
+   "raw": "0 @I54@ INDI\n1 _UPD 4 APR 2025 03:50:35 GMT -0600 \n1 NAME Иван Димитривич /Амбросов/\n2 GIVN Иван Димитривич\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1911\n2 PLAC Vārkava, Латвия\n1 DEAT Y\n2 DATE 1944\n2 AGE 32-33\n1 FAMS @F50@\n1 FAMC @F19@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Иван Димитривич Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1911 - Vārkava, Латвия&amp;lt;br&amp;gt;Семейное положен\n4 CONC ие: Супруг(-а): Минадора Васильевна Амбросова (Андреева) - 4 авг 1940&amp;lt;br&amp;gt;Смерть: 1944&amp;lt;br&amp;gt;Отец: Димитрий Д�\n4 CONC �нильевич Амбросов&amp;lt;br&amp;gt;Мать: Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Жена: Минадора Васильевн\n4 CONC а Амбросова (Андреева)&amp;lt;br&amp;gt;Ребенок: &lt;&lt;Private&gt;&gt; Михайлова (Амбросова)&amp;lt;br&amp;gt;Родные брат/сестра: Мари�\n4 CONC � Дмитриевна Семёнова (Амбросова), Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Ефросиния Бр\n4 CONC иц (Амбросова), Анфим Димитриевич Амбросов\n2 EVEN Record\n3 ROLE 40000:26093282:\n1 RIN MH:I54\n1 _UID 67C8160F6F9043112025E5A60AF7F2E8",
+   "name_raw": "Иван Димитривич /Амбросов/",
+   "name": "Иван Димитривич",
+   "surname": "Амбросов",
+   "nickname": "",
+   "sex": "M",
+   "birth_date": "1911",
+   "birth_place": "Vārkava, Латвия",
+   "death_date": "1944",
+   "death_place": "",
+   "burial_date": "",
+   "burial_place": "",
+   "residence": "",
+   "parents": [
+    "I47",
+    "I48"
+   ],
+   "married_name": "Амбросов"
+  },
+  {
+   "id": "I136",
+   "raw": "0 @I136@ INDI\n1 _UPD 27 APR 2025 09:46:29 GMT -0600 \n1 NAME Калерия \"Алла\" Ивановна /Амбросова/\n2 GIVN Калерия \"Алла\" Ивановна\n2 NICK Алла\n2 SURN Амбросова\n2 _MARNM Михайлова\n1 SEX F\n1 BIRT\n2 DATE 14 JUN 1941\n1 RESI\n2 ADDR\n3 CITY Preiļi\n3 CTRY Latvia\n1 FAMS @F98@\n1 FAMC @F50@\n1 RIN MH:I136\n1 _UID 67C8160F71CA43166025E5A60AF7F2E8",
+   "name_raw": "Калерия \"Алла\" Ивановна /Амбросова/",
+   "name": "Калерия \"Алла\" Ивановна",
+   "surname": "Амбросова",
+   "nickname": "Алла",
+   "sex": "F",
+   "birth_date": "14 JUN 1941",
+   "birth_place": "",
+   "death_date": "",
+   "death_place": "",
+   "burial_date": "",
+   "burial_place": "",
+   "residence": "Preiļi",
+   "parents": [
+    "I54",
+    "I135"
+   ],
+   "married_name": "Михайлова"
+  },
+  {
+   "id": "I270",
+   "raw": "0 @I270@ INDI\n1 _UPD 22 DEC 2025 12:11:14 GMT -0600 \n1 NAME Пётр Яковлевич /Михайлов/\n2 GIVN Пётр Яковлевич\n2 SURN Михайлов\n2 _MARNM Михайлов\n1 SEX M\n1 DEAT Y\n2 DATE 22 DEC 2025\n2 PLAC Preiļi, Preiļu novads, Латвия\n1 FAMS @F98@\n1 FAMC @F500248@\n1 RIN MH:I270\n1 _UID 67C8160F74CB731EF025E5A60AF7F2E8",
+   "name_raw": "Пётр Яковлевич /Михайлов/",
+   "name": "Пётр Яковлевич",
+   "surname": "Михайлов",
+   "nickname": "",
+   "sex": "M",
+   "birth_date": "",
+   "birth_place": "",
+   "death_date": "22 DEC 2025",
+   "death_place": "Preiļi, Preiļu novads, Латвия",
+   "burial_date": "",
+   "burial_place": "",
+   "residence": "",
+   "parents": [],
+   "married_name": "Михайлов"
+  },
+  {
+   "id": "I271",
+   "raw": "0 @I271@ INDI\n1 NAME Марина /Михайлова/\n2 GIVN Марина\n2 SURN Михайлова\n2 _MARNM Уреки\n1 SEX F\n1 BIRT\n2 DATE 9 APR 1971\n1 FAMS @F161@\n1 FAMS @F162@\n1 FAMC @F98@\n1 RIN MH:I271\n1 _UID 67C8160F74D2131F0025E5A60AF7F2E8",
+   "name_raw": "Марина /Михайлова/",
+   "name": "Марина",
+   "surname": "Михайлова",
+   "nickname": "",
+   "sex": "F",
+   "birth_date": "9 APR 1971",
+   "birth_place": "",
+   "death_date": "",
+   "death_place": "",
+   "burial_date": "",
+   "burial_place": "",
+   "residence": "",
+   "parents": [
+    "I270",
+    "I136"
+   ],
+   "married_name": "Уреки"
+  },
+  {
+   "id": "I272",
+   "raw": "0 @I272@ INDI\n1 NAME Вячеслав Петрович /Михайлов/\n2 GIVN Вячеслав Петрович\n2 SURN Михайлов\n2 _MARNM Михайлов\n1 SEX M\n1 BIRT\n2 DATE 27 JAN 1975\n1 RESI\n2 ADDR\n3 ADR1 vjachaslavm@gmail.com\n1 RESI\n2 EMAIL vjacheslavm@@gmail.com\n1 FAMS @F163@\n1 FAMC @F98@\n1 RIN MH:I272\n1 _UID 67C8160F74DA731F1025E5A60AF7F2E8",
+   "name_raw": "Вячеслав Петрович /Михайлов/",
+   "name": "Вячеслав Петрович",
+   "surname": "Михайлов",
+   "nickname": "",
+   "sex": "M",
+   "birth_date": "27 JAN 1975",
+   "birth_place": "",
+   "death_date": "",
+   "death_place": "",
+   "burial_date": "",
+   "burial_place": "",
+   "residence": "",
+   "parents": [
+    "I270",
+    "I136"
+   ],
+   "married_name": "Михайлов"
   }
  ],
  "families": [
@@ -1816,7 +1919,8 @@
     "I48"
    ],
    "children": [
-    "I16"
+    "I16",
+    "I54"
    ],
    "raw": "0 @F19@ FAM\n1 HUSB @I47@\n1 WIFE @I48@\n1 CHIL @I49@\n1 CHIL @I52@\n1 CHIL @I53@\n1 CHIL @I54@\n1 CHIL @I50@\n1 CHIL @I16@\n1 CHIL @I51@\n1 RIN MH:F19\n1 _UID 67C8160F81E0A3546025E5A60AF7F2E8"
   },
@@ -2001,6 +2105,37 @@
     "I786"
    ],
    "raw": "0 @F307@ FAM\n1 HUSB @I634@\n1 CHIL @I786@\n1 RIN MH:F307\n1 _UID 67C8160F8323C3666025E5A60AF7F2E8"
+  },
+  {
+   "id": "F50",
+   "raw": "0 @F50@ FAM\n1 HUSB @I54@\n1 WIFE @I135@\n1 CHIL @I136@\n1 RIN MH:F50\n1 _UID 67C8160F821523565025E5A60AF7F2E8\n1 MARR\n2 DATE 4 AUG 1940",
+   "husband": [
+    "I54"
+   ],
+   "wife": [
+    "I135"
+   ],
+   "children": [
+    "I136"
+   ],
+   "marriage_date": "4 AUG 1940",
+   "marriage_place": ""
+  },
+  {
+   "id": "F98",
+   "raw": "0 @F98@ FAM\n1 HUSB @I270@\n1 WIFE @I136@\n1 CHIL @I271@\n1 CHIL @I272@\n1 RIN MH:F98\n1 _UID 67C8160F824EF3595025E5A60AF7F2E8",
+   "husband": [
+    "I270"
+   ],
+   "wife": [
+    "I136"
+   ],
+   "children": [
+    "I271",
+    "I272"
+   ],
+   "marriage_date": "",
+   "marriage_place": ""
   }
  ]
 }

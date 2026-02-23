@@ -592,10 +592,10 @@ function drawGraph(){
     t2.setAttribute('font-size', nodeW<120 ? '9.6' : '10.6');
     t2.setAttribute('fill','#314764');
     const yy=years(p);
-    t2.textContent=yy ? `${p.id} · ${yy}` : p.id;
+    t2.textContent=yy || '';
 
     const title=document.createElementNS('http://www.w3.org/2000/svg','title');
-    title.textContent=`${(p.name||p.name_raw||p.id).replaceAll('/','').trim()}\n${p.id}${yy?(' · '+yy):''}`;
+    title.textContent=`${(p.name||p.name_raw||p.id).replaceAll('/','').trim()}${yy?(' · '+yy):''}`;
 
     g.appendChild(rect); g.appendChild(t1); g.appendChild(t1b); g.appendChild(t2); g.appendChild(title);
     g.onclick=()=>select(p.id,true);
