@@ -86,11 +86,12 @@ details summary{cursor:pointer;color:#b9cef4;font-size:12px}
       </div>
     </h2>
     <div class="content" style="padding:8px;display:flex;flex-direction:column;gap:8px;overflow:hidden">
-      <div class="legend">
+      <div class="legend" id="legend">
         <span><i class="dot" style="background:var(--node-key)"></i> Эд + мама + её родители</span>
         <span><i class="dot" style="background:var(--node-mention)"></i> Минадора/Фоманида/Фомаида/Федора</span>
         <span><i class="dot" style="background:var(--female)"></i> Женщины</span>
         <span><i class="dot" style="background:var(--male)"></i> Мужчины</span>
+        <span style="margin-left:12px;opacity:.7">Линии окрашены по семьям</span>
       </div>
       <div id="graphHost">
         <svg id="graphSvg"></svg>
@@ -399,98 +400,162 @@ function drawGraph(){
 
   const {xy,nodeW,nodeH}=graph;
 
-  const edges=document.createElementNS('http://www.w3.org/2000/svg','g');
-  edges.setAttribute('stroke', 'var(--edge)');
-  edges.setAttribute('fill','none');
-  edges.setAttribute('stroke-width','1.8');
-  edges.setAttribute('stroke-linecap','round');
-  edges.setAttribute('stroke-linejoin','round');
-  edges.setAttribute('shape-rendering','geometricPrecision');
+  // === FAMILY COLOR PALETTE ===
+  const FAMILY_COLORS = [
+    '#6ec6ff', '#f7a072', '#a78bfa', '#4ade80', '#f472b6',
+    '#fbbf24', '#67e8f9', '#c084fc', '#fb923c', '#86efac',
+    '#f87171', '#38bdf8', '#a3e635', '#e879f9', '#fcd34d',
+    '#5eead4', '#fb7185',
+  ];
 
-  // Edge drawing strategy:
-  // Parent(s) → vertical down to yMid → horizontal bar between parents → marriage dot
-  // Hub → vertical down to yChildBar → horizontal bar across ALL children → vertical down into each child
-  // Key: NO polyline from hub to individual child — only one shared horizontal bar + individual verticals.
-  const INTO = 6; // pixels into node body past border
+  // Build occupancy grid: for each level, list of {left,right} rectangles
+  const occupancy = {};
+  PEOPLE.forEach(p=>{
+    const pos=xy[p.id]; if(!pos) return;
+    const l = Math.round(pos.y); // approx level y
+    if(!occupancy[l]) occupancy[l]=[];
+    occupancy[l].push({left:pos.x, right:pos.x+nodeW, id:p.id});
+  });
 
-  FAMS.forEach(f=>{
+  // Build level Y ranges (nodeTop→nodeBottom) for collision detection
+  const levelYRanges = {};
+  PEOPLE.forEach(p=>{
+    const pos=xy[p.id]; if(!pos) return;
+    const ly = pos.y;
+    if(!levelYRanges[ly]) levelYRanges[ly]={top:ly, bottom:ly+nodeH, nodes:[]};
+    levelYRanges[ly].nodes.push({left:pos.x, right:pos.x+nodeW, id:p.id});
+  });
+
+  // Find a clear vertical X channel that doesn't overlap any node on intermediate levels
+  function findClearChannel(fromY, toY, preferX, famMembers){
+    // Collect all node rects on levels between fromY and toY
+    const blocked = [];
+    const pad = 4; // padding around nodes
+    Object.values(levelYRanges).forEach(lr=>{
+      if(lr.top > fromY && lr.bottom < toY){ // strictly between
+        lr.nodes.forEach(n=>{
+          if(!famMembers.has(n.id)){
+            blocked.push({left:n.left-pad, right:n.right+pad});
+          }
+        });
+      }
+    });
+    // Check if preferX is clear
+    if(!blocked.some(b => preferX > b.left && preferX < b.right)) return preferX;
+    // Try offsets left/right
+    for(let d=8; d<graph.worldW; d+=6){
+      const xl = preferX - d;
+      if(xl > 4 && !blocked.some(b => xl > b.left && xl < b.right)) return xl;
+      const xr = preferX + d;
+      if(xr < graph.worldW-4 && !blocked.some(b => xr > b.left && xr < b.right)) return xr;
+    }
+    return preferX; // fallback
+  }
+
+  const INTO = 6;
+
+  FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
     if(!ps.length || !ch.length) return;
 
-    // Parent anchor: center-bottom, pushed INTO the node
-    const parentAnchors=ps.map(id=>({
-      x: xy[id].x + nodeW/2,
-      y: xy[id].y + nodeH - INTO
-    }));
-    // Child anchor: center-top, pushed INTO the node
-    const childAnchors=ch.map(id=>({
-      x: xy[id].x + nodeW/2,
-      y: xy[id].y + INTO
-    }));
+    const color = FAMILY_COLORS[fi % FAMILY_COLORS.length];
+    const famMembers = new Set([...ps, ...ch]);
 
-    const parentBottomEdge = Math.max(...ps.map(id=> xy[id].y + nodeH));
-    const childTopEdge = Math.min(...ch.map(id=> xy[id].y));
-    const yMid = (parentBottomEdge + childTopEdge) / 2;
-    const yChildBar = yMid + 12;
+    const famG=document.createElementNS('http://www.w3.org/2000/svg','g');
+    famG.setAttribute('stroke', color);
+    famG.setAttribute('fill','none');
+    famG.setAttribute('stroke-width','1.8');
+    famG.setAttribute('stroke-linecap','round');
+    famG.setAttribute('stroke-linejoin','round');
+    famG.setAttribute('shape-rendering','geometricPrecision');
 
-    // Hub X = center between leftmost and rightmost parent
+    const parentAnchors=ps.map(id=>({x:xy[id].x+nodeW/2, y:xy[id].y+nodeH-INTO}));
+    const childAnchors=ch.map(id=>({x:xy[id].x+nodeW/2, y:xy[id].y+INTO}));
+
+    const parentBottomEdge = Math.max(...ps.map(id=>xy[id].y+nodeH));
+    const childTopEdge = Math.min(...ch.map(id=>xy[id].y));
+
+    // yMid: halfway between parent bottom and either the next level or child top
+    const yMid = parentBottomEdge + 14;
+    const yChildBar = childTopEdge - 14;
+
     const hubX = (Math.min(...parentAnchors.map(a=>a.x)) + Math.max(...parentAnchors.map(a=>a.x))) / 2;
 
+    // Detect multi-level gap: if there are intermediate levels with nodes between parents and children
+    const multiLevel = (childTopEdge - parentBottomEdge) > (nodeH + 40);
+
     // === PARENT SIDE ===
-    // Each parent: vertical line from inside node down to yMid
     parentAnchors.forEach(a=>{
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
       line.setAttribute('x1',a.x); line.setAttribute('y1',a.y);
       line.setAttribute('x2',a.x); line.setAttribute('y2',yMid);
-      edges.appendChild(line);
+      famG.appendChild(line);
     });
-
-    // Horizontal bar connecting parents at yMid
     if(parentAnchors.length>1){
       const h=document.createElementNS('http://www.w3.org/2000/svg','line');
       h.setAttribute('x1', Math.min(...parentAnchors.map(a=>a.x)));
       h.setAttribute('x2', Math.max(...parentAnchors.map(a=>a.x)));
       h.setAttribute('y1', yMid); h.setAttribute('y2', yMid);
-      edges.appendChild(h);
+      famG.appendChild(h);
     }
 
-    // Marriage dot at hub
+    // Marriage dot
     const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
     dot.setAttribute('cx',hubX); dot.setAttribute('cy',yMid);
-    dot.setAttribute('r','3'); dot.setAttribute('fill','#c4d7f6');
-    edges.appendChild(dot);
+    dot.setAttribute('r','3'); dot.setAttribute('fill',color);
+    famG.appendChild(dot);
 
-    // === HUB → CHILDREN ===
-    // Single vertical line from hub down to children bar
-    const vDown=document.createElementNS('http://www.w3.org/2000/svg','line');
-    vDown.setAttribute('x1',hubX); vDown.setAttribute('y1',yMid);
-    vDown.setAttribute('x2',hubX); vDown.setAttribute('y2',yChildBar);
-    edges.appendChild(vDown);
+    // === HUB → CHILDREN with obstacle avoidance ===
+    if(multiLevel){
+      // Route through a clear channel
+      const channelX = findClearChannel(yMid, yChildBar, hubX, famMembers);
+      // hub → horizontal to channel → vertical through clear space → horizontal to childBar center → childBar
+      const childCenterX = (Math.min(...childAnchors.map(a=>a.x)) + Math.max(...childAnchors.map(a=>a.x))) / 2;
 
-    // Single horizontal bar across ALL children at yChildBar
+      const path=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+      const pts = [
+        `${hubX},${yMid}`,
+        `${channelX},${yMid}`,
+        `${channelX},${yChildBar}`,
+      ];
+      path.setAttribute('points', pts.join(' '));
+      famG.appendChild(path);
+    } else {
+      // Direct: hub → childBar
+      const vDown=document.createElementNS('http://www.w3.org/2000/svg','line');
+      vDown.setAttribute('x1',hubX); vDown.setAttribute('y1',yMid);
+      vDown.setAttribute('x2',hubX); vDown.setAttribute('y2',yChildBar);
+      famG.appendChild(vDown);
+    }
+
+    // Horizontal bar across children + connect to routing
     const allX = childAnchors.map(a=>a.x);
-    // Bar must also reach hubX so it connects to the vertical from hub
-    allX.push(hubX);
+    if(multiLevel){
+      const channelX = findClearChannel(yMid, yChildBar, hubX, famMembers);
+      allX.push(channelX);
+    } else {
+      allX.push(hubX);
+    }
     const barLeft = Math.min(...allX);
     const barRight = Math.max(...allX);
     if(barLeft !== barRight){
       const hBar=document.createElementNS('http://www.w3.org/2000/svg','line');
       hBar.setAttribute('x1', barLeft); hBar.setAttribute('x2', barRight);
       hBar.setAttribute('y1', yChildBar); hBar.setAttribute('y2', yChildBar);
-      edges.appendChild(hBar);
+      famG.appendChild(hBar);
     }
 
-    // Each child: vertical line from children bar down into node
+    // Each child: vertical from bar into node
     childAnchors.forEach(a=>{
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
       line.setAttribute('x1',a.x); line.setAttribute('y1',yChildBar);
       line.setAttribute('x2',a.x); line.setAttribute('y2',a.y);
-      edges.appendChild(line);
+      famG.appendChild(line);
     });
-  });
 
-  svg.appendChild(edges);
+    svg.appendChild(famG);
+  });
 
   const nodes=document.createElementNS('http://www.w3.org/2000/svg','g');
   PEOPLE.forEach(p=>{
