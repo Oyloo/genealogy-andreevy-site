@@ -208,8 +208,8 @@ function years(p){
 }
 
 function buildGraphModel(){
-  const parents=new Map(), children=new Map(), indeg=new Map();
-  PEOPLE.forEach(p=>{parents.set(p.id,new Set()); children.set(p.id,new Set()); indeg.set(p.id,0);});
+  const parents=new Map(), children=new Map();
+  PEOPLE.forEach(p=>{parents.set(p.id,new Set()); children.set(p.id,new Set());});
 
   FAMS.forEach(f=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>MAP[id]);
@@ -217,52 +217,48 @@ function buildGraphModel(){
     ps.forEach(p=>ch.forEach(c=>{children.get(p).add(c); parents.get(c).add(p);}));
   });
 
-  PEOPLE.forEach(p=>indeg.set(p.id, parents.get(p.id).size));
-  const roots=PEOPLE.filter(p=>indeg.get(p.id)===0).map(p=>p.id);
-
-  const level=new Map(); roots.forEach(r=>level.set(r,0));
-  const q=[...roots];
+  // === GENERATION ASSIGNMENT relative to Ed (I1) ===
+  // Gen 0 = Ed, +1 = parents, +2 = grandparents, etc.
+  // This ensures same-generation relatives align on one row.
+  const ROOT_ID = MAP['I1'] ? 'I1' : PEOPLE[0]?.id;
+  const gen=new Map();
+  gen.set(ROOT_ID, 0);
+  const q=[ROOT_ID];
   while(q.length){
     const u=q.shift();
-    const lu=level.get(u)||0;
-    [...children.get(u)].forEach(v=>{
-      const nv=Math.max(level.get(v)??0, lu+1);
-      level.set(v,nv);
-      indeg.set(v, indeg.get(v)-1);
-      if(indeg.get(v)===0) q.push(v);
-    });
+    const g=gen.get(u);
+    for(const p of parents.get(u)){
+      if(!gen.has(p)){ gen.set(p, g+1); q.push(p); }
+    }
+    for(const c of children.get(u)){
+      if(!gen.has(c)){ gen.set(c, g-1); q.push(c); }
+    }
   }
-  PEOPLE.forEach(p=>{ if(!level.has(p.id)) level.set(p.id,0); });
-
-  // Align spouses/parents of same family on one generation row.
-  // This avoids cases where one parent floats far above and creates misleading edges.
-  let changedAlign = true;
-  let guard = 0;
-  while (changedAlign && guard < 20) {
-    changedAlign = false;
-    guard++;
+  // Spouse alignment: ensure spouses share the same generation
+  let changed=true;
+  while(changed){
+    changed=false;
     FAMS.forEach(f=>{
       const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>MAP[id]);
       const ch=(f.children||[]).filter(id=>MAP[id]);
-      if(!ps.length || !ch.length) return;
-
-      const parentLevel=Math.max(...ps.map(id=>level.get(id)||0));
-      ps.forEach(id=>{
-        if((level.get(id)||0)!==parentLevel){
-          level.set(id,parentLevel);
-          changedAlign=true;
-        }
-      });
-
-      const childMin = parentLevel + 1;
-      ch.forEach(id=>{
-        if((level.get(id)||0) < childMin){
-          level.set(id, childMin);
-          changedAlign=true;
-        }
-      });
+      const knownP=ps.filter(id=>gen.has(id));
+      const knownC=ch.filter(id=>gen.has(id));
+      if(knownP.length){
+        const pg=Math.max(...knownP.map(id=>gen.get(id)));
+        for(const id of ps){ if(!gen.has(id)){ gen.set(id,pg); changed=true; } }
+        for(const id of ch){ if(!gen.has(id)){ gen.set(id,pg-1); changed=true; } }
+      } else if(knownC.length){
+        const cg=Math.min(...knownC.map(id=>gen.get(id)));
+        for(const id of ps){ if(!gen.has(id)){ gen.set(id,cg+1); changed=true; } }
+      }
     });
   }
+  PEOPLE.forEach(p=>{ if(!gen.has(p.id)) gen.set(p.id,0); });
+
+  // Convert: highest gen number = top row (level 0), Ed = bottom
+  const maxGen=Math.max(...[...gen.values()]);
+  const level=new Map();
+  PEOPLE.forEach(p=>level.set(p.id, maxGen - gen.get(p.id)));
 
   const layers={};
   PEOPLE.forEach(p=>{const l=level.get(p.id); (layers[l]=layers[l]||[]).push(p.id);});
