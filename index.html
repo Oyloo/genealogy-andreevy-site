@@ -402,49 +402,78 @@ function drawGraph(){
   const edges=document.createElementNS('http://www.w3.org/2000/svg','g');
   edges.setAttribute('stroke', 'var(--edge)');
   edges.setAttribute('fill','none');
-  edges.setAttribute('stroke-width','1.6');
+  edges.setAttribute('stroke-width','1.8');
   edges.setAttribute('stroke-linecap','round');
   edges.setAttribute('stroke-linejoin','round');
+  edges.setAttribute('shape-rendering','geometricPrecision');
 
-  const snap=v=>Math.round(v)+0.5;
-  const overlap=2; // overlap into node borders to avoid visual micro-gaps on mobile rasterization
+  // Edge drawing: use continuous polylines, penetrate INTO nodes by ~6px
+  // to guarantee visible connection regardless of zoom/retina/rounded corners.
+  const INTO = 6; // pixels into node body past border
 
   FAMS.forEach(f=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
     if(!ps.length || !ch.length) return;
 
-    const px=ps.map(id=>snap(xy[id].x + nodeW/2));
-    const py=ps.map(id=>snap(xy[id].y + nodeH - overlap));
-    const cx=ch.map(id=>snap(xy[id].x + nodeW/2));
-    const cy=ch.map(id=>snap(xy[id].y + overlap));
+    // Parent anchor: center-bottom, pushed INTO the node
+    const parentAnchors=ps.map(id=>({
+      x: xy[id].x + nodeW/2,
+      y: xy[id].y + nodeH - INTO
+    }));
+    // Child anchor: center-top, pushed INTO the node
+    const childAnchors=ch.map(id=>({
+      x: xy[id].x + nodeW/2,
+      y: xy[id].y + INTO
+    }));
 
-    const yMid=snap((Math.max(...py)+Math.min(...cy))/2);
+    const parentBottomY = Math.max(...parentAnchors.map(a=>a.y)) + INTO; // just past node bottom
+    const childTopY = Math.min(...childAnchors.map(a=>a.y)) - INTO; // just past node top
+    const yMid = (parentBottomY + childTopY) / 2;
 
-    ps.forEach((id,i)=>{
-      const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-      p.setAttribute('d',`M ${px[i]} ${py[i]} V ${yMid}`); edges.appendChild(p);
+    // Hub X = center between leftmost and rightmost parent
+    const hubX = (Math.min(...parentAnchors.map(a=>a.x)) + Math.max(...parentAnchors.map(a=>a.x))) / 2;
+
+    // Draw each parent → hub as a single continuous polyline
+    parentAnchors.forEach(a=>{
+      const p=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+      p.setAttribute('points',`${a.x},${a.y} ${a.x},${yMid} ${hubX},${yMid}`);
+      edges.appendChild(p);
     });
 
-    const h1=document.createElementNS('http://www.w3.org/2000/svg','path');
-    h1.setAttribute('d',`M ${snap(Math.min(...px))} ${yMid} H ${snap(Math.max(...px))}`); edges.appendChild(h1);
+    // If multiple parents, draw horizontal bar connecting them at yMid
+    if(parentAnchors.length>1){
+      const h=document.createElementNS('http://www.w3.org/2000/svg','line');
+      h.setAttribute('x1', Math.min(...parentAnchors.map(a=>a.x)));
+      h.setAttribute('x2', Math.max(...parentAnchors.map(a=>a.x)));
+      h.setAttribute('y1', yMid); h.setAttribute('y2', yMid);
+      edges.appendChild(h);
+    }
 
-    const hub=snap((Math.min(...px)+Math.max(...px))/2);
+    // Marriage dot at hub
     const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx',hub); dot.setAttribute('cy',yMid); dot.setAttribute('r','2.6'); dot.setAttribute('fill','#c4d7f6');
+    dot.setAttribute('cx',hubX); dot.setAttribute('cy',yMid);
+    dot.setAttribute('r','3'); dot.setAttribute('fill','#c4d7f6');
     edges.appendChild(dot);
 
-    const yChildrenBar=snap(yMid+10);
-    const down=document.createElementNS('http://www.w3.org/2000/svg','path');
-    down.setAttribute('d',`M ${hub} ${yMid} V ${yChildrenBar}`); edges.appendChild(down);
+    // Children bar Y
+    const yChildBar = yMid + 12;
 
-    const h2=document.createElementNS('http://www.w3.org/2000/svg','path');
-    h2.setAttribute('d',`M ${snap(Math.min(...cx))} ${yChildrenBar} H ${snap(Math.max(...cx))}`); edges.appendChild(h2);
-
-    ch.forEach(id=>{
-      const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-      p.setAttribute('d',`M ${snap(xy[id].x+nodeW/2)} ${yChildrenBar} V ${snap(xy[id].y+overlap)}`); edges.appendChild(p);
+    // Draw hub → each child as a single continuous polyline
+    childAnchors.forEach(a=>{
+      const p=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+      p.setAttribute('points',`${hubX},${yMid} ${hubX},${yChildBar} ${a.x},${yChildBar} ${a.x},${a.y}`);
+      edges.appendChild(p);
     });
+
+    // Horizontal bar across children at yChildBar
+    if(childAnchors.length>1){
+      const h=document.createElementNS('http://www.w3.org/2000/svg','line');
+      h.setAttribute('x1', Math.min(...childAnchors.map(a=>a.x)));
+      h.setAttribute('x2', Math.max(...childAnchors.map(a=>a.x)));
+      h.setAttribute('y1', yChildBar); h.setAttribute('y2', yChildBar);
+      edges.appendChild(h);
+    }
   });
 
   svg.appendChild(edges);
