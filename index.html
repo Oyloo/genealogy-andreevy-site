@@ -304,7 +304,7 @@ function buildGraphModel(){
   // compress base geometry so full tree stays readable on one screen more often
   const targetW=1500, targetH=920;
   const gx = maxCols > 9 ? 10 : 14;
-  const gy = depth > 7 ? 30 : 38;
+  const gy = depth > 7 ? 50 : 60;
 
   const nodeW = Math.max(104, Math.min(170,
     Math.floor((targetW - 2*margin - Math.max(0,maxCols-1)*gx) / maxCols)
@@ -450,6 +450,62 @@ function drawGraph(){
 
   const INTO = 6;
 
+  // === LANE ALLOCATION: spread horizontal bars so no two families overlap ===
+  // Group families by the generation gap they occupy (parentBottomEdge → childTopEdge)
+  const famGaps = []; // {fi, parentBottomEdge, childTopEdge, gapKey}
+  FAMS.forEach((f, fi)=>{
+    const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
+    const ch=(f.children||[]).filter(id=>xy[id]);
+    if(!ps.length || !ch.length) return;
+    const pbe = Math.max(...ps.map(id=>xy[id].y+nodeH));
+    const cte = Math.min(...ch.map(id=>xy[id].y));
+    const gapKey = `${Math.round(pbe)}_${Math.round(cte)}`;
+    famGaps.push({fi, pbe, cte, gapKey});
+  });
+  // Count families per gap and assign slot indices
+  const gapSlots = {};
+  famGaps.forEach(fg=>{
+    if(!gapSlots[fg.gapKey]) gapSlots[fg.gapKey] = [];
+    fg.slotIdx = gapSlots[fg.gapKey].length;
+    gapSlots[fg.gapKey].push(fg.fi);
+  });
+  const famSlotMap = {};
+  famGaps.forEach(fg=>{
+    const total = gapSlots[fg.gapKey].length;
+    famSlotMap[fg.fi] = {idx: fg.slotIdx, total, pbe: fg.pbe, cte: fg.cte};
+  });
+
+  // === ANCHOR OFFSET: when a person appears in multiple families, offset attachment points ===
+  // Track how many times each person is used as parent-anchor or child-anchor
+  const anchorUsage = {}; // personId → {asParent: [fi,...], asChild: [fi,...]}
+  FAMS.forEach((f, fi)=>{
+    const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
+    const ch=(f.children||[]).filter(id=>xy[id]);
+    if(!ps.length || !ch.length) return;
+    ps.forEach(id=>{
+      if(!anchorUsage[id]) anchorUsage[id]={asParent:[],asChild:[]};
+      anchorUsage[id].asParent.push(fi);
+    });
+    ch.forEach(id=>{
+      if(!anchorUsage[id]) anchorUsage[id]={asParent:[],asChild:[]};
+      anchorUsage[id].asChild.push(fi);
+    });
+  });
+
+  // For each person+role+family, compute X offset from center
+  function getAnchorXOffset(personId, role, fi){
+    const u = anchorUsage[personId];
+    if(!u) return 0;
+    const list = role==='parent' ? u.asParent : u.asChild;
+    // Also count cross-role: if same node has both parent and child connections
+    const allFams = [...new Set([...u.asParent, ...u.asChild])];
+    if(allFams.length <= 1) return 0;
+    const idx = allFams.indexOf(fi);
+    const total = allFams.length;
+    const spread = Math.min(nodeW * 0.4, total * 10);
+    return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
+  }
+
   FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
@@ -466,20 +522,37 @@ function drawGraph(){
     famG.setAttribute('stroke-linejoin','round');
     famG.setAttribute('shape-rendering','geometricPrecision');
 
-    const parentAnchors=ps.map(id=>({x:xy[id].x+nodeW/2, y:xy[id].y+nodeH-INTO}));
-    const childAnchors=ch.map(id=>({x:xy[id].x+nodeW/2, y:xy[id].y+INTO}));
+    const parentAnchors=ps.map(id=>({x:xy[id].x+nodeW/2+getAnchorXOffset(id,'parent',fi), y:xy[id].y+nodeH-INTO}));
+    const childAnchors=ch.map(id=>({x:xy[id].x+nodeW/2+getAnchorXOffset(id,'child',fi), y:xy[id].y+INTO}));
 
     const parentBottomEdge = Math.max(...ps.map(id=>xy[id].y+nodeH));
     const childTopEdge = Math.min(...ch.map(id=>xy[id].y));
 
-    // yMid: halfway between parent bottom and either the next level or child top
-    const yMid = parentBottomEdge + 14;
-    const yChildBar = childTopEdge - 14;
+    // Spread yMid and yChildBar across the gap so families don't overlap
+    const slot = famSlotMap[fi];
+    const gapH = childTopEdge - parentBottomEdge;
+    const midZone = parentBottomEdge + 6; // start of available zone
+    const childZone = childTopEdge - 6;   // end of available zone
+    const availH = childZone - midZone;
+    let yMid, yChildBar;
+    if(slot && slot.total > 1){
+      // Divide available space: top half for yMid slots, bottom half for yChildBar slots
+      const halfH = availH / 2;
+      const step = Math.max(4, Math.min(8, halfH / slot.total));
+      yMid = midZone + slot.idx * step;
+      yChildBar = childZone - slot.idx * step;
+    } else {
+      yMid = parentBottomEdge + 14;
+      yChildBar = childTopEdge - 14;
+    }
 
     const hubX = (Math.min(...parentAnchors.map(a=>a.x)) + Math.max(...parentAnchors.map(a=>a.x))) / 2;
 
-    // Detect multi-level gap: if there are intermediate levels with nodes between parents and children
+    // Detect multi-level gap
     const multiLevel = (childTopEdge - parentBottomEdge) > (nodeH + 40);
+
+    // Also offset channelX per family to avoid vertical line overlap
+    const channelOffset = slot ? (slot.idx - (slot.total-1)/2) * 5 : 0;
 
     // === PARENT SIDE ===
     parentAnchors.forEach(a=>{
@@ -504,8 +577,7 @@ function drawGraph(){
 
     // === HUB → CHILDREN with obstacle avoidance ===
     if(multiLevel){
-      // Route through a clear channel
-      const channelX = findClearChannel(yMid, yChildBar, hubX, famMembers);
+      const channelX = findClearChannel(yMid, yChildBar, hubX + channelOffset, famMembers);
       // hub → horizontal to channel → vertical through clear space → horizontal to childBar center → childBar
       const childCenterX = (Math.min(...childAnchors.map(a=>a.x)) + Math.max(...childAnchors.map(a=>a.x))) / 2;
 
@@ -528,7 +600,7 @@ function drawGraph(){
     // Horizontal bar across children + connect to routing
     const allX = childAnchors.map(a=>a.x);
     if(multiLevel){
-      const channelX = findClearChannel(yMid, yChildBar, hubX, famMembers);
+      const channelX = findClearChannel(yMid, yChildBar, hubX + channelOffset, famMembers);
       allX.push(channelX);
     } else {
       allX.push(hubX);
