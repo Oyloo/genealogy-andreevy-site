@@ -1,2052 +1,2006 @@
 {
-  "meta": {
-    "title": "Ильины / Амбросовы / Андреевы — custom graph",
-    "source_file": "/Users/oyloo/.openclaw/workspace/data/genealogy/myheritage-ilyiny-ambrosovy/latest/subset-andreevy/ed-mom-andreevy-subset.v2.ged",
-    "people_count": 44,
-    "families_count": 17,
-    "generator": "custom-js-layout-v2"
+ "meta": {
+  "title": "Ильины / Амбросовы / Андреевы — custom graph",
+  "source_file": "/Users/oyloo/.openclaw/workspace/data/genealogy/myheritage-ilyiny-ambrosovy/latest/subset-andreevy/ed-mom-andreevy-subset.v2.ged",
+  "people_count": 43,
+  "families_count": 17,
+  "generator": "custom-js-layout-v2"
+ },
+ "people": [
+  {
+   "id": "I261",
+   "name_raw": "Лукерья Харламовна //",
+   "name": "Лукерья Харламовна",
+   "given": "",
+   "surname": "",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I261",
+   "uid": "67C8160F7495731E6025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1867",
+     "place": "Preiļi, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "SEP 1943",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F160"
+   ],
+   "fams": [
+    "F97"
+   ],
+   "parents": [
+    "I441"
+   ],
+   "children": [
+    "I135",
+    "I263",
+    "I264",
+    "I265",
+    "I266",
+    "I267",
+    "I268",
+    "I269"
+   ],
+   "spouses": [
+    "I262"
+   ],
+   "raw": "0 @I261@ INDI\n1 _UPD 19 MAR 2025 14:47:59 GMT -0600 \n1 NAME Лукерья Харламовна //\n2 GIVN Лукерья Харламовна\n2 NICK Гликерия\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1867\n2 PLAC Preiļi, Латвия\n1 DEAT Y\n2 DATE SEP 1943\n2 AGE 75-76\n1 FAMS @F97@\n1 FAMC @F160@\n1 RIN MH:I261\n1 _UID 67C8160F7495731E6025E5A60AF7F2E8"
   },
-  "people": [
+  {
+   "id": "I629",
+   "name_raw": "Мартын //",
+   "name": "Мартын",
+   "given": "",
+   "surname": "",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I629",
+   "uid": "67C8160F7AF543358025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [],
+   "fams": [
+    "F239"
+   ],
+   "parents": [],
+   "children": [
+    "I482"
+   ],
+   "spouses": [],
+   "raw": "0 @I629@ INDI\n1 NAME Мартын //\n2 GIVN Мартын\n1 SEX M\n1 FAMS @F239@\n1 RIN MH:I629\n1 _UID 67C8160F7AF543358025E5A60AF7F2E8"
+  },
+  {
+   "id": "I482",
+   "name_raw": "Матрена Мартыновна //",
+   "name": "Матрена Мартыновна",
+   "given": "",
+   "surname": "",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I482",
+   "uid": "67C8160F787B132C5025E5A60AF7F2E8",
+   "birth": [
     {
-      "id": "I261",
-      "name_raw": "Лукерья Харламовна //",
-      "name": "Лукерья Харламовна",
-      "given": "",
-      "surname": "",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I261",
-      "uid": "67C8160F7495731E6025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1867",
-          "place": "Preiļi, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "SEP 1943",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F160"
-      ],
-      "fams": [
-        "F97"
-      ],
-      "parents": [
-        "I441"
-      ],
-      "children": [
-        "I135",
-        "I263",
-        "I264",
-        "I265",
-        "I266",
-        "I267",
-        "I268",
-        "I269"
-      ],
-      "spouses": [
-        "I262"
-      ],
-      "raw": "0 @I261@ INDI\n1 _UPD 19 MAR 2025 14:47:59 GMT -0600 \n1 NAME Лукерья Харламовна //\n2 GIVN Лукерья Харламовна\n2 NICK Гликерия\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1867\n2 PLAC Preiļi, Латвия\n1 DEAT Y\n2 DATE SEP 1943\n2 AGE 75-76\n1 FAMS @F97@\n1 FAMC @F160@\n1 RIN MH:I261\n1 _UID 67C8160F7495731E6025E5A60AF7F2E8"
-    },
-    {
-      "id": "I629",
-      "name_raw": "Мартын //",
-      "name": "Мартын",
-      "given": "",
-      "surname": "",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I629",
-      "uid": "67C8160F7AF543358025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [],
-      "fams": [
-        "F239"
-      ],
-      "parents": [],
-      "children": [
-        "I482"
-      ],
-      "spouses": [],
-      "raw": "0 @I629@ INDI\n1 NAME Мартын //\n2 GIVN Мартын\n1 SEX M\n1 FAMS @F239@\n1 RIN MH:I629\n1 _UID 67C8160F7AF543358025E5A60AF7F2E8"
-    },
-    {
-      "id": "I482",
-      "name_raw": "Матрена Мартыновна //",
-      "name": "Матрена Мартыновна",
-      "given": "",
-      "surname": "",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I482",
-      "uid": "67C8160F787B132C5025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1866",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F239"
-      ],
-      "fams": [
-        "F179"
-      ],
-      "parents": [
-        "I629"
-      ],
-      "children": [
-        "I483",
-        "I484",
-        "I485"
-      ],
-      "spouses": [
-        "I323"
-      ],
-      "raw": "0 @I482@ INDI\n1 _UPD 19 MAR 2025 14:49:22 GMT -0600 \n1 NAME Матрена Мартыновна //\n2 GIVN Матрена Мартыновна\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1866\n1 DEAT Y\n1 FAMS @F179@\n1 FAMC @F239@\n1 RIN MH:I482\n1 _UID 67C8160F787B132C5025E5A60AF7F2E8"
-    },
-    {
-      "id": "I322",
-      "name_raw": "Прасковья Спиридоновна //",
-      "name": "Прасковья Спиридоновна",
-      "given": "",
-      "surname": "",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I322",
-      "uid": "67C8160F759CA3224025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1837",
-          "place": "Прейльская волость",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F178"
-      ],
-      "fams": [
-        "F114"
-      ],
-      "parents": [
-        "I481"
-      ],
-      "children": [
-        "I155",
-        "I262",
-        "I323"
-      ],
-      "spouses": [
-        "I321"
-      ],
-      "raw": "0 @I322@ INDI\n1 _UPD 16 APR 2025 04:10:48 GMT -0600 \n1 NAME Прасковья Спиридоновна //\n2 GIVN Прасковья Спиридоновна\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1837\n2 PLAC Прейльская волость\n1 DEAT Y\n1 FAMS @F114@\n1 FAMC @F178@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Прасковья Спиридоновна Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1837 - Прейльская волость&a\n4 CONC mp;lt;br&amp;gt;Отец: Спиридон Неизвестно&amp;lt;br&amp;gt;Муж: Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Дети: Пётр Евстигнеев\n4 CONC ич Андреев, Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:58805366:\n1 RIN MH:I322\n1 _UID 67C8160F759CA3224025E5A60AF7F2E8"
-    },
-    {
-      "id": "I324",
-      "name_raw": "Пётр //",
-      "name": "Пётр",
-      "given": "",
-      "surname": "",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I324",
-      "uid": "67C8160F75A403226025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [],
-      "fams": [
-        "F115"
-      ],
-      "parents": [],
-      "children": [
-        "I156"
-      ],
-      "spouses": [],
-      "raw": "0 @I324@ INDI\n1 NAME Пётр //\n2 GIVN Пётр\n1 SEX M\n1 FAMS @F115@\n1 RIN MH:I324\n1 _UID 67C8160F75A403226025E5A60AF7F2E8"
-    },
-    {
-      "id": "I481",
-      "name_raw": "Спиридон //",
-      "name": "Спиридон",
-      "given": "",
-      "surname": "",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I481",
-      "uid": "67C8160F7875D32C4025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [],
-      "fams": [
-        "F178"
-      ],
-      "parents": [],
-      "children": [
-        "I322"
-      ],
-      "spouses": [],
-      "raw": "0 @I481@ INDI\n1 _UPD 8 JUN 2025 09:58:33 GMT -0600 \n1 NAME Спиридон //\n2 GIVN Спиридон\n1 SEX M\n1 FAMS @F178@\n1 RIN MH:I481\n1 _UID 67C8160F7875D32C4025E5A60AF7F2E8"
-    },
-    {
-      "id": "I48",
-      "name_raw": "Фетиния Игнатьевна //",
-      "name": "Фетиния Игнатьевна",
-      "given": "",
-      "surname": "",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I48",
-      "uid": "67C8160F6F4EF310C025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1884",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "1963",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "baptism": [],
-      "famc": [
-        "F141"
-      ],
-      "fams": [
-        "F19"
-      ],
-      "parents": [],
-      "children": [
-        "I16"
-      ],
-      "spouses": [
-        "I47"
-      ],
-      "raw": "0 @I48@ INDI\n1 _UPD 8 JUN 2025 10:58:18 GMT -0600 \n1 NAME Фетиния Игнатьевна //\n2 GIVN Фетиния Игнатьевна\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 1884\n1 DEAT Y\n2 DATE 1963\n2 AGE 78-79\n1 OCCU Домохозяйка\n1 FAMS @F19@\n1 FAMC @F141@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 1884&amp;lt;br&amp;gt;Занятие: Домох�\n4 CONC �зяйка&amp;lt;br&amp;gt;Смерть: 1963&amp;lt;br&amp;gt;Отец: Агап Богданов&amp;lt;br&amp;gt;Муж: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Д\n4 CONC ети: Мария Дмитриевна Семёнова (Амбросова), Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Ефр\n4 CONC осиния Бриц (Амбросова), Анфим Димитриевич Амбросов, Иван Димитривич Амбросов&amp;lt;br&amp;gt;Родные брат/сестра: Ек\n4 CONC атерина Игнатьевна Карпова (Богданова), Февруса Агаповна Рыхлова (Богданова), Милания Богданова\n2 EVEN Record\n3 ROLE 40000:26093243:\n1 NOTE Жила и работала в Vārkavas pagasta Znutiņu s.\n1 RIN MH:I48\n1 _UID 67C8160F6F4EF310C025E5A60AF7F2E8"
-    },
-    {
-      "id": "I441",
-      "name_raw": "Харлам //",
-      "name": "Харлам",
-      "given": "",
-      "surname": "",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I441",
-      "uid": "67C8160F77D98329B025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [],
-      "fams": [
-        "F160"
-      ],
-      "parents": [],
-      "children": [
-        "I261"
-      ],
-      "spouses": [],
-      "raw": "0 @I441@ INDI\n1 NAME Харлам //\n2 GIVN Харлам\n1 SEX M\n1 FAMS @F160@\n1 RIN MH:I441\n1 _UID 67C8160F77D98329B025E5A60AF7F2E8"
-    },
-    {
-      "id": "I47",
-      "name_raw": "Димитрий Данильевич /Амбросов/",
-      "name": "Димитрий Данильевич Амбросов",
-      "given": "",
-      "surname": "Амбросов",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I47",
-      "uid": "67C8160F6F43E310A025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1880",
-          "place": "Viški",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "29 DEC 1953",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "baptism": [],
-      "famc": [
-        "F44"
-      ],
-      "fams": [
-        "F19",
-        "F500039"
-      ],
-      "parents": [],
-      "children": [
-        "I16"
-      ],
-      "spouses": [
-        "I48"
-      ],
-      "raw": "0 @I47@ INDI\n1 _UPD 4 APR 2025 03:50:33 GMT -0600 \n1 NAME Димитрий Данильевич /Амбросов/\n2 GIVN Димитрий Данильевич\n2 SURN Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1880\n2 PLAC Viški\n1 DEAT Y\n2 DATE 29 DEC 1953\n2 AGE 72-73\n1 OCCU Плотник. Мастерил колёса\n1 FAMS @F19@\n1 FAMS @F500039@\n1 FAMC @F44@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1880&amp;lt;br&amp;gt;Занятие: Плотник. Мастерил\n4 CONC  колёса&amp;lt;br&amp;gt;Смерть: 29 дек 1953&amp;lt;br&amp;gt;Отец: Даниил Амбросов&amp;lt;br&amp;gt;Мать: Неизвестно Амбросова&amp;lt;br&amp;gt\n4 CONC ;Жена: Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Дети: Мария Дмитриевна Семёнова (Амбросова), Иван Дим\n4 CONC итривич Амбросов, Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, \n4 CONC Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093242:\n1 RIN MH:I47\n1 _UID 67C8160F6F43E310A025E5A60AF7F2E8"
-    },
-    {
-      "id": "I16",
-      "name_raw": "Кузьма /Амбросов/",
-      "name": "Кузьма Амбросов",
-      "given": "",
-      "surname": "Амбросов",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I16",
-      "uid": "67C8160F6E61D30E9025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "5 NOV 1918",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "11 JAN 2009",
-          "place": "Raudas iela, Riga, Латвия",
-          "note": "Естественная смерть/старость"
-        }
-      ],
-      "burial": [
-        {
-          "date": "15 JAN 2009",
-          "place": "Riga, Латвия",
-          "note": ""
-        }
-      ],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F19"
-      ],
-      "fams": [
-        "F6"
-      ],
-      "parents": [
-        "I47",
-        "I48"
-      ],
-      "children": [
-        "I7"
-      ],
-      "spouses": [
-        "I17"
-      ],
-      "raw": "0 @I16@ INDI\n1 _UPD 12 MAY 2025 04:03:02 GMT -0600 \n1 NAME Кузьма /Амбросов/\n2 GIVN Кузьма\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 5 NOV 1918\n1 DEAT Y\n2 DATE 11 JAN 2009\n2 PLAC Raudas iela, Riga, Латвия\n2 AGE 90\n2 CAUS Естественная смерть/старость\n1 BURI Ivana kapi, Rīga, Latvija\n2 DATE 15 JAN 2009\n2 PLAC Riga, Латвия\n1 FAMS @F6@\n1 FAMC @F19@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Кузьма Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 5 ноя 1918&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Мане\n4 CONC фа Амбросова (Васильева) - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Смерть: 11 янв 2009 - Riga, Латвия&amp;lt;br&amp;gt;Захоронение: 15 янв 20\n4 CONC 09 - Riga, Латвия&amp;lt;br&amp;gt;Отец: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Мать: Фетиния Игнатьевна Амбросова (Богда�\n4 CONC �ова)&amp;lt;br&amp;gt;Жена: Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt\n4 CONC ;br&amp;gt;Родные брат/сестра: Мария Дмитриевна Семёнова (Амбросова), Иван Димитривич Амбросов, Марина Vaivode (Амброс\n4 CONC ова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093229:\n1 RIN MH:I16\n1 _UID 67C8160F6E61D30E9025E5A60AF7F2E8"
-    },
-    {
-      "id": "I7",
-      "name_raw": "Людмила Кузьминична /Амбросова/",
-      "name": "Людмила Кузьминична Амбросова",
-      "given": "",
-      "surname": "Амбросова",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I7",
-      "uid": "67C8160F6DFDC30E0025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "10 AUG 1948",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F6"
-      ],
-      "fams": [
-        "F2",
-        "F5"
-      ],
-      "parents": [
-        "I16",
-        "I17"
-      ],
-      "children": [
-        "I1"
-      ],
-      "spouses": [
-        "I6"
-      ],
-      "raw": "0 @I7@ INDI\n1 _UPD 29 MAR 2025 14:46:43 GMT -0600 \n1 NAME Людмила Кузьминична /Амбросова/\n2 GIVN Людмила Кузьминична\n2 SURN Амбросова\n2 _MARNM Ильина\n1 SEX F\n1 BIRT\n2 DATE 10 AUG 1948\n1 RESI\n2 ADDR\n3 CITY Riga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n3 ADR1 Ludmila.Iljina@live.com\n1 RESI\n2 ADDR\n3 ADR1 Riga, Латвия\n1 RESI\n2 EMAIL ludmila.iljina@@live.com\n1 FAMS @F2@\n1 FAMS @F5@\n1 FAMC @F6@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Кузьма Амбросов&amp;lt;br&amp;gt;Мать: Ма\n4 CONC нефа Амбросова (Васильева)&amp;lt;br&amp;gt;Муж: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Фактический(-ая) супруг(-а): &lt;&lt;Priva\n4 CONC te&gt;&gt; Paja&amp;lt;br&amp;gt;Дети: Виктория Митрофанова (Ильина), Эдуард Валентинович Ильин\n2 EVEN Record\n3 ROLE 40000:26093227:\n1 RIN MH:I7\n1 _UID 67C8160F6DFDC30E0025E5A60AF7F2E8"
-    },
-    {
-      "id": "I631",
-      "name_raw": "Александр /Андреев/",
-      "name": "Александр Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I631",
-      "uid": "67C8160F7AFC1335A025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F240"
-      ],
-      "fams": [
-        "F305"
-      ],
-      "parents": [
-        "I483"
-      ],
-      "children": [
-        "I784"
-      ],
-      "spouses": [],
-      "raw": "0 @I631@ INDI\n1 NAME Александр /Андреев/\n2 GIVN Александр\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMS @F305@\n1 FAMC @F240@\n1 RIN MH:I631\n1 _UID 67C8160F7AFC1335A025E5A60AF7F2E8"
-    },
-    {
-      "id": "I784",
-      "name_raw": "/Андреев/",
-      "name": "Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I784",
-      "uid": "67C8160F7D4E633F3025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F305"
-      ],
-      "fams": [],
-      "parents": [
-        "I631"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I784@ INDI\n1 NAME  /Андреев/\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMC @F305@\n1 RIN MH:I784\n1 _UID 67C8160F7D4E633F3025E5A60AF7F2E8"
-    },
-    {
-      "id": "I264",
-      "name_raw": "Аникий Васильевич /Андреев/",
-      "name": "Аникий Васильевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I264",
-      "uid": "67C8160F74A6331E9025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1891",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I264@ INDI\n1 NAME Аникий Васильевич /Андреев/\n2 GIVN Аникий Васильевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1891\n1 FAMC @F97@\n1 RIN MH:I264\n1 _UID 67C8160F74A6331E9025E5A60AF7F2E8"
-    },
-    {
-      "id": "I262",
-      "name_raw": "Василий Евстигнеевич /Андреев/",
-      "name": "Василий Евстигнеевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I262",
-      "uid": "67C8160F749BB31E7025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1863",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "baptism": [],
-      "famc": [
-        "F114"
-      ],
-      "fams": [
-        "F97"
-      ],
-      "parents": [
-        "I321",
-        "I322"
-      ],
-      "children": [
-        "I135",
-        "I263",
-        "I264",
-        "I265",
-        "I266",
-        "I267",
-        "I268",
-        "I269"
-      ],
-      "spouses": [
-        "I261"
-      ],
-      "raw": "0 @I262@ INDI\n1 NAME Василий Евстигнеевич /Андреев/\n2 GIVN Василий Евстигнеевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1863\n1 OCCU закончил народное училище - земледелец при отце\n1 FAMS @F97@\n1 FAMC @F114@\n1 RIN MH:I262\n1 _UID 67C8160F749BB31E7025E5A60AF7F2E8"
-    },
-    {
-      "id": "I483",
-      "name_raw": "Денис Прокопьевич /Андреев/",
-      "name": "Денис Прокопьевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I483",
-      "uid": "67C8160F7882832C6025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1890",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "1970",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F179"
-      ],
-      "fams": [
-        "F240"
-      ],
-      "parents": [
-        "I323",
-        "I482"
-      ],
-      "children": [
-        "I630",
-        "I631"
-      ],
-      "spouses": [],
-      "raw": "0 @I483@ INDI\n1 NAME Денис Прокопьевич /Андреев/\n2 GIVN Денис Прокопьевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n2 DATE 1970\n2 AGE 79-80\n1 FAMS @F240@\n1 FAMC @F179@\n1 RIN MH:I483\n1 _UID 67C8160F7882832C6025E5A60AF7F2E8"
-    },
-    {
-      "id": "I321",
-      "name_raw": "Евстигней Трофимович /Андреев/",
-      "name": "Евстигней Трофимович Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I321",
-      "uid": "67C8160F7595D3223025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1827",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "baptism": [],
-      "famc": [
-        "F177"
-      ],
-      "fams": [
-        "F114"
-      ],
-      "parents": [
-        "I480"
-      ],
-      "children": [
-        "I155",
-        "I262",
-        "I323"
-      ],
-      "spouses": [
-        "I322"
-      ],
-      "raw": "0 @I321@ INDI\n1 _UPD 1 JUL 2025 11:57:20 GMT -0600 \n1 NAME Евстигней Трофимович /Андреев/\n2 GIVN Евстигней Трофимович\n2 SURN Андреев\n1 SEX M\n1 BIRT\n2 DATE 1827\n1 OCCU землевладелец\n1 FAMS @F114@\n1 FAMC @F177@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: Примерно в 1827&amp;lt;br&amp;gt;Занятие: землев\n4 CONC ладелец&amp;lt;br&amp;gt;Отец: Трофим Андреев&amp;lt;br&amp;gt;Жена: Прасковья Спиридоновна Андреева&amp;lt;br&amp;gt;Дети: Пётр Евс\n4 CONC тигнеевич Андреев, Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:57596071:\n1 RIN MH:I321\n1 _UID 67C8160F7595D3223025E5A60AF7F2E8"
-    },
-    {
-      "id": "I484",
-      "name_raw": "Иван /Андреев/",
-      "name": "Иван Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I484",
-      "uid": "67C8160F7888132C7025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1895",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F179"
-      ],
-      "fams": [
-        "F241"
-      ],
-      "parents": [
-        "I323",
-        "I482"
-      ],
-      "children": [
-        "I632",
-        "I633",
-        "I634"
-      ],
-      "spouses": [],
-      "raw": "0 @I484@ INDI\n1 NAME Иван /Андреев/\n2 GIVN Иван\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1895\n1 FAMS @F241@\n1 FAMC @F179@\n1 RIN MH:I484\n1 _UID 67C8160F7888132C7025E5A60AF7F2E8"
-    },
-    {
-      "id": "I266",
-      "name_raw": "Иван Васильевич /Андреев/",
-      "name": "Иван Васильевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I266",
-      "uid": "67C8160F74B6C31EB025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "28 JUL 1895",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I266@ INDI\n1 NAME Иван Васильевич /Андреев/\n2 GIVN Иван Васильевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 28 JUL 1895\n1 FAMC @F97@\n1 RIN MH:I266\n1 _UID 67C8160F74B6C31EB025E5A60AF7F2E8"
-    },
-    {
-      "id": "I267",
-      "name_raw": "Макарий Васильевич /Андреев/",
-      "name": "Макарий Васильевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I267",
-      "uid": "67C8160F74BCD31EC025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1904",
-          "place": "Mazie Klapari, Vārkava 5337, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I267@ INDI\n1 _UPD 5 MAY 2025 06:05:44 GMT -0600 \n1 NAME Макарий Васильевич /Андреев/\n2 GIVN Макарий Васильевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1904\n2 PLAC Mazie Klapari, Vārkava 5337, Латвия\n1 DEAT Y\n1 FAMC @F97@\n1 RIN MH:I267\n1 _UID 67C8160F74BCD31EC025E5A60AF7F2E8"
-    },
-    {
-      "id": "I634",
-      "name_raw": "Панфил /Андреев/",
-      "name": "Панфил Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I634",
-      "uid": "67C8160F7B046335D025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F241"
-      ],
-      "fams": [
-        "F307"
-      ],
-      "parents": [
-        "I484"
-      ],
-      "children": [
-        "I786"
-      ],
-      "spouses": [],
-      "raw": "0 @I634@ INDI\n1 NAME Панфил /Андреев/\n2 GIVN Панфил\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMS @F307@\n1 FAMC @F241@\n1 RIN MH:I634\n1 _UID 67C8160F7B046335D025E5A60AF7F2E8"
-    },
-    {
-      "id": "I323",
-      "name_raw": "Прокопий Евстигнеевич /Андреев/",
-      "name": "Прокопий Евстигнеевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I323",
-      "uid": "67C8160F75A1E3225025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1867",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F114"
-      ],
-      "fams": [
-        "F179"
-      ],
-      "parents": [
-        "I321",
-        "I322"
-      ],
-      "children": [
-        "I483",
-        "I484",
-        "I485"
-      ],
-      "spouses": [
-        "I482"
-      ],
-      "raw": "0 @I323@ INDI\n1 NAME Прокопий Евстигнеевич /Андреев/\n2 GIVN Прокопий Евстигнеевич\n2 NICK Прокоп\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1867\n1 FAMS @F179@\n1 FAMC @F114@\n1 RIN MH:I323\n1 _UID 67C8160F75A1E3225025E5A60AF7F2E8"
-    },
-    {
-      "id": "I155",
-      "name_raw": "Пётр Евстигнеевич /Андреев/",
-      "name": "Пётр Евстигнеевич Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I155",
-      "uid": "67C8160F722523179025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1860",
-          "place": "Germany",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "22 APR 1929",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "baptism": [],
-      "famc": [
-        "F114"
-      ],
-      "fams": [
-        "F55"
-      ],
-      "parents": [
-        "I321",
-        "I322"
-      ],
-      "children": [
-        "I157",
-        "I158",
-        "I159",
-        "I160",
-        "I57"
-      ],
-      "spouses": [
-        "I156"
-      ],
-      "raw": "0 @I155@ INDI\n1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Пётр Евстигнеевич /Андреев/\n2 GIVN Пётр Евстигнеевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1860\n2 PLAC Germany\n1 DEAT Y\n2 DATE 22 APR 1929\n2 AGE 68-69\n1 OCCU десятский, земледелец при отце\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n1 FAMS @F55@\n1 FAMC @F114@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: Примерно в 1860&amp;lt;br&amp;gt;Занятие: десятский\n4 CONC , земледелец при отце&amp;lt;br&amp;gt;Смерть: 22 апр 1929&amp;lt;br&amp;gt;Отец: Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Мать: Пра\n4 CONC сковья Спиридоновна Андреева&amp;lt;br&amp;gt;Жена: Марья Петровна Андреева&amp;lt;br&amp;gt;Дети: Агафия Петровна Егорова, \n4 CONC Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинья Петровна Иванова (Андреева), Манефа А�\n4 CONC �дреева&amp;lt;br&amp;gt;Родные брат/сестра: Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:49561619:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500236/%D0%BF%D1%91%D1%82%D1%80-%D0%B5%D0%B2%D1%81%D1%82%D0%B8%D0%B3%D0%BD%D0%B5%D0%B5%D0%B2%D0%B8%D1%87-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500236\n1 RIN MH:I155\n1 _UID 67C8160F722523179025E5A60AF7F2E8"
-    },
-    {
-      "id": "I480",
-      "name_raw": "Трофим /Андреев/",
-      "name": "Трофим Андреев",
-      "given": "",
-      "surname": "Андреев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I480",
-      "uid": "67C8160F7873A32C3025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [],
-      "fams": [
-        "F177"
-      ],
-      "parents": [],
-      "children": [
-        "I321"
-      ],
-      "spouses": [],
-      "raw": "0 @I480@ INDI\n1 NAME Трофим /Андреев/\n2 GIVN Трофим\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMS @F177@\n1 RIN MH:I480\n1 _UID 67C8160F7873A32C3025E5A60AF7F2E8"
-    },
-    {
-      "id": "I159",
-      "name_raw": "Агафия \"Ганька\" Петровна /Андреева/",
-      "name": "Агафия \"Ганька\" Петровна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I159",
-      "uid": "67C8160F7246E317E025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1902",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "",
-          "place": "Ермаки",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F55"
-      ],
-      "fams": [
-        "F118"
-      ],
-      "parents": [
-        "I155",
-        "I156"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I159@ INDI\n1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Агафия \"Ганька\" Петровна /Андреева/\n2 GIVN Агафия \"Ганька\" Петровна\n2 SURN Андреева\n2 _MARNM Егорова\n1 SEX F\n1 DEAT Y\n2 PLAC Ермаки\n1 BIRT\n2 DATE 1902\n1 FAMS @F118@\n1 FAMC @F55@\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500240/%D0%B0%D0%B3%D0%B0%D1%84%D0%B8%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B5%D0%B3%D0%BE%D1%80%D0%BE%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500240\n1 RIN MH:I159\n1 _UID 67C8160F7246E317E025E5A60AF7F2E8"
-    },
-    {
-      "id": "I158",
-      "name_raw": "Агрипина \"Рипа\" Петровна /Андреева/",
-      "name": "Агрипина \"Рипа\" Петровна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I158",
-      "uid": "67C8160F72405317D025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "BET 1895 AND 1897",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "7 MAR 1967",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F55"
-      ],
-      "fams": [
-        "F116",
-        "F117"
-      ],
-      "parents": [
-        "I155",
-        "I156"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I158@ INDI\n1 _UPD 1 MAY 2025 17:00:17 GMT -0600 \n1 NAME Агрипина \"Рипа\" Петровна /Андреева/\n2 GIVN Агрипина \"Рипа\" Петровна\n2 SURN Андреева\n2 _MARNM Иванова\n1 SEX F\n1 BIRT\n2 DATE BET 1895 AND 1897\n1 DEAT Y\n2 DATE 7 MAR 1967\n2 AGE 71-72\n1 FAMS @F116@\n1 FAMS @F117@\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Рипинья Петровна Иванова (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1895&amp;lt;br&amp;gt;Смерть: 7 �\n4 CONC �ар 1967&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андреева&amp;lt;br&amp;gt;Бывший муж: Н�\n4 CONC �кита Иванов&amp;lt;br&amp;gt;Дети: Михаил Иванов, Григорий Иванов, &amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Иванова, Неизвестно Иванов, &\n4 CONC amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Иванов&amp;lt;br&amp;gt;Родные брат/сестра: Агафия Петровна Егорова (Андреева), Марфа Петровна А\n4 CONC ндреева, Евдокия Петровна Васильева (Андреева), Манефа Андреева\n2 EVEN Record\n3 ROLE 40000:49561328:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500239/%D1%80%D0%B8%D0%BF%D0%B8%D0%BD%D1%8C%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B8%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500239\n1 RIN MH:I158\n1 _UID 67C8160F72405317D025E5A60AF7F2E8"
-    },
-    {
-      "id": "I633",
-      "name_raw": "Анастасия /Андреева/",
-      "name": "Анастасия Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I633",
-      "uid": "67C8160F7B01B335C025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F241"
-      ],
-      "fams": [
-        "F306"
-      ],
-      "parents": [
-        "I484"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I633@ INDI\n1 NAME Анастасия /Андреева/\n2 GIVN Анастасия\n2 SURN Андреева\n1 SEX F\n1 FAMS @F306@\n1 FAMC @F241@\n1 RIN MH:I633\n1 _UID 67C8160F7B01B335C025E5A60AF7F2E8"
-    },
-    {
-      "id": "I786",
-      "name_raw": "Валентина /Андреева/",
-      "name": "Валентина Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I786",
-      "uid": "67C8160F7D52F33F5025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F307"
-      ],
-      "fams": [],
-      "parents": [
-        "I634"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I786@ INDI\n1 NAME Валентина /Андреева/\n2 GIVN Валентина\n2 SURN Андреева\n1 SEX F\n1 FAMC @F307@\n1 RIN MH:I786\n1 _UID 67C8160F7D52F33F5025E5A60AF7F2E8"
-    },
-    {
-      "id": "I57",
-      "name_raw": "Евдокия Петровна /Андреева/",
-      "name": "Евдокия Петровна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I57",
-      "uid": "67C8160F6FB1B3115025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1892",
-          "place": "Клапары, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "1969",
-          "place": "Клапары, Латвия",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F55"
-      ],
-      "fams": [
-        "F21",
-        "F54"
-      ],
-      "parents": [
-        "I155",
-        "I156"
-      ],
-      "children": [
-        "I17"
-      ],
-      "spouses": [
-        "I56"
-      ],
-      "raw": "0 @I57@ INDI\n1 _UPD 4 JUN 2025 13:34:47 GMT -0600 \n1 NAME Евдокия Петровна /Андреева/\n2 GIVN Евдокия Петровна\n2 SURN Андреева\n2 _MARNM Васильева\n1 SEX F\n1 BIRT\n2 DATE 1892\n2 PLAC Клапары, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Клапары, Латвия\n2 AGE 76-77\n1 FAMS @F21@\n1 FAMS @F54@\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1892 - Клапары&amp;lt;br&amp\n4 CONC ;gt;Смерть: Примерно в 1969 - Клапары&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андр�\n4 CONC �ева&amp;lt;br&amp;gt;Муж: Иван Петрович Васильев&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Васильев, Таиси\n4 CONC я Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев, Степанида Архипова?&amp;lt;br&amp;gt;Родные бра\n4 CONC т/сестра: Агафия Петровна Егорова, Марфа Петровна Андреева, Рипинья Петровна Иванова (Андреева), Манефа Андре�\n4 CONC �ва\n2 EVEN Record\n3 ROLE 40000:26093247:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500215/%D0%B5%D0%B2%D0%B4%D0%BE%D0%BA%D0%B8%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B2%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=R\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500215\n1 RIN MH:I57\n1 _UID 67C8160F6FB1B3115025E5A60AF7F2E8"
-    },
-    {
-      "id": "I160",
-      "name_raw": "Манефа /Андреева/",
-      "name": "Манефа Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I160",
-      "uid": "67C8160F72496317F025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F55"
-      ],
-      "fams": [],
-      "parents": [
-        "I155",
-        "I156"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I160@ INDI\n1 _UPD 19 MAR 2025 14:46:21 GMT -0600 \n1 NAME Манефа /Андреева/\n2 GIVN Манефа\n2 SURN Андреева\n1 SEX F\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна\n4 CONC  Андреева&amp;lt;br&amp;gt;Родные брат/сестра: Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинь\n4 CONC я Петровна Иванова (Андреева), Агафия Петровна Егорова\n2 EVEN Record\n3 ROLE 40000:60652329:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500242/%D0%BC%D0%B0%D0%BD%D0%B5%D1%84%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500242\n1 RIN MH:I160\n1 _UID 67C8160F72496317F025E5A60AF7F2E8"
-    },
-    {
-      "id": "I630",
-      "name_raw": "Марфа /Андреева/",
-      "name": "Марфа Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I630",
-      "uid": "67C8160F7AF7E3359025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F240"
-      ],
-      "fams": [
-        "F304"
-      ],
-      "parents": [
-        "I483"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I630@ INDI\n1 NAME Марфа /Андреева/\n2 GIVN Марфа\n2 SURN Андреева\n1 SEX F\n1 FAMS @F304@\n1 FAMC @F240@\n1 RIN MH:I630\n1 _UID 67C8160F7AF7E3359025E5A60AF7F2E8"
-    },
-    {
-      "id": "I157",
-      "name_raw": "Марфа Петровна /Андреева/",
-      "name": "Марфа Петровна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I157",
-      "uid": "67C8160F72377317C025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1890",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F55"
-      ],
-      "fams": [],
-      "parents": [
-        "I155",
-        "I156"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I157@ INDI\n1 _UPD 19 MAR 2025 14:47:11 GMT -0600 \n1 NAME Марфа Петровна /Андреева/\n2 GIVN Марфа Петровна\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n1 FAMC @F55@\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500238/%D0%BC%D0%B0%D1%80%D1%84%D0%B0-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500238\n1 RIN MH:I157\n1 _UID 67C8160F72377317C025E5A60AF7F2E8"
-    },
-    {
-      "id": "I156",
-      "name_raw": "Марья Петровна /Андреева/",
-      "name": "Марья Петровна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I156",
-      "uid": "67C8160F72314317B025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1862",
-          "place": "Borbaļi, Vārkava, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "28 JAN 1958",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F115"
-      ],
-      "fams": [
-        "F55"
-      ],
-      "parents": [
-        "I324"
-      ],
-      "children": [
-        "I157",
-        "I158",
-        "I159",
-        "I160",
-        "I57"
-      ],
-      "spouses": [
-        "I155"
-      ],
-      "raw": "0 @I156@ INDI\n1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Марья Петровна /Андреева/\n2 GIVN Марья Петровна\n2 NICK Марфа\n2 SURN Андреева\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1862\n2 PLAC Borbaļi, Vārkava, Латвия\n1 DEAT Y\n2 DATE 28 JAN 1958\n2 AGE 95-96\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n1 FAMS @F55@\n1 FAMC @F115@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Марья Петровна Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Псевдоним: Марфа&amp;lt;br&amp;gt;Рождение: Примерно в 1862 - Borba\n4 CONC ļi, Vārkava, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в 1958&amp;lt;br&amp;gt;Отец: Пётр Неизвестно&amp;lt;br&amp;gt;Муж: Пётр Евстигнеевич \n4 CONC Андреев&amp;lt;br&amp;gt;Дети: Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинья Петровна Иван�\n4 CONC �ва (Андреева), Агафия Петровна Егорова, Манефа Андреева\n2 EVEN Record\n3 ROLE 40000:49561630:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500237/%D0%BC%D0%B0%D1%80%D1%8C%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500237\n1 NOTE <p>LVVA фонд 2258 опись 5 дело 602:</p><p><p></p></p><p><p>Предыдущий пасспорт №3515 был выдан 1922 году 16 сентября.</p></p><p><p></p></p><p><p>П\n2 CONC ассаорт JZ № 021036, №4236 был выдан 1929 году 5 ноября.</p></p><p><p></p></p><p><p>Фотки нет, но есть отпечаток пальца.</p></p><p><p></p></p>\n2 CONC <p><p>Жила в Анчкино</p></p><p><p></p></p><p><p>Мед помощь право первой группы 1933 год 21 сентября</p></p><p><p></p></p><p>в 1931 году голос\n2 CONC овала (сейм и пагастс)</p>\n1 RIN MH:I156\n1 _UID 67C8160F72314317B025E5A60AF7F2E8"
-    },
-    {
-      "id": "I135",
-      "name_raw": "Минадора Васильевна /Андреева/",
-      "name": "Минадора Васильевна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I135",
-      "uid": "67C8160F71C2F3165025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "19 SEP 1911",
-          "place": "Mazie Klapari, Vārkava 5337, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "26 OCT 1965",
-          "place": "Mazie Klapari, Vārkava 5337, Латвия",
-          "note": ""
-        }
-      ],
-      "burial": [
-        {
-          "date": "30 OCT 1965",
-          "place": "Klaparu kapi",
-          "note": ""
-        }
-      ],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [
-        "F50"
-      ],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I135@ INDI\n1 NAME Минадора Васильевна /Андреева/\n2 GIVN Минадора Васильевна\n2 SURN Андреева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 19 SEP 1911\n2 PLAC Mazie Klapari, Vārkava 5337, Латвия\n1 DEAT Y\n2 DATE 26 OCT 1965\n2 PLAC Mazie Klapari, Vārkava 5337, Латвия\n2 AGE 54\n1 BURI\n2 DATE 30 OCT 1965\n2 PLAC Klaparu kapi\n1 FAMS @F50@\n1 FAMC @F97@\n1 RIN MH:I135\n1 _UID 67C8160F71C2F3165025E5A60AF7F2E8"
-    },
-    {
-      "id": "I269",
-      "name_raw": "Просковия Васильевна /Андреева/",
-      "name": "Просковия Васильевна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I269",
-      "uid": "67C8160F74C8F31EE025E5A60AF7F2E8",
-      "birth": [],
-      "death": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [
-        {
-          "date": "",
-          "place": "Sunipi",
-          "note": ""
-        }
-      ],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [
-        "F500047"
-      ],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I269@ INDI\n1 _UPD 1 MAY 2025 09:09:50 GMT -0600 \n1 NAME Просковия Васильевна /Андреева/\n2 GIVN Просковия Васильевна\n2 SURN Андреева\n1 SEX F\n1 DEAT Y\n1 BURI\n2 PLAC Sunipi\n1 FAMS @F500047@\n1 FAMC @F97@\n1 RIN MH:I269\n1 _UID 67C8160F74C8F31EE025E5A60AF7F2E8"
-    },
-    {
-      "id": "I485",
-      "name_raw": "Устиния Прокопьевна /Андреева/",
-      "name": "Устиния Прокопьевна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I485",
-      "uid": "67C8160F788AD32C8025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F179"
-      ],
-      "fams": [],
-      "parents": [
-        "I323",
-        "I482"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I485@ INDI\n1 _UPD 19 MAR 2025 14:49:36 GMT -0600 \n1 NAME Устиния Прокопьевна /Андреева/\n2 GIVN Устиния Прокопьевна\n2 SURN Андреева\n1 SEX F\n1 FAMC @F179@\n1 RIN MH:I485\n1 _UID 67C8160F788AD32C8025E5A60AF7F2E8"
-    },
-    {
-      "id": "I268",
-      "name_raw": "Федора Васильевна /Андреева/",
-      "name": "Федора Васильевна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I268",
-      "uid": "67C8160F74C6631ED025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "11 MAY 1906",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "28 FEB 1989",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [
-        {
-          "date": "",
-          "place": "Klapari",
-          "note": ""
-        }
-      ],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I268@ INDI\n1 NAME Федора Васильевна /Андреева/\n2 GIVN Федора Васильевна\n2 SURN Андреева\n2 _MARNM Иванова\n1 SEX F\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 11 MAY 1906\n1 DEAT Y\n2 DATE 28 FEB 1989\n2 AGE 82\n1 FAMC @F97@\n1 RIN MH:I268\n1 _UID 67C8160F74C6631ED025E5A60AF7F2E8"
-    },
-    {
-      "id": "I632",
-      "name_raw": "Феодосия /Андреева/",
-      "name": "Феодосия Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I632",
-      "uid": "67C8160F7AFE7335B025E5A60AF7F2E8",
-      "birth": [],
-      "death": [],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F241"
-      ],
-      "fams": [],
-      "parents": [
-        "I484"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I632@ INDI\n1 NAME Феодосия /Андреева/\n2 GIVN Феодосия\n2 SURN Андреева\n1 SEX F\n1 FAMC @F241@\n1 RIN MH:I632\n1 _UID 67C8160F7AFE7335B025E5A60AF7F2E8"
-    },
-    {
-      "id": "I265",
-      "name_raw": "Фомаида Васильевна /Андреева/",
-      "name": "Фомаида Васильевна Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I265",
-      "uid": "67C8160F74B0E31EA025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "23 MAY 1892",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "21 JAN 1977",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [
-        {
-          "date": "",
-          "place": "Klapari",
-          "note": ""
-        }
-      ],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [
-        "F500046"
-      ],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I265@ INDI\n1 NAME Фомаида Васильевна /Андреева/\n2 GIVN Фомаида Васильевна\n2 SURN Андреева\n2 _MARNM Дерягина\n1 SEX F\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 23 MAY 1892\n1 DEAT Y\n2 DATE 21 JAN 1977\n2 AGE 84\n1 FAMS @F500046@\n1 FAMC @F97@\n1 RIN MH:I265\n1 _UID 67C8160F74B0E31EA025E5A60AF7F2E8"
-    },
-    {
-      "id": "I263",
-      "name_raw": "Фоманида /Андреева/",
-      "name": "Фоманида Андреева",
-      "given": "",
-      "surname": "Андреева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I263",
-      "uid": "67C8160F74A0D31E8025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1890",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F97"
-      ],
-      "fams": [],
-      "parents": [
-        "I261",
-        "I262"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I263@ INDI\n1 _UPD 19 MAR 2025 14:48:58 GMT -0600 \n1 NAME Фоманида /Андреева/\n2 GIVN Фоманида\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n1 FAMC @F97@\n1 RIN MH:I263\n1 _UID 67C8160F74A0D31E8025E5A60AF7F2E8"
-    },
-    {
-      "id": "I56",
-      "name_raw": "Иван Петрович /Васильев/",
-      "name": "Иван Петрович Васильев",
-      "given": "",
-      "surname": "Васильев",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I56",
-      "uid": "67C8160F6FA693114025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "1897",
-          "place": "д. Гай, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "1969",
-          "place": "Varkava, Латвия",
-          "note": ""
-        }
-      ],
-      "burial": [
-        {
-          "date": "",
-          "place": "Klapari",
-          "note": ""
-        }
-      ],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F53"
-      ],
-      "fams": [
-        "F21"
-      ],
-      "parents": [],
-      "children": [
-        "I17"
-      ],
-      "spouses": [
-        "I57"
-      ],
-      "raw": "0 @I56@ INDI\n1 _UPD 5 MAR 2025 03:31:21 GMT -0600 \n1 NAME Иван Петрович /Васильев/\n2 GIVN Иван Петрович\n2 SURN Васильев\n2 _MARNM Васильев\n1 SEX M\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 1897\n2 PLAC д. Гай, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Varkava, Латвия\n2 AGE 71-72\n1 FAMS @F21@\n1 FAMC @F53@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Иван Петрович Васильев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1897 - д. Гай, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в\n4 CONC  1969 - Varkava, Латвия&amp;lt;br&amp;gt;Захоронение: Klapari&amp;lt;br&amp;gt;Отец: Пётр Васильев&amp;lt;br&amp;gt;Мать: Матрена Васильева&amp;lt;\n4 CONC br&amp;gt;Жена: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Василье\n4 CONC в, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев&amp;lt;br&amp;gt;Родные брат/сестра: Ник�\n4 CONC �нор Васильев, Агафон Васильев, Анисия Васильева, Семен Васильев, Василий Васильев, Савелий Васильев, Стюшка В\n4 CONC асильев, Матрена Васильева, Степан Васильев\n2 EVEN Record\n3 ROLE 40000:26093246:\n1 RIN MH:I56\n1 _UID 67C8160F6FA693114025E5A60AF7F2E8"
-    },
-    {
-      "id": "I17",
-      "name_raw": "Манефа /Васильева/",
-      "name": "Манефа Васильева",
-      "given": "",
-      "surname": "Васильева",
-      "sex": "F",
-      "marnm": "",
-      "rin": "MH:I17",
-      "uid": "67C8160F6E6BE30EA025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "6 NOV 1924",
-          "place": "д.Аньчкино, Варкавская волость, Латвия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "10 MAY 2000",
-          "place": "Avotu iela 5 - 9, Rīga, Latvija",
-          "note": "Инсульт"
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F21"
-      ],
-      "fams": [
-        "F6"
-      ],
-      "parents": [
-        "I56",
-        "I57"
-      ],
-      "children": [
-        "I7"
-      ],
-      "spouses": [
-        "I16"
-      ],
-      "raw": "0 @I17@ INDI\n1 _UPD 12 MAY 2025 04:04:06 GMT -0600 \n1 NAME Манефа /Васильева/\n2 GIVN Манефа\n2 SURN Васильева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 6 NOV 1924\n2 PLAC д.Аньчкино, Варкавская волость, Латвия\n1 DEAT Y\n2 DATE 10 MAY 2000\n2 PLAC Avotu iela 5 - 9, Rīga, Latvija\n2 AGE 75\n2 CAUS Инсульт\n1 FAMS @F6@\n1 FAMC @F21@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 6 ноя 1924 - д.Аньчкино, Варкавская волость\n4 CONC , Латвия&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Кузьма Амбросов - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Развод: Супруг(-а\n4 CONC ): Дмитрий Федосеевич Егоров - Примерно в 1946&amp;lt;br&amp;gt;Смерть: 10 май 2000&amp;lt;br&amp;gt;Отец: Иван Петрович Васильев&amp;l\n4 CONC t;br&amp;gt;Мать: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Муж: Кузьма Амбросов&amp;lt;br&amp;gt;Бывший муж: Дмитрий \n4 CONC Федосеевич Егоров&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Родные брат/сестра: Васи\n4 CONC лий Васильев, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев\n2 EVEN Record\n3 ROLE 40000:26093230:\n1 SOUR @S500003@\n2 PAGE https://www.myheritage.com/profile-OYYV7UKW6UKEWOKBADCPFBP3SWQKL5A-1500134/%D0%BC%D0%B0%D0%BD%D0%B5%D1%84%D0%B0-%D0%B2%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500134\n1 RIN MH:I17\n1 _UID 67C8160F6E6BE30EA025E5A60AF7F2E8"
-    },
-    {
-      "id": "I6",
-      "name_raw": "Валентин Фёдорович /Ильин/",
-      "name": "Валентин Фёдорович Ильин",
-      "given": "",
-      "surname": "Ильин",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I6",
-      "uid": "67C8160F6DF2A30DF025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "22 MAR 1949",
-          "place": "Щигровский район, Озерский с/с, Курская область, Россия",
-          "note": ""
-        }
-      ],
-      "death": [
-        {
-          "date": "18 DEC 1995",
-          "place": "152 Kurzemes prospekts, Rīga LV-1069, Latvija",
-          "note": ""
-        }
-      ],
-      "burial": [],
-      "residence": [],
-      "occupation": [],
-      "baptism": [],
-      "famc": [
-        "F4"
-      ],
-      "fams": [
-        "F2"
-      ],
-      "parents": [],
-      "children": [
-        "I1"
-      ],
-      "spouses": [
-        "I7"
-      ],
-      "raw": "0 @I6@ INDI\n1 _UPD 5 MAR 2025 03:30:50 GMT -0600 \n1 NAME Валентин Фёдорович /Ильин/\n2 GIVN Валентин Фёдорович\n2 SURN Ильин\n2 _MARNM Ильин\n1 SEX M\n1 BIRT\n2 DATE 22 MAR 1949\n2 PLAC Щигровский район, Озерский с/с, Курская область, Россия\n1 DEAT Y\n2 DATE 18 DEC 1995\n2 PLAC 152 Kurzemes prospekts, Rīga LV-1069, Latvija\n2 AGE 46\n1 FAMS @F2@\n1 FAMC @F4@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 22 мар 1949 - Щигровский район, Озерский с/с, Ку\n4 CONC рская область, Россия&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Людмила Кузьминична Ильина (Амбросова) - 6 мар 1971\n4 CONC  - Латвия&amp;lt;br&amp;gt;Смерть: 18 дек 1995 - 152 Kurzemes prospekts, Rīga LV-1069, Latvija&amp;lt;br&amp;gt;Отец: Фёдор Никифорович Ильин&amp;lt;br&amp;gt;\n4 CONC Мать: Галина Романовна Ильина (Полякова)&amp;lt;br&amp;gt;Жена: Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Дети: \n4 CONC Виктория Митрофанова (Ильина), Эдуард Валентинович Ильин&amp;lt;br&amp;gt;Родные брат/сестра: Валерий Фёдорович Ильи\n4 CONC н, &amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Ильин\n2 EVEN Record\n3 ROLE 40000:26093226:\n1 RIN MH:I6\n1 _UID 67C8160F6DF2A30DF025E5A60AF7F2E8"
-    },
-    {
-      "id": "I1",
-      "name_raw": "Эдуард Валентинович /Ильин/",
-      "name": "Эдуард Валентинович Ильин",
-      "given": "",
-      "surname": "Ильин",
-      "sex": "M",
-      "marnm": "",
-      "rin": "MH:I1",
-      "uid": "67C8160F6DBD430DA025E5A60AF7F2E8",
-      "birth": [
-        {
-          "date": "20 MAR 1978",
-          "place": "Rīga, Latvia",
-          "note": ""
-        }
-      ],
-      "death": [],
-      "burial": [],
-      "residence": [
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "occupation": [
-        {
-          "date": "3 JUL 2002",
-          "place": "HORTUS Digital, Rīga, Latvia",
-          "note": ""
-        },
-        {
-          "date": "",
-          "place": "",
-          "note": ""
-        }
-      ],
-      "baptism": [],
-      "famc": [
-        "F2"
-      ],
-      "fams": [
-        "F1"
-      ],
-      "parents": [
-        "I6",
-        "I7"
-      ],
-      "children": [],
-      "spouses": [],
-      "raw": "0 @I1@ INDI\n1 NAME Эдуард Валентинович /Ильин/\n2 GIVN Эдуард Валентинович\n2 SURN Ильин\n1 SEX M\n1 BIRT\n2 DATE 20 MAR 1978\n2 PLAC Rīga, Latvia\n1 GRAD\n2 DATE ABT 1 JUN 1996\n2 PLAC Рижская средняя школа № 9, Rīga, Latvia\n2 AGE 18\n1 GRAD\n2 DATE 1999\n2 PLAC Rīgas tehniskas universitātes transporta tehnoloģiju institūts, Rīga, Latvia\n2 AGE 20-21\n1 OCCU ITI Solutuions Consultant\n2 DATE 3 JUL 2002\n2 PLAC HORTUS Digital, Rīga, Latvia\n2 AGE 24\n1 GRAD\n2 DATE 2003\n2 PLAC Transporta un sakaru institūts\n2 AGE 24-25\n1 OCCU ITI Systems Engineer\n1 RESI\n2 ADDR\n3 CITY Rīga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n3 ADR1 Ed.Il@live.com\n1 RESI\n2 PHON (371) 29168716\n1 RESI\n2 ADDR\n3 ADR1 (371) 29168716\n1 RESI\n2 PHON (371) 67412860\n1 RESI\n2 ADDR\n3 ADR1 (371) 67412860\n1 RESI\n2 PHON (371) 67339292\n1 RESI\n2 ADDR\n3 ADR1 (371) 67339292\n1 DSCR <DSCR><HAIR>Brown</HAIR><EYES>Brown</EYES></DSCR>\n1 RESI\n2 EMAIL ed.adult@@gmail.com\n1 FAMS @F1@\n1 FAMC @F2@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Эдуард Валентинович Ильин&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Отец: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Мать: Людми\n4 CONC ла Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Супруг(-а): &lt;&lt;Private&gt;&gt; Ильина (Сумбаева)&amp;lt;br&amp;gt;Братья / сестры: \n4 CONC Виктория Митрофанова (Ильина)\n2 EVEN Record\n3 ROLE 40000:26090289:\n1 RIN MH:I1\n1 _UID 67C8160F6DBD430DA025E5A60AF7F2E8"
+     "date": "1866",
+     "place": "",
+     "note": ""
     }
-  ],
-  "families": [
+   ],
+   "death": [
     {
-      "id": "F2",
-      "husband": [
-        "I6"
-      ],
-      "wife": [
-        "I7"
-      ],
-      "children": [
-        "I1"
-      ],
-      "raw": "0 @F2@ FAM\n1 HUSB @I6@\n1 WIFE @I7@\n1 CHIL @I8@\n1 CHIL @I1@\n1 RIN MH:F2\n1 _UID 67C8160F81C6E3535025E5A60AF7F2E8\n1 MARR\n2 DATE 6 MAR 1971\n2 PLAC Латвия\n2 NOTE Супруг(-а): Валентин Фёдорович Ильин"
-    },
-    {
-      "id": "F6",
-      "husband": [
-        "I16"
-      ],
-      "wife": [
-        "I17"
-      ],
-      "children": [
-        "I7"
-      ],
-      "raw": "0 @F6@ FAM\n1 HUSB @I16@\n1 WIFE @I17@\n1 CHIL @I7@\n1 RIN MH:F6\n1 _UID 67C8160F81D0C3539025E5A60AF7F2E8\n1 MARR\n2 DATE 8 MAY 1948\n2 PLAC Varkavas pagasts\n2 NOTE Супруг(-а): Манефа Амбросова (Васильева)"
-    },
-    {
-      "id": "F19",
-      "husband": [
-        "I47"
-      ],
-      "wife": [
-        "I48"
-      ],
-      "children": [
-        "I16"
-      ],
-      "raw": "0 @F19@ FAM\n1 HUSB @I47@\n1 WIFE @I48@\n1 CHIL @I49@\n1 CHIL @I52@\n1 CHIL @I53@\n1 CHIL @I54@\n1 CHIL @I50@\n1 CHIL @I16@\n1 CHIL @I51@\n1 RIN MH:F19\n1 _UID 67C8160F81E0A3546025E5A60AF7F2E8"
-    },
-    {
-      "id": "F21",
-      "husband": [
-        "I56"
-      ],
-      "wife": [
-        "I57"
-      ],
-      "children": [
-        "I17"
-      ],
-      "raw": "0 @F21@ FAM\n1 HUSB @I56@\n1 WIFE @I57@\n1 CHIL @I17@\n1 CHIL @I58@\n1 CHIL @I59@\n1 CHIL @I60@\n1 CHIL @I61@\n1 RIN MH:F21\n1 _UID 67C8160F81E793548025E5A60AF7F2E8"
-    },
-    {
-      "id": "F55",
-      "husband": [
-        "I155"
-      ],
-      "wife": [
-        "I156"
-      ],
-      "children": [
-        "I157",
-        "I57",
-        "I158",
-        "I159",
-        "I160"
-      ],
-      "raw": "0 @F55@ FAM\n1 HUSB @I155@\n1 WIFE @I156@\n1 CHIL @I157@\n1 CHIL @I57@\n1 CHIL @I158@\n1 CHIL @I159@\n1 CHIL @I160@\n1 RIN MH:F55\n1 _UID 67C8160F821A5356A025E5A60AF7F2E8\n1 MARR\n2 DATE ABT 1897"
-    },
-    {
-      "id": "F97",
-      "husband": [
-        "I262"
-      ],
-      "wife": [
-        "I261"
-      ],
-      "children": [
-        "I263",
-        "I264",
-        "I265",
-        "I266",
-        "I267",
-        "I268",
-        "I135",
-        "I269"
-      ],
-      "raw": "0 @F97@ FAM\n1 HUSB @I262@\n1 WIFE @I261@\n1 CHIL @I263@\n1 CHIL @I264@\n1 CHIL @I265@\n1 CHIL @I266@\n1 CHIL @I267@\n1 CHIL @I268@\n1 CHIL @I135@\n1 CHIL @I269@\n1 RIN MH:F97\n1 _UID 67C8160F824E13594025E5A60AF7F2E8"
-    },
-    {
-      "id": "F114",
-      "husband": [
-        "I321"
-      ],
-      "wife": [
-        "I322"
-      ],
-      "children": [
-        "I155",
-        "I262",
-        "I323"
-      ],
-      "raw": "0 @F114@ FAM\n1 HUSB @I321@\n1 WIFE @I322@\n1 CHIL @I155@\n1 CHIL @I262@\n1 CHIL @I323@\n1 RIN MH:F114\n1 _UID 67C8160F825CF35A5025E5A60AF7F2E8"
-    },
-    {
-      "id": "F115",
-      "husband": [
-        "I324"
-      ],
-      "wife": [],
-      "children": [
-        "I156"
-      ],
-      "raw": "0 @F115@ FAM\n1 HUSB @I324@\n1 CHIL @I156@\n1 RIN MH:F115\n1 _UID 67C8160F825DA35A6025E5A60AF7F2E8"
-    },
-    {
-      "id": "F160",
-      "husband": [
-        "I441"
-      ],
-      "wife": [],
-      "children": [
-        "I261"
-      ],
-      "raw": "0 @F160@ FAM\n1 HUSB @I441@\n1 CHIL @I261@\n1 RIN MH:F160\n1 _UID 67C8160F8283635D3025E5A60AF7F2E8"
-    },
-    {
-      "id": "F177",
-      "husband": [
-        "I480"
-      ],
-      "wife": [],
-      "children": [
-        "I321"
-      ],
-      "raw": "0 @F177@ FAM\n1 HUSB @I480@\n1 CHIL @I321@\n1 RIN MH:F177\n1 _UID 67C8160F8294535E4025E5A60AF7F2E8"
-    },
-    {
-      "id": "F178",
-      "husband": [
-        "I481"
-      ],
-      "wife": [],
-      "children": [
-        "I322"
-      ],
-      "raw": "0 @F178@ FAM\n1 HUSB @I481@\n1 CHIL @I322@\n1 RIN MH:F178\n1 _UID 67C8160F8295135E5025E5A60AF7F2E8"
-    },
-    {
-      "id": "F179",
-      "husband": [
-        "I323"
-      ],
-      "wife": [
-        "I482"
-      ],
-      "children": [
-        "I483",
-        "I484",
-        "I485"
-      ],
-      "raw": "0 @F179@ FAM\n1 HUSB @I323@\n1 WIFE @I482@\n1 CHIL @I483@\n1 CHIL @I484@\n1 CHIL @I485@\n1 RIN MH:F179\n1 _UID 67C8160F8296235E6025E5A60AF7F2E8"
-    },
-    {
-      "id": "F239",
-      "husband": [
-        "I629"
-      ],
-      "wife": [],
-      "children": [
-        "I482"
-      ],
-      "raw": "0 @F239@ FAM\n1 HUSB @I629@\n1 CHIL @I482@\n1 RIN MH:F239\n1 _UID 67C8160F82D763622025E5A60AF7F2E8"
-    },
-    {
-      "id": "F240",
-      "husband": [
-        "I483"
-      ],
-      "wife": [],
-      "children": [
-        "I630",
-        "I631"
-      ],
-      "raw": "0 @F240@ FAM\n1 HUSB @I483@\n1 CHIL @I630@\n1 CHIL @I631@\n1 RIN MH:F240\n1 _UID 67C8160F82D843623025E5A60AF7F2E8"
-    },
-    {
-      "id": "F241",
-      "husband": [
-        "I484"
-      ],
-      "wife": [],
-      "children": [
-        "I632",
-        "I633",
-        "I634"
-      ],
-      "raw": "0 @F241@ FAM\n1 HUSB @I484@\n1 CHIL @I632@\n1 CHIL @I633@\n1 CHIL @I634@\n1 RIN MH:F241\n1 _UID 67C8160F82D953624025E5A60AF7F2E8"
-    },
-    {
-      "id": "F305",
-      "husband": [
-        "I631"
-      ],
-      "wife": [],
-      "children": [
-        "I784"
-      ],
-      "raw": "0 @F305@ FAM\n1 HUSB @I631@\n1 CHIL @I784@\n1 RIN MH:F305\n1 _UID 67C8160F832243664025E5A60AF7F2E8"
-    },
-    {
-      "id": "F307",
-      "husband": [
-        "I634"
-      ],
-      "wife": [],
-      "children": [
-        "I786"
-      ],
-      "raw": "0 @F307@ FAM\n1 HUSB @I634@\n1 CHIL @I786@\n1 RIN MH:F307\n1 _UID 67C8160F8323C3666025E5A60AF7F2E8"
+     "date": "",
+     "place": "",
+     "note": ""
     }
-  ]
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F239"
+   ],
+   "fams": [
+    "F179"
+   ],
+   "parents": [
+    "I629"
+   ],
+   "children": [
+    "I483",
+    "I484",
+    "I485"
+   ],
+   "spouses": [
+    "I323"
+   ],
+   "raw": "0 @I482@ INDI\n1 _UPD 19 MAR 2025 14:49:22 GMT -0600 \n1 NAME Матрена Мартыновна //\n2 GIVN Матрена Мартыновна\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1866\n1 DEAT Y\n1 FAMS @F179@\n1 FAMC @F239@\n1 RIN MH:I482\n1 _UID 67C8160F787B132C5025E5A60AF7F2E8"
+  },
+  {
+   "id": "I322",
+   "name_raw": "Прасковья Спиридоновна //",
+   "name": "Прасковья Спиридоновна",
+   "given": "",
+   "surname": "",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I322",
+   "uid": "67C8160F759CA3224025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1837",
+     "place": "Прейльская волость",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F178"
+   ],
+   "fams": [
+    "F114"
+   ],
+   "parents": [
+    "I481"
+   ],
+   "children": [
+    "I155",
+    "I262",
+    "I323"
+   ],
+   "spouses": [
+    "I321"
+   ],
+   "raw": "0 @I322@ INDI\n1 _UPD 16 APR 2025 04:10:48 GMT -0600 \n1 NAME Прасковья Спиридоновна //\n2 GIVN Прасковья Спиридоновна\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1837\n2 PLAC Прейльская волость\n1 DEAT Y\n1 FAMS @F114@\n1 FAMC @F178@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Прасковья Спиридоновна Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1837 - Прейльская волость&a\n4 CONC mp;lt;br&amp;gt;Отец: Спиридон Неизвестно&amp;lt;br&amp;gt;Муж: Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Дети: Пётр Евстигнеев\n4 CONC ич Андреев, Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:58805366:\n1 RIN MH:I322\n1 _UID 67C8160F759CA3224025E5A60AF7F2E8"
+  },
+  {
+   "id": "I324",
+   "name_raw": "Пётр //",
+   "name": "Пётр",
+   "given": "",
+   "surname": "",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I324",
+   "uid": "67C8160F75A403226025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [],
+   "fams": [
+    "F115"
+   ],
+   "parents": [],
+   "children": [
+    "I156"
+   ],
+   "spouses": [],
+   "raw": "0 @I324@ INDI\n1 NAME Пётр //\n2 GIVN Пётр\n1 SEX M\n1 FAMS @F115@\n1 RIN MH:I324\n1 _UID 67C8160F75A403226025E5A60AF7F2E8"
+  },
+  {
+   "id": "I481",
+   "name_raw": "Спиридон //",
+   "name": "Спиридон",
+   "given": "",
+   "surname": "",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I481",
+   "uid": "67C8160F7875D32C4025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [],
+   "fams": [
+    "F178"
+   ],
+   "parents": [],
+   "children": [
+    "I322"
+   ],
+   "spouses": [],
+   "raw": "0 @I481@ INDI\n1 _UPD 8 JUN 2025 09:58:33 GMT -0600 \n1 NAME Спиридон //\n2 GIVN Спиридон\n1 SEX M\n1 FAMS @F178@\n1 RIN MH:I481\n1 _UID 67C8160F7875D32C4025E5A60AF7F2E8"
+  },
+  {
+   "id": "I48",
+   "name_raw": "Фетиния Игнатьевна //",
+   "name": "Фетиния Игнатьевна",
+   "given": "",
+   "surname": "",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I48",
+   "uid": "67C8160F6F4EF310C025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1884",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "1963",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "baptism": [],
+   "famc": [
+    "F141"
+   ],
+   "fams": [
+    "F19"
+   ],
+   "parents": [],
+   "children": [
+    "I16"
+   ],
+   "spouses": [
+    "I47"
+   ],
+   "raw": "0 @I48@ INDI\n1 _UPD 8 JUN 2025 10:58:18 GMT -0600 \n1 NAME Фетиния Игнатьевна //\n2 GIVN Фетиния Игнатьевна\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 1884\n1 DEAT Y\n2 DATE 1963\n2 AGE 78-79\n1 OCCU Домохозяйка\n1 FAMS @F19@\n1 FAMC @F141@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 1884&amp;lt;br&amp;gt;Занятие: Домох�\n4 CONC �зяйка&amp;lt;br&amp;gt;Смерть: 1963&amp;lt;br&amp;gt;Отец: Агап Богданов&amp;lt;br&amp;gt;Муж: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Д\n4 CONC ети: Мария Дмитриевна Семёнова (Амбросова), Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Ефр\n4 CONC осиния Бриц (Амбросова), Анфим Димитриевич Амбросов, Иван Димитривич Амбросов&amp;lt;br&amp;gt;Родные брат/сестра: Ек\n4 CONC атерина Игнатьевна Карпова (Богданова), Февруса Агаповна Рыхлова (Богданова), Милания Богданова\n2 EVEN Record\n3 ROLE 40000:26093243:\n1 NOTE Жила и работала в Vārkavas pagasta Znutiņu s.\n1 RIN MH:I48\n1 _UID 67C8160F6F4EF310C025E5A60AF7F2E8"
+  },
+  {
+   "id": "I441",
+   "name_raw": "Харлам //",
+   "name": "Харлам",
+   "given": "",
+   "surname": "",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I441",
+   "uid": "67C8160F77D98329B025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [],
+   "fams": [
+    "F160"
+   ],
+   "parents": [],
+   "children": [
+    "I261"
+   ],
+   "spouses": [],
+   "raw": "0 @I441@ INDI\n1 NAME Харлам //\n2 GIVN Харлам\n1 SEX M\n1 FAMS @F160@\n1 RIN MH:I441\n1 _UID 67C8160F77D98329B025E5A60AF7F2E8"
+  },
+  {
+   "id": "I47",
+   "name_raw": "Димитрий Данильевич /Амбросов/",
+   "name": "Димитрий Данильевич Амбросов",
+   "given": "",
+   "surname": "Амбросов",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I47",
+   "uid": "67C8160F6F43E310A025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1880",
+     "place": "Viški",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "29 DEC 1953",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "baptism": [],
+   "famc": [
+    "F44"
+   ],
+   "fams": [
+    "F19",
+    "F500039"
+   ],
+   "parents": [],
+   "children": [
+    "I16"
+   ],
+   "spouses": [
+    "I48"
+   ],
+   "raw": "0 @I47@ INDI\n1 _UPD 4 APR 2025 03:50:33 GMT -0600 \n1 NAME Димитрий Данильевич /Амбросов/\n2 GIVN Димитрий Данильевич\n2 SURN Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1880\n2 PLAC Viški\n1 DEAT Y\n2 DATE 29 DEC 1953\n2 AGE 72-73\n1 OCCU Плотник. Мастерил колёса\n1 FAMS @F19@\n1 FAMS @F500039@\n1 FAMC @F44@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1880&amp;lt;br&amp;gt;Занятие: Плотник. Мастерил\n4 CONC  колёса&amp;lt;br&amp;gt;Смерть: 29 дек 1953&amp;lt;br&amp;gt;Отец: Даниил Амбросов&amp;lt;br&amp;gt;Мать: Неизвестно Амбросова&amp;lt;br&amp;gt\n4 CONC ;Жена: Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Дети: Мария Дмитриевна Семёнова (Амбросова), Иван Дим\n4 CONC итривич Амбросов, Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, \n4 CONC Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093242:\n1 RIN MH:I47\n1 _UID 67C8160F6F43E310A025E5A60AF7F2E8"
+  },
+  {
+   "id": "I16",
+   "name_raw": "Кузьма /Амбросов/",
+   "name": "Кузьма Амбросов",
+   "given": "",
+   "surname": "Амбросов",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I16",
+   "uid": "67C8160F6E61D30E9025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "5 NOV 1918",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "11 JAN 2009",
+     "place": "Raudas iela, Riga, Латвия",
+     "note": "Естественная смерть/старость"
+    }
+   ],
+   "burial": [
+    {
+     "date": "15 JAN 2009",
+     "place": "Riga, Латвия",
+     "note": ""
+    }
+   ],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F19"
+   ],
+   "fams": [
+    "F6"
+   ],
+   "parents": [
+    "I47",
+    "I48"
+   ],
+   "children": [
+    "I7"
+   ],
+   "spouses": [
+    "I17"
+   ],
+   "raw": "0 @I16@ INDI\n1 _UPD 12 MAY 2025 04:03:02 GMT -0600 \n1 NAME Кузьма /Амбросов/\n2 GIVN Кузьма\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 5 NOV 1918\n1 DEAT Y\n2 DATE 11 JAN 2009\n2 PLAC Raudas iela, Riga, Латвия\n2 AGE 90\n2 CAUS Естественная смерть/старость\n1 BURI Ivana kapi, Rīga, Latvija\n2 DATE 15 JAN 2009\n2 PLAC Riga, Латвия\n1 FAMS @F6@\n1 FAMC @F19@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Кузьма Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 5 ноя 1918&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Мане\n4 CONC фа Амбросова (Васильева) - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Смерть: 11 янв 2009 - Riga, Латвия&amp;lt;br&amp;gt;Захоронение: 15 янв 20\n4 CONC 09 - Riga, Латвия&amp;lt;br&amp;gt;Отец: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Мать: Фетиния Игнатьевна Амбросова (Богда�\n4 CONC �ова)&amp;lt;br&amp;gt;Жена: Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt\n4 CONC ;br&amp;gt;Родные брат/сестра: Мария Дмитриевна Семёнова (Амбросова), Иван Димитривич Амбросов, Марина Vaivode (Амброс\n4 CONC ова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093229:\n1 RIN MH:I16\n1 _UID 67C8160F6E61D30E9025E5A60AF7F2E8"
+  },
+  {
+   "id": "I7",
+   "name_raw": "Людмила Кузьминична /Амбросова/",
+   "name": "Людмила Кузьминична Амбросова",
+   "given": "",
+   "surname": "Амбросова",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I7",
+   "uid": "67C8160F6DFDC30E0025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "10 AUG 1948",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F6"
+   ],
+   "fams": [
+    "F2",
+    "F5"
+   ],
+   "parents": [
+    "I16",
+    "I17"
+   ],
+   "children": [
+    "I1"
+   ],
+   "spouses": [
+    "I6"
+   ],
+   "raw": "0 @I7@ INDI\n1 _UPD 29 MAR 2025 14:46:43 GMT -0600 \n1 NAME Людмила Кузьминична /Амбросова/\n2 GIVN Людмила Кузьминична\n2 SURN Амбросова\n2 _MARNM Ильина\n1 SEX F\n1 BIRT\n2 DATE 10 AUG 1948\n1 RESI\n2 ADDR\n3 CITY Riga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n3 ADR1 Ludmila.Iljina@live.com\n1 RESI\n2 ADDR\n3 ADR1 Riga, Латвия\n1 RESI\n2 EMAIL ludmila.iljina@@live.com\n1 FAMS @F2@\n1 FAMS @F5@\n1 FAMC @F6@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Кузьма Амбросов&amp;lt;br&amp;gt;Мать: Ма\n4 CONC нефа Амбросова (Васильева)&amp;lt;br&amp;gt;Муж: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Фактический(-ая) супруг(-а): &lt;&lt;Priva\n4 CONC te&gt;&gt; Paja&amp;lt;br&amp;gt;Дети: Виктория Митрофанова (Ильина), Эдуард Валентинович Ильин\n2 EVEN Record\n3 ROLE 40000:26093227:\n1 RIN MH:I7\n1 _UID 67C8160F6DFDC30E0025E5A60AF7F2E8"
+  },
+  {
+   "id": "I631",
+   "name_raw": "Александр /Андреев/",
+   "name": "Александр Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I631",
+   "uid": "67C8160F7AFC1335A025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F240"
+   ],
+   "fams": [
+    "F305"
+   ],
+   "parents": [
+    "I483"
+   ],
+   "children": [
+    "I784"
+   ],
+   "spouses": [],
+   "raw": "0 @I631@ INDI\n1 NAME Александр /Андреев/\n2 GIVN Александр\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMS @F305@\n1 FAMC @F240@\n1 RIN MH:I631\n1 _UID 67C8160F7AFC1335A025E5A60AF7F2E8"
+  },
+  {
+   "id": "I784",
+   "name_raw": "/Андреев/",
+   "name": "Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I784",
+   "uid": "67C8160F7D4E633F3025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F305"
+   ],
+   "fams": [],
+   "parents": [
+    "I631"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I784@ INDI\n1 NAME  /Андреев/\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMC @F305@\n1 RIN MH:I784\n1 _UID 67C8160F7D4E633F3025E5A60AF7F2E8"
+  },
+  {
+   "id": "I264",
+   "name_raw": "Аникий Васильевич /Андреев/",
+   "name": "Аникий Васильевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I264",
+   "uid": "67C8160F74A6331E9025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1891",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I264@ INDI\n1 NAME Аникий Васильевич /Андреев/\n2 GIVN Аникий Васильевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1891\n1 FAMC @F97@\n1 RIN MH:I264\n1 _UID 67C8160F74A6331E9025E5A60AF7F2E8"
+  },
+  {
+   "id": "I262",
+   "name_raw": "Василий Евстигнеевич /Андреев/",
+   "name": "Василий Евстигнеевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I262",
+   "uid": "67C8160F749BB31E7025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1863",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "baptism": [],
+   "famc": [
+    "F114"
+   ],
+   "fams": [
+    "F97"
+   ],
+   "parents": [
+    "I321",
+    "I322"
+   ],
+   "children": [
+    "I135",
+    "I263",
+    "I264",
+    "I265",
+    "I266",
+    "I267",
+    "I268",
+    "I269"
+   ],
+   "spouses": [
+    "I261"
+   ],
+   "raw": "0 @I262@ INDI\n1 NAME Василий Евстигнеевич /Андреев/\n2 GIVN Василий Евстигнеевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1863\n1 OCCU закончил народное училище - земледелец при отце\n1 FAMS @F97@\n1 FAMC @F114@\n1 RIN MH:I262\n1 _UID 67C8160F749BB31E7025E5A60AF7F2E8"
+  },
+  {
+   "id": "I483",
+   "name_raw": "Денис Прокопьевич /Андреев/",
+   "name": "Денис Прокопьевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I483",
+   "uid": "67C8160F7882832C6025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1890",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "1970",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F179"
+   ],
+   "fams": [
+    "F240"
+   ],
+   "parents": [
+    "I323",
+    "I482"
+   ],
+   "children": [
+    "I630",
+    "I631"
+   ],
+   "spouses": [],
+   "raw": "0 @I483@ INDI\n1 NAME Денис Прокопьевич /Андреев/\n2 GIVN Денис Прокопьевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n2 DATE 1970\n2 AGE 79-80\n1 FAMS @F240@\n1 FAMC @F179@\n1 RIN MH:I483\n1 _UID 67C8160F7882832C6025E5A60AF7F2E8"
+  },
+  {
+   "id": "I321",
+   "name_raw": "Евстигней Трофимович /Андреев/",
+   "name": "Евстигней Трофимович Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I321",
+   "uid": "67C8160F7595D3223025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1827",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "baptism": [],
+   "famc": [
+    "F177"
+   ],
+   "fams": [
+    "F114"
+   ],
+   "parents": [
+    "I480"
+   ],
+   "children": [
+    "I155",
+    "I262",
+    "I323"
+   ],
+   "spouses": [
+    "I322"
+   ],
+   "raw": "0 @I321@ INDI\n1 _UPD 1 JUL 2025 11:57:20 GMT -0600 \n1 NAME Евстигней Трофимович /Андреев/\n2 GIVN Евстигней Трофимович\n2 SURN Андреев\n1 SEX M\n1 BIRT\n2 DATE 1827\n1 OCCU землевладелец\n1 FAMS @F114@\n1 FAMC @F177@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: Примерно в 1827&amp;lt;br&amp;gt;Занятие: землев\n4 CONC ладелец&amp;lt;br&amp;gt;Отец: Трофим Андреев&amp;lt;br&amp;gt;Жена: Прасковья Спиридоновна Андреева&amp;lt;br&amp;gt;Дети: Пётр Евс\n4 CONC тигнеевич Андреев, Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:57596071:\n1 RIN MH:I321\n1 _UID 67C8160F7595D3223025E5A60AF7F2E8"
+  },
+  {
+   "id": "I484",
+   "name_raw": "Иван /Андреев/",
+   "name": "Иван Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I484",
+   "uid": "67C8160F7888132C7025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1895",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F179"
+   ],
+   "fams": [
+    "F241"
+   ],
+   "parents": [
+    "I323",
+    "I482"
+   ],
+   "children": [
+    "I632",
+    "I633",
+    "I634"
+   ],
+   "spouses": [],
+   "raw": "0 @I484@ INDI\n1 NAME Иван /Андреев/\n2 GIVN Иван\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1895\n1 FAMS @F241@\n1 FAMC @F179@\n1 RIN MH:I484\n1 _UID 67C8160F7888132C7025E5A60AF7F2E8"
+  },
+  {
+   "id": "I266",
+   "name_raw": "Иван Васильевич /Андреев/",
+   "name": "Иван Васильевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I266",
+   "uid": "67C8160F74B6C31EB025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "28 JUL 1895",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I266@ INDI\n1 NAME Иван Васильевич /Андреев/\n2 GIVN Иван Васильевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 28 JUL 1895\n1 FAMC @F97@\n1 RIN MH:I266\n1 _UID 67C8160F74B6C31EB025E5A60AF7F2E8"
+  },
+  {
+   "id": "I267",
+   "name_raw": "Макарий Васильевич /Андреев/",
+   "name": "Макарий Васильевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I267",
+   "uid": "67C8160F74BCD31EC025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1904",
+     "place": "Mazie Klapari, Vārkava 5337, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I267@ INDI\n1 _UPD 5 MAY 2025 06:05:44 GMT -0600 \n1 NAME Макарий Васильевич /Андреев/\n2 GIVN Макарий Васильевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1904\n2 PLAC Mazie Klapari, Vārkava 5337, Латвия\n1 DEAT Y\n1 FAMC @F97@\n1 RIN MH:I267\n1 _UID 67C8160F74BCD31EC025E5A60AF7F2E8"
+  },
+  {
+   "id": "I634",
+   "name_raw": "Панфил /Андреев/",
+   "name": "Панфил Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I634",
+   "uid": "67C8160F7B046335D025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F241"
+   ],
+   "fams": [
+    "F307"
+   ],
+   "parents": [
+    "I484"
+   ],
+   "children": [
+    "I786"
+   ],
+   "spouses": [],
+   "raw": "0 @I634@ INDI\n1 NAME Панфил /Андреев/\n2 GIVN Панфил\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMS @F307@\n1 FAMC @F241@\n1 RIN MH:I634\n1 _UID 67C8160F7B046335D025E5A60AF7F2E8"
+  },
+  {
+   "id": "I323",
+   "name_raw": "Прокопий Евстигнеевич /Андреев/",
+   "name": "Прокопий Евстигнеевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I323",
+   "uid": "67C8160F75A1E3225025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1867",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F114"
+   ],
+   "fams": [
+    "F179"
+   ],
+   "parents": [
+    "I321",
+    "I322"
+   ],
+   "children": [
+    "I483",
+    "I484",
+    "I485"
+   ],
+   "spouses": [
+    "I482"
+   ],
+   "raw": "0 @I323@ INDI\n1 NAME Прокопий Евстигнеевич /Андреев/\n2 GIVN Прокопий Евстигнеевич\n2 NICK Прокоп\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1867\n1 FAMS @F179@\n1 FAMC @F114@\n1 RIN MH:I323\n1 _UID 67C8160F75A1E3225025E5A60AF7F2E8"
+  },
+  {
+   "id": "I155",
+   "name_raw": "Пётр Евстигнеевич /Андреев/",
+   "name": "Пётр Евстигнеевич Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I155",
+   "uid": "67C8160F722523179025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1860",
+     "place": "Germany",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "22 APR 1929",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "baptism": [],
+   "famc": [
+    "F114"
+   ],
+   "fams": [
+    "F55"
+   ],
+   "parents": [
+    "I321",
+    "I322"
+   ],
+   "children": [
+    "I157",
+    "I158",
+    "I159",
+    "I160",
+    "I57"
+   ],
+   "spouses": [
+    "I156"
+   ],
+   "raw": "0 @I155@ INDI\n1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Пётр Евстигнеевич /Андреев/\n2 GIVN Пётр Евстигнеевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1860\n2 PLAC Germany\n1 DEAT Y\n2 DATE 22 APR 1929\n2 AGE 68-69\n1 OCCU десятский, земледелец при отце\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n1 FAMS @F55@\n1 FAMC @F114@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: Примерно в 1860&amp;lt;br&amp;gt;Занятие: десятский\n4 CONC , земледелец при отце&amp;lt;br&amp;gt;Смерть: 22 апр 1929&amp;lt;br&amp;gt;Отец: Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Мать: Пра\n4 CONC сковья Спиридоновна Андреева&amp;lt;br&amp;gt;Жена: Марья Петровна Андреева&amp;lt;br&amp;gt;Дети: Агафия Петровна Егорова, \n4 CONC Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинья Петровна Иванова (Андреева), Манефа А�\n4 CONC �дреева&amp;lt;br&amp;gt;Родные брат/сестра: Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:49561619:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500236/%D0%BF%D1%91%D1%82%D1%80-%D0%B5%D0%B2%D1%81%D1%82%D0%B8%D0%B3%D0%BD%D0%B5%D0%B5%D0%B2%D0%B8%D1%87-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500236\n1 RIN MH:I155\n1 _UID 67C8160F722523179025E5A60AF7F2E8"
+  },
+  {
+   "id": "I480",
+   "name_raw": "Трофим /Андреев/",
+   "name": "Трофим Андреев",
+   "given": "",
+   "surname": "Андреев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I480",
+   "uid": "67C8160F7873A32C3025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [],
+   "fams": [
+    "F177"
+   ],
+   "parents": [],
+   "children": [
+    "I321"
+   ],
+   "spouses": [],
+   "raw": "0 @I480@ INDI\n1 NAME Трофим /Андреев/\n2 GIVN Трофим\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 FAMS @F177@\n1 RIN MH:I480\n1 _UID 67C8160F7873A32C3025E5A60AF7F2E8"
+  },
+  {
+   "id": "I159",
+   "name_raw": "Агафия \"Ганька\" Петровна /Андреева/",
+   "name": "Агафия \"Ганька\" Петровна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I159",
+   "uid": "67C8160F7246E317E025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1902",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "",
+     "place": "Ермаки",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F55"
+   ],
+   "fams": [
+    "F118"
+   ],
+   "parents": [
+    "I155",
+    "I156"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I159@ INDI\n1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Агафия \"Ганька\" Петровна /Андреева/\n2 GIVN Агафия \"Ганька\" Петровна\n2 SURN Андреева\n2 _MARNM Егорова\n1 SEX F\n1 DEAT Y\n2 PLAC Ермаки\n1 BIRT\n2 DATE 1902\n1 FAMS @F118@\n1 FAMC @F55@\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500240/%D0%B0%D0%B3%D0%B0%D1%84%D0%B8%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B5%D0%B3%D0%BE%D1%80%D0%BE%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500240\n1 RIN MH:I159\n1 _UID 67C8160F7246E317E025E5A60AF7F2E8"
+  },
+  {
+   "id": "I158",
+   "name_raw": "Агрипина \"Рипа\" Петровна /Андреева/",
+   "name": "Агрипина \"Рипа\" Петровна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I158",
+   "uid": "67C8160F72405317D025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "BET 1895 AND 1897",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "7 MAR 1967",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F55"
+   ],
+   "fams": [
+    "F116",
+    "F117"
+   ],
+   "parents": [
+    "I155",
+    "I156"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I158@ INDI\n1 _UPD 1 MAY 2025 17:00:17 GMT -0600 \n1 NAME Агрипина \"Рипа\" Петровна /Андреева/\n2 GIVN Агрипина \"Рипа\" Петровна\n2 SURN Андреева\n2 _MARNM Иванова\n1 SEX F\n1 BIRT\n2 DATE BET 1895 AND 1897\n1 DEAT Y\n2 DATE 7 MAR 1967\n2 AGE 71-72\n1 FAMS @F116@\n1 FAMS @F117@\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Рипинья Петровна Иванова (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1895&amp;lt;br&amp;gt;Смерть: 7 �\n4 CONC �ар 1967&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андреева&amp;lt;br&amp;gt;Бывший муж: Н�\n4 CONC �кита Иванов&amp;lt;br&amp;gt;Дети: Михаил Иванов, Григорий Иванов, &amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Иванова, Неизвестно Иванов, &\n4 CONC amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Иванов&amp;lt;br&amp;gt;Родные брат/сестра: Агафия Петровна Егорова (Андреева), Марфа Петровна А\n4 CONC ндреева, Евдокия Петровна Васильева (Андреева), Манефа Андреева\n2 EVEN Record\n3 ROLE 40000:49561328:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500239/%D1%80%D0%B8%D0%BF%D0%B8%D0%BD%D1%8C%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B8%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500239\n1 RIN MH:I158\n1 _UID 67C8160F72405317D025E5A60AF7F2E8"
+  },
+  {
+   "id": "I633",
+   "name_raw": "Анастасия /Андреева/",
+   "name": "Анастасия Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I633",
+   "uid": "67C8160F7B01B335C025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F241"
+   ],
+   "fams": [
+    "F306"
+   ],
+   "parents": [
+    "I484"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I633@ INDI\n1 NAME Анастасия /Андреева/\n2 GIVN Анастасия\n2 SURN Андреева\n1 SEX F\n1 FAMS @F306@\n1 FAMC @F241@\n1 RIN MH:I633\n1 _UID 67C8160F7B01B335C025E5A60AF7F2E8"
+  },
+  {
+   "id": "I786",
+   "name_raw": "Валентина /Андреева/",
+   "name": "Валентина Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I786",
+   "uid": "67C8160F7D52F33F5025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F307"
+   ],
+   "fams": [],
+   "parents": [
+    "I634"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I786@ INDI\n1 NAME Валентина /Андреева/\n2 GIVN Валентина\n2 SURN Андреева\n1 SEX F\n1 FAMC @F307@\n1 RIN MH:I786\n1 _UID 67C8160F7D52F33F5025E5A60AF7F2E8"
+  },
+  {
+   "id": "I57",
+   "name_raw": "Евдокия Петровна /Андреева/",
+   "name": "Евдокия Петровна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I57",
+   "uid": "67C8160F6FB1B3115025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1892",
+     "place": "Клапары, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "1969",
+     "place": "Клапары, Латвия",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F55"
+   ],
+   "fams": [
+    "F21",
+    "F54"
+   ],
+   "parents": [
+    "I155",
+    "I156"
+   ],
+   "children": [
+    "I17"
+   ],
+   "spouses": [
+    "I56"
+   ],
+   "raw": "0 @I57@ INDI\n1 _UPD 4 JUN 2025 13:34:47 GMT -0600 \n1 NAME Евдокия Петровна /Андреева/\n2 GIVN Евдокия Петровна\n2 SURN Андреева\n2 _MARNM Васильева\n1 SEX F\n1 BIRT\n2 DATE 1892\n2 PLAC Клапары, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Клапары, Латвия\n2 AGE 76-77\n1 FAMS @F21@\n1 FAMS @F54@\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1892 - Клапары&amp;lt;br&amp\n4 CONC ;gt;Смерть: Примерно в 1969 - Клапары&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андр�\n4 CONC �ева&amp;lt;br&amp;gt;Муж: Иван Петрович Васильев&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Васильев, Таиси\n4 CONC я Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев, Степанида Архипова?&amp;lt;br&amp;gt;Родные бра\n4 CONC т/сестра: Агафия Петровна Егорова, Марфа Петровна Андреева, Рипинья Петровна Иванова (Андреева), Манефа Андре�\n4 CONC �ва\n2 EVEN Record\n3 ROLE 40000:26093247:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500215/%D0%B5%D0%B2%D0%B4%D0%BE%D0%BA%D0%B8%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B2%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=R\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500215\n1 RIN MH:I57\n1 _UID 67C8160F6FB1B3115025E5A60AF7F2E8"
+  },
+  {
+   "id": "I160",
+   "name_raw": "Манефа /Андреева/",
+   "name": "Манефа Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I160",
+   "uid": "67C8160F72496317F025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F55"
+   ],
+   "fams": [],
+   "parents": [
+    "I155",
+    "I156"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I160@ INDI\n1 _UPD 19 MAR 2025 14:46:21 GMT -0600 \n1 NAME Манефа /Андреева/\n2 GIVN Манефа\n2 SURN Андреева\n1 SEX F\n1 FAMC @F55@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна\n4 CONC  Андреева&amp;lt;br&amp;gt;Родные брат/сестра: Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинь\n4 CONC я Петровна Иванова (Андреева), Агафия Петровна Егорова\n2 EVEN Record\n3 ROLE 40000:60652329:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500242/%D0%BC%D0%B0%D0%BD%D0%B5%D1%84%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500242\n1 RIN MH:I160\n1 _UID 67C8160F72496317F025E5A60AF7F2E8"
+  },
+  {
+   "id": "I630",
+   "name_raw": "Марфа /Андреева/",
+   "name": "Марфа Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I630",
+   "uid": "67C8160F7AF7E3359025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F240"
+   ],
+   "fams": [
+    "F304"
+   ],
+   "parents": [
+    "I483"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I630@ INDI\n1 NAME Марфа /Андреева/\n2 GIVN Марфа\n2 SURN Андреева\n1 SEX F\n1 FAMS @F304@\n1 FAMC @F240@\n1 RIN MH:I630\n1 _UID 67C8160F7AF7E3359025E5A60AF7F2E8"
+  },
+  {
+   "id": "I157",
+   "name_raw": "Марфа Петровна /Андреева/",
+   "name": "Марфа Петровна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I157",
+   "uid": "67C8160F72377317C025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1890",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F55"
+   ],
+   "fams": [],
+   "parents": [
+    "I155",
+    "I156"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I157@ INDI\n1 _UPD 19 MAR 2025 14:47:11 GMT -0600 \n1 NAME Марфа Петровна /Андреева/\n2 GIVN Марфа Петровна\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n1 FAMC @F55@\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500238/%D0%BC%D0%B0%D1%80%D1%84%D0%B0-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500238\n1 RIN MH:I157\n1 _UID 67C8160F72377317C025E5A60AF7F2E8"
+  },
+  {
+   "id": "I156",
+   "name_raw": "Марья Петровна /Андреева/",
+   "name": "Марья Петровна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I156",
+   "uid": "67C8160F72314317B025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1862",
+     "place": "Borbaļi, Vārkava, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "28 JAN 1958",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F115"
+   ],
+   "fams": [
+    "F55"
+   ],
+   "parents": [
+    "I324"
+   ],
+   "children": [
+    "I157",
+    "I158",
+    "I159",
+    "I160",
+    "I57"
+   ],
+   "spouses": [
+    "I155"
+   ],
+   "raw": "0 @I156@ INDI\n1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Марья Петровна /Андреева/\n2 GIVN Марья Петровна\n2 NICK Марфа\n2 SURN Андреева\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1862\n2 PLAC Borbaļi, Vārkava, Латвия\n1 DEAT Y\n2 DATE 28 JAN 1958\n2 AGE 95-96\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n1 FAMS @F55@\n1 FAMC @F115@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Марья Петровна Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Псевдоним: Марфа&amp;lt;br&amp;gt;Рождение: Примерно в 1862 - Borba\n4 CONC ļi, Vārkava, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в 1958&amp;lt;br&amp;gt;Отец: Пётр Неизвестно&amp;lt;br&amp;gt;Муж: Пётр Евстигнеевич \n4 CONC Андреев&amp;lt;br&amp;gt;Дети: Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинья Петровна Иван�\n4 CONC �ва (Андреева), Агафия Петровна Егорова, Манефа Андреева\n2 EVEN Record\n3 ROLE 40000:49561630:\n1 SOUR @S500010@\n2 PAGE https://www.myheritage.com/profile-OYYV7FAFD6VOHSFOYQEQFAKOUMXSYQY-1500237/%D0%BC%D0%B0%D1%80%D1%8C%D1%8F-%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2-%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500237\n1 NOTE <p>LVVA фонд 2258 опись 5 дело 602:</p><p><p></p></p><p><p>Предыдущий пасспорт №3515 был выдан 1922 году 16 сентября.</p></p><p><p></p></p><p><p>П\n2 CONC ассаорт JZ № 021036, №4236 был выдан 1929 году 5 ноября.</p></p><p><p></p></p><p><p>Фотки нет, но есть отпечаток пальца.</p></p><p><p></p></p>\n2 CONC <p><p>Жила в Анчкино</p></p><p><p></p></p><p><p>Мед помощь право первой группы 1933 год 21 сентября</p></p><p><p></p></p><p>в 1931 году голос\n2 CONC овала (сейм и пагастс)</p>\n1 RIN MH:I156\n1 _UID 67C8160F72314317B025E5A60AF7F2E8"
+  },
+  {
+   "id": "I135",
+   "name_raw": "Минадора Васильевна /Андреева/",
+   "name": "Минадора Васильевна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I135",
+   "uid": "67C8160F71C2F3165025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "19 SEP 1911",
+     "place": "Mazie Klapari, Vārkava 5337, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "26 OCT 1965",
+     "place": "Mazie Klapari, Vārkava 5337, Латвия",
+     "note": ""
+    }
+   ],
+   "burial": [
+    {
+     "date": "30 OCT 1965",
+     "place": "Klaparu kapi",
+     "note": ""
+    }
+   ],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [
+    "F50"
+   ],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I135@ INDI\n1 NAME Минадора Васильевна /Андреева/\n2 GIVN Минадора Васильевна\n2 SURN Андреева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 19 SEP 1911\n2 PLAC Mazie Klapari, Vārkava 5337, Латвия\n1 DEAT Y\n2 DATE 26 OCT 1965\n2 PLAC Mazie Klapari, Vārkava 5337, Латвия\n2 AGE 54\n1 BURI\n2 DATE 30 OCT 1965\n2 PLAC Klaparu kapi\n1 FAMS @F50@\n1 FAMC @F97@\n1 RIN MH:I135\n1 _UID 67C8160F71C2F3165025E5A60AF7F2E8"
+  },
+  {
+   "id": "I269",
+   "name_raw": "Просковия Васильевна /Андреева/",
+   "name": "Просковия Васильевна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I269",
+   "uid": "67C8160F74C8F31EE025E5A60AF7F2E8",
+   "birth": [],
+   "death": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [
+    {
+     "date": "",
+     "place": "Sunipi",
+     "note": ""
+    }
+   ],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [
+    "F500047"
+   ],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I269@ INDI\n1 _UPD 1 MAY 2025 09:09:50 GMT -0600 \n1 NAME Просковия Васильевна /Андреева/\n2 GIVN Просковия Васильевна\n2 SURN Андреева\n1 SEX F\n1 DEAT Y\n1 BURI\n2 PLAC Sunipi\n1 FAMS @F500047@\n1 FAMC @F97@\n1 RIN MH:I269\n1 _UID 67C8160F74C8F31EE025E5A60AF7F2E8"
+  },
+  {
+   "id": "I485",
+   "name_raw": "Устиния Прокопьевна /Андреева/",
+   "name": "Устиния Прокопьевна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I485",
+   "uid": "67C8160F788AD32C8025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F179"
+   ],
+   "fams": [],
+   "parents": [
+    "I323",
+    "I482"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I485@ INDI\n1 _UPD 19 MAR 2025 14:49:36 GMT -0600 \n1 NAME Устиния Прокопьевна /Андреева/\n2 GIVN Устиния Прокопьевна\n2 SURN Андреева\n1 SEX F\n1 FAMC @F179@\n1 RIN MH:I485\n1 _UID 67C8160F788AD32C8025E5A60AF7F2E8"
+  },
+  {
+   "id": "I268",
+   "name_raw": "Федора Васильевна /Андреева/",
+   "name": "Федора Васильевна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I268",
+   "uid": "67C8160F74C6631ED025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "11 MAY 1906",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "28 FEB 1989",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [
+    {
+     "date": "",
+     "place": "Klapari",
+     "note": ""
+    }
+   ],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I268@ INDI\n1 NAME Федора Васильевна /Андреева/\n2 GIVN Федора Васильевна\n2 SURN Андреева\n2 _MARNM Иванова\n1 SEX F\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 11 MAY 1906\n1 DEAT Y\n2 DATE 28 FEB 1989\n2 AGE 82\n1 FAMC @F97@\n1 RIN MH:I268\n1 _UID 67C8160F74C6631ED025E5A60AF7F2E8"
+  },
+  {
+   "id": "I632",
+   "name_raw": "Феодосия /Андреева/",
+   "name": "Феодосия Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I632",
+   "uid": "67C8160F7AFE7335B025E5A60AF7F2E8",
+   "birth": [],
+   "death": [],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F241"
+   ],
+   "fams": [],
+   "parents": [
+    "I484"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I632@ INDI\n1 NAME Феодосия /Андреева/\n2 GIVN Феодосия\n2 SURN Андреева\n1 SEX F\n1 FAMC @F241@\n1 RIN MH:I632\n1 _UID 67C8160F7AFE7335B025E5A60AF7F2E8"
+  },
+  {
+   "id": "I265",
+   "name_raw": "Фомаида Васильевна /Андреева/",
+   "name": "Фомаида Васильевна Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I265",
+   "uid": "67C8160F74B0E31EA025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "23 MAY 1892",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "21 JAN 1977",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [
+    {
+     "date": "",
+     "place": "Klapari",
+     "note": ""
+    }
+   ],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [
+    "F500046"
+   ],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I265@ INDI\n1 NAME Фомаида Васильевна /Андреева/\n2 GIVN Фомаида Васильевна\n2 SURN Андреева\n2 _MARNM Дерягина\n1 SEX F\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 23 MAY 1892\n1 DEAT Y\n2 DATE 21 JAN 1977\n2 AGE 84\n1 FAMS @F500046@\n1 FAMC @F97@\n1 RIN MH:I265\n1 _UID 67C8160F74B0E31EA025E5A60AF7F2E8"
+  },
+  {
+   "id": "I263",
+   "name_raw": "Фоманида /Андреева/",
+   "name": "Фоманида Андреева",
+   "given": "",
+   "surname": "Андреева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I263",
+   "uid": "67C8160F74A0D31E8025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1890",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F97"
+   ],
+   "fams": [],
+   "parents": [
+    "I261",
+    "I262"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I263@ INDI\n1 _UPD 19 MAR 2025 14:48:58 GMT -0600 \n1 NAME Фоманида /Андреева/\n2 GIVN Фоманида\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n1 FAMC @F97@\n1 RIN MH:I263\n1 _UID 67C8160F74A0D31E8025E5A60AF7F2E8"
+  },
+  {
+   "id": "I56",
+   "name_raw": "Иван Петрович /Васильев/",
+   "name": "Иван Петрович Васильев",
+   "given": "",
+   "surname": "Васильев",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I56",
+   "uid": "67C8160F6FA693114025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "1897",
+     "place": "д. Гай, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "1969",
+     "place": "Varkava, Латвия",
+     "note": ""
+    }
+   ],
+   "burial": [
+    {
+     "date": "",
+     "place": "Klapari",
+     "note": ""
+    }
+   ],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F53"
+   ],
+   "fams": [
+    "F21"
+   ],
+   "parents": [],
+   "children": [
+    "I17"
+   ],
+   "spouses": [
+    "I57"
+   ],
+   "raw": "0 @I56@ INDI\n1 _UPD 5 MAR 2025 03:31:21 GMT -0600 \n1 NAME Иван Петрович /Васильев/\n2 GIVN Иван Петрович\n2 SURN Васильев\n2 _MARNM Васильев\n1 SEX M\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 1897\n2 PLAC д. Гай, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Varkava, Латвия\n2 AGE 71-72\n1 FAMS @F21@\n1 FAMC @F53@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Иван Петрович Васильев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1897 - д. Гай, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в\n4 CONC  1969 - Varkava, Латвия&amp;lt;br&amp;gt;Захоронение: Klapari&amp;lt;br&amp;gt;Отец: Пётр Васильев&amp;lt;br&amp;gt;Мать: Матрена Васильева&amp;lt;\n4 CONC br&amp;gt;Жена: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Василье\n4 CONC в, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев&amp;lt;br&amp;gt;Родные брат/сестра: Ник�\n4 CONC �нор Васильев, Агафон Васильев, Анисия Васильева, Семен Васильев, Василий Васильев, Савелий Васильев, Стюшка В\n4 CONC асильев, Матрена Васильева, Степан Васильев\n2 EVEN Record\n3 ROLE 40000:26093246:\n1 RIN MH:I56\n1 _UID 67C8160F6FA693114025E5A60AF7F2E8"
+  },
+  {
+   "id": "I17",
+   "name_raw": "Манефа /Васильева/",
+   "name": "Манефа Васильева",
+   "given": "",
+   "surname": "Васильева",
+   "sex": "F",
+   "marnm": "",
+   "rin": "MH:I17",
+   "uid": "67C8160F6E6BE30EA025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "6 NOV 1924",
+     "place": "д.Аньчкино, Варкавская волость, Латвия",
+     "note": ""
+    }
+   ],
+   "death": [
+    {
+     "date": "10 MAY 2000",
+     "place": "Avotu iela 5 - 9, Rīga, Latvija",
+     "note": "Инсульт"
+    }
+   ],
+   "burial": [],
+   "residence": [],
+   "occupation": [],
+   "baptism": [],
+   "famc": [
+    "F21"
+   ],
+   "fams": [
+    "F6"
+   ],
+   "parents": [
+    "I56",
+    "I57"
+   ],
+   "children": [
+    "I7"
+   ],
+   "spouses": [
+    "I16"
+   ],
+   "raw": "0 @I17@ INDI\n1 _UPD 12 MAY 2025 04:04:06 GMT -0600 \n1 NAME Манефа /Васильева/\n2 GIVN Манефа\n2 SURN Васильева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 6 NOV 1924\n2 PLAC д.Аньчкино, Варкавская волость, Латвия\n1 DEAT Y\n2 DATE 10 MAY 2000\n2 PLAC Avotu iela 5 - 9, Rīga, Latvija\n2 AGE 75\n2 CAUS Инсульт\n1 FAMS @F6@\n1 FAMC @F21@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 6 ноя 1924 - д.Аньчкино, Варкавская волость\n4 CONC , Латвия&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Кузьма Амбросов - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Развод: Супруг(-а\n4 CONC ): Дмитрий Федосеевич Егоров - Примерно в 1946&amp;lt;br&amp;gt;Смерть: 10 май 2000&amp;lt;br&amp;gt;Отец: Иван Петрович Васильев&amp;l\n4 CONC t;br&amp;gt;Мать: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Муж: Кузьма Амбросов&amp;lt;br&amp;gt;Бывший муж: Дмитрий \n4 CONC Федосеевич Егоров&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Родные брат/сестра: Васи\n4 CONC лий Васильев, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев\n2 EVEN Record\n3 ROLE 40000:26093230:\n1 SOUR @S500003@\n2 PAGE https://www.myheritage.com/profile-OYYV7UKW6UKEWOKBADCPFBP3SWQKL5A-1500134/%D0%BC%D0%B0%D0%BD%D0%B5%D1%84%D0%B0-%D0%B2%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B0?lang=RU\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500134\n1 RIN MH:I17\n1 _UID 67C8160F6E6BE30EA025E5A60AF7F2E8"
+  },
+  {
+   "id": "I1",
+   "name_raw": "Эдуард Валентинович /Ильин/",
+   "name": "Эдуард Валентинович Ильин",
+   "given": "",
+   "surname": "Ильин",
+   "sex": "M",
+   "marnm": "",
+   "rin": "MH:I1",
+   "uid": "67C8160F6DBD430DA025E5A60AF7F2E8",
+   "birth": [
+    {
+     "date": "20 MAR 1978",
+     "place": "Rīga, Latvia",
+     "note": ""
+    }
+   ],
+   "death": [],
+   "burial": [],
+   "residence": [
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "occupation": [
+    {
+     "date": "3 JUL 2002",
+     "place": "HORTUS Digital, Rīga, Latvia",
+     "note": ""
+    },
+    {
+     "date": "",
+     "place": "",
+     "note": ""
+    }
+   ],
+   "baptism": [],
+   "famc": [
+    "F2"
+   ],
+   "fams": [
+    "F1"
+   ],
+   "parents": [
+    "I7"
+   ],
+   "children": [],
+   "spouses": [],
+   "raw": "0 @I1@ INDI\n1 NAME Эдуард Валентинович /Ильин/\n2 GIVN Эдуард Валентинович\n2 SURN Ильин\n1 SEX M\n1 BIRT\n2 DATE 20 MAR 1978\n2 PLAC Rīga, Latvia\n1 GRAD\n2 DATE ABT 1 JUN 1996\n2 PLAC Рижская средняя школа № 9, Rīga, Latvia\n2 AGE 18\n1 GRAD\n2 DATE 1999\n2 PLAC Rīgas tehniskas universitātes transporta tehnoloģiju institūts, Rīga, Latvia\n2 AGE 20-21\n1 OCCU ITI Solutuions Consultant\n2 DATE 3 JUL 2002\n2 PLAC HORTUS Digital, Rīga, Latvia\n2 AGE 24\n1 GRAD\n2 DATE 2003\n2 PLAC Transporta un sakaru institūts\n2 AGE 24-25\n1 OCCU ITI Systems Engineer\n1 RESI\n2 ADDR\n3 CITY Rīga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n3 ADR1 Ed.Il@live.com\n1 RESI\n2 PHON (371) 29168716\n1 RESI\n2 ADDR\n3 ADR1 (371) 29168716\n1 RESI\n2 PHON (371) 67412860\n1 RESI\n2 ADDR\n3 ADR1 (371) 67412860\n1 RESI\n2 PHON (371) 67339292\n1 RESI\n2 ADDR\n3 ADR1 (371) 67339292\n1 DSCR <DSCR><HAIR>Brown</HAIR><EYES>Brown</EYES></DSCR>\n1 RESI\n2 EMAIL ed.adult@@gmail.com\n1 FAMS @F1@\n1 FAMC @F2@\n1 SOUR @S500002@\n2 QUAY 4\n2 DATA\n3 TEXT Эдуард Валентинович Ильин&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Отец: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Мать: Людми\n4 CONC ла Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Супруг(-а): &lt;&lt;Private&gt;&gt; Ильина (Сумбаева)&amp;lt;br&amp;gt;Братья / сестры: \n4 CONC Виктория Митрофанова (Ильина)\n2 EVEN Record\n3 ROLE 40000:26090289:\n1 RIN MH:I1\n1 _UID 67C8160F6DBD430DA025E5A60AF7F2E8"
+  }
+ ],
+ "families": [
+  {
+   "id": "F2",
+   "husband": [],
+   "wife": [
+    "I7"
+   ],
+   "children": [
+    "I1"
+   ],
+   "raw": "0 @F2@ FAM\n1 WIFE @I7@\n1 CHIL @I8@\n1 CHIL @I1@\n1 RIN MH:F2\n1 _UID 67C8160F81C6E3535025E5A60AF7F2E8\n1 MARR\n2 DATE 6 MAR 1971\n2 PLAC Латвия\n2 NOTE Супруг(-а): Валентин Фёдорович Ильин"
+  },
+  {
+   "id": "F6",
+   "husband": [
+    "I16"
+   ],
+   "wife": [
+    "I17"
+   ],
+   "children": [
+    "I7"
+   ],
+   "raw": "0 @F6@ FAM\n1 HUSB @I16@\n1 WIFE @I17@\n1 CHIL @I7@\n1 RIN MH:F6\n1 _UID 67C8160F81D0C3539025E5A60AF7F2E8\n1 MARR\n2 DATE 8 MAY 1948\n2 PLAC Varkavas pagasts\n2 NOTE Супруг(-а): Манефа Амбросова (Васильева)"
+  },
+  {
+   "id": "F19",
+   "husband": [
+    "I47"
+   ],
+   "wife": [
+    "I48"
+   ],
+   "children": [
+    "I16"
+   ],
+   "raw": "0 @F19@ FAM\n1 HUSB @I47@\n1 WIFE @I48@\n1 CHIL @I49@\n1 CHIL @I52@\n1 CHIL @I53@\n1 CHIL @I54@\n1 CHIL @I50@\n1 CHIL @I16@\n1 CHIL @I51@\n1 RIN MH:F19\n1 _UID 67C8160F81E0A3546025E5A60AF7F2E8"
+  },
+  {
+   "id": "F21",
+   "husband": [
+    "I56"
+   ],
+   "wife": [
+    "I57"
+   ],
+   "children": [
+    "I17"
+   ],
+   "raw": "0 @F21@ FAM\n1 HUSB @I56@\n1 WIFE @I57@\n1 CHIL @I17@\n1 CHIL @I58@\n1 CHIL @I59@\n1 CHIL @I60@\n1 CHIL @I61@\n1 RIN MH:F21\n1 _UID 67C8160F81E793548025E5A60AF7F2E8"
+  },
+  {
+   "id": "F55",
+   "husband": [
+    "I155"
+   ],
+   "wife": [
+    "I156"
+   ],
+   "children": [
+    "I157",
+    "I57",
+    "I158",
+    "I159",
+    "I160"
+   ],
+   "raw": "0 @F55@ FAM\n1 HUSB @I155@\n1 WIFE @I156@\n1 CHIL @I157@\n1 CHIL @I57@\n1 CHIL @I158@\n1 CHIL @I159@\n1 CHIL @I160@\n1 RIN MH:F55\n1 _UID 67C8160F821A5356A025E5A60AF7F2E8\n1 MARR\n2 DATE ABT 1897"
+  },
+  {
+   "id": "F97",
+   "husband": [
+    "I262"
+   ],
+   "wife": [
+    "I261"
+   ],
+   "children": [
+    "I263",
+    "I264",
+    "I265",
+    "I266",
+    "I267",
+    "I268",
+    "I135",
+    "I269"
+   ],
+   "raw": "0 @F97@ FAM\n1 HUSB @I262@\n1 WIFE @I261@\n1 CHIL @I263@\n1 CHIL @I264@\n1 CHIL @I265@\n1 CHIL @I266@\n1 CHIL @I267@\n1 CHIL @I268@\n1 CHIL @I135@\n1 CHIL @I269@\n1 RIN MH:F97\n1 _UID 67C8160F824E13594025E5A60AF7F2E8"
+  },
+  {
+   "id": "F114",
+   "husband": [
+    "I321"
+   ],
+   "wife": [
+    "I322"
+   ],
+   "children": [
+    "I155",
+    "I262",
+    "I323"
+   ],
+   "raw": "0 @F114@ FAM\n1 HUSB @I321@\n1 WIFE @I322@\n1 CHIL @I155@\n1 CHIL @I262@\n1 CHIL @I323@\n1 RIN MH:F114\n1 _UID 67C8160F825CF35A5025E5A60AF7F2E8"
+  },
+  {
+   "id": "F115",
+   "husband": [
+    "I324"
+   ],
+   "wife": [],
+   "children": [
+    "I156"
+   ],
+   "raw": "0 @F115@ FAM\n1 HUSB @I324@\n1 CHIL @I156@\n1 RIN MH:F115\n1 _UID 67C8160F825DA35A6025E5A60AF7F2E8"
+  },
+  {
+   "id": "F160",
+   "husband": [
+    "I441"
+   ],
+   "wife": [],
+   "children": [
+    "I261"
+   ],
+   "raw": "0 @F160@ FAM\n1 HUSB @I441@\n1 CHIL @I261@\n1 RIN MH:F160\n1 _UID 67C8160F8283635D3025E5A60AF7F2E8"
+  },
+  {
+   "id": "F177",
+   "husband": [
+    "I480"
+   ],
+   "wife": [],
+   "children": [
+    "I321"
+   ],
+   "raw": "0 @F177@ FAM\n1 HUSB @I480@\n1 CHIL @I321@\n1 RIN MH:F177\n1 _UID 67C8160F8294535E4025E5A60AF7F2E8"
+  },
+  {
+   "id": "F178",
+   "husband": [
+    "I481"
+   ],
+   "wife": [],
+   "children": [
+    "I322"
+   ],
+   "raw": "0 @F178@ FAM\n1 HUSB @I481@\n1 CHIL @I322@\n1 RIN MH:F178\n1 _UID 67C8160F8295135E5025E5A60AF7F2E8"
+  },
+  {
+   "id": "F179",
+   "husband": [
+    "I323"
+   ],
+   "wife": [
+    "I482"
+   ],
+   "children": [
+    "I483",
+    "I484",
+    "I485"
+   ],
+   "raw": "0 @F179@ FAM\n1 HUSB @I323@\n1 WIFE @I482@\n1 CHIL @I483@\n1 CHIL @I484@\n1 CHIL @I485@\n1 RIN MH:F179\n1 _UID 67C8160F8296235E6025E5A60AF7F2E8"
+  },
+  {
+   "id": "F239",
+   "husband": [
+    "I629"
+   ],
+   "wife": [],
+   "children": [
+    "I482"
+   ],
+   "raw": "0 @F239@ FAM\n1 HUSB @I629@\n1 CHIL @I482@\n1 RIN MH:F239\n1 _UID 67C8160F82D763622025E5A60AF7F2E8"
+  },
+  {
+   "id": "F240",
+   "husband": [
+    "I483"
+   ],
+   "wife": [],
+   "children": [
+    "I630",
+    "I631"
+   ],
+   "raw": "0 @F240@ FAM\n1 HUSB @I483@\n1 CHIL @I630@\n1 CHIL @I631@\n1 RIN MH:F240\n1 _UID 67C8160F82D843623025E5A60AF7F2E8"
+  },
+  {
+   "id": "F241",
+   "husband": [
+    "I484"
+   ],
+   "wife": [],
+   "children": [
+    "I632",
+    "I633",
+    "I634"
+   ],
+   "raw": "0 @F241@ FAM\n1 HUSB @I484@\n1 CHIL @I632@\n1 CHIL @I633@\n1 CHIL @I634@\n1 RIN MH:F241\n1 _UID 67C8160F82D953624025E5A60AF7F2E8"
+  },
+  {
+   "id": "F305",
+   "husband": [
+    "I631"
+   ],
+   "wife": [],
+   "children": [
+    "I784"
+   ],
+   "raw": "0 @F305@ FAM\n1 HUSB @I631@\n1 CHIL @I784@\n1 RIN MH:F305\n1 _UID 67C8160F832243664025E5A60AF7F2E8"
+  },
+  {
+   "id": "F307",
+   "husband": [
+    "I634"
+   ],
+   "wife": [],
+   "children": [
+    "I786"
+   ],
+   "raw": "0 @F307@ FAM\n1 HUSB @I634@\n1 CHIL @I786@\n1 RIN MH:F307\n1 _UID 67C8160F8323C3666025E5A60AF7F2E8"
+  }
+ ]
 }
