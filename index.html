@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2345';
-const APP_BUILT_AT_ISO='2026-02-24T23:45:00+02:00';
+const APP_VERSION='20260224_2350';
+const APP_BUILT_AT_ISO='2026-02-24T23:50:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -858,13 +858,11 @@ function drawGraph(){
       reserveYLane(yMid, pLeft, pRight);
     }
 
-    // Marriage dot (made more visible)
+    // Marriage dot
     const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
     dot.setAttribute('cx',hubX); dot.setAttribute('cy',yMid);
-    dot.setAttribute('r','5'); // Увеличил с 3 до 5px
+    dot.setAttribute('r','3');
     dot.setAttribute('fill',color);
-    dot.setAttribute('stroke','#fff');
-    dot.setAttribute('stroke-width','1.2');
     famG.appendChild(dot);
 
     // === HUB → CHILDREN with obstacle avoidance ===
