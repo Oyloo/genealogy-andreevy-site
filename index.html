@@ -208,7 +208,7 @@ function renderList(arr){
     const d=document.createElement('div');
     d.className='item'+(selected===p.id?' active':'');
     d.dataset.id=p.id;
-    d.innerHTML=`<div><b>${p.emoji} ${esc(p.name||p.name_raw||p.id)}</b></div><div class='small'>${p.surname?esc(p.surname):''}</div>`;
+    d.innerHTML=`<div><b>${p.emoji} ${esc(p.name||p.name_raw||p.id)}</b></div>`;
     d.onclick=()=>select(p.id,true);
     elList.appendChild(d);
   });
