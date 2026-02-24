@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2350';
-const APP_BUILT_AT_ISO='2026-02-24T23:50:00+02:00';
+const APP_VERSION='20260224_2355';
+const APP_BUILT_AT_ISO='2026-02-24T23:55:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -685,42 +685,8 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
-  // === COLOR ASSIGNMENT: Local greedy coloring per person ===
-  const famColors = new Array(FAMS.length).fill(null);
-  
-  // For each person appearing in multiple families, assign different colors
-  Object.entries(anchorUsage).forEach(([personId, usage]) => {
-    const allFams = [...new Set([...usage.asParent, ...usage.asChild])].sort((a,b)=>a-b);
-    if(allFams.length <= 1) return;
-    
-    // For each family connected to this person, assign a color
-    // that hasn't been used by other families of this person
-    allFams.forEach((fi, idx) => {
-      if(famColors[fi] !== null) return; // Already assigned
-      
-      // Collect colors already used by sibling families of this person
-      const siblingColors = new Set();
-      allFams.forEach(sibling => {
-        if(famColors[sibling] !== null) siblingColors.add(famColors[sibling]);
-      });
-      
-      // Pick a color not used by siblings
-      let cIdx = 0;
-      while(cIdx < FAMILY_COLORS.length && siblingColors.has(FAMILY_COLORS[cIdx])) {
-        cIdx++;
-      }
-      if(cIdx >= FAMILY_COLORS.length) cIdx = idx % FAMILY_COLORS.length;
-      
-      famColors[fi] = FAMILY_COLORS[cIdx];
-    });
-  });
-  
-  // Assign remaining colors (families not yet colored)
-  for(let fi = 0; fi < FAMS.length; fi++) {
-    if(famColors[fi] === null) {
-      famColors[fi] = FAMILY_COLORS[fi % FAMILY_COLORS.length];
-    }
-  }
+  // === COLOR ASSIGNMENT: Simple modulo based on family index ===
+  const famColors = FAMS.map((f, fi) => FAMILY_COLORS[fi % FAMILY_COLORS.length]);
 
   FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
