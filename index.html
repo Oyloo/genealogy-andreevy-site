@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2003';
-const APP_BUILT_AT_ISO='2026-02-24T20:03:00+02:00';
+const APP_VERSION='20260224_2011';
+const APP_BUILT_AT_ISO='2026-02-24T20:11:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -849,11 +849,16 @@ function drawGraph(){
       
       const initialJogY = endY + clearance;
       
-      // Find a clean Y-lane for the jog
+      // Calculate provisional ax for the initial jog level
+      let ax = findFreeXLane(a.x, yChildBar, initialJogY, famMembers);
+
+      // Find a clean Y-lane for the jog (refine Y)
       const safeJogY = findFreeYLane(initialJogY, a.x, ax, endY-30, endY+30, famMembers);
 
-      // Find safe lane for main drop from yChildBar to safeJogY
-      const ax = findFreeXLane(a.x, yChildBar, safeJogY, famMembers);
+      // Re-calculate ax for the final safeJogY if it changed significantly
+      if(Math.abs(safeJogY - initialJogY) > 1){
+         ax = findFreeXLane(a.x, yChildBar, safeJogY, famMembers);
+      }
 
       // 1. Main vertical drop from bar
       if(Math.abs(safeJogY - yChildBar) > 0.1){
