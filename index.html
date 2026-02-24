@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2016';
-const APP_BUILT_AT_ISO='2026-02-24T20:16:00+02:00';
+const APP_VERSION='20260224_2025';
+const APP_BUILT_AT_ISO='2026-02-24T20:25:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -400,7 +400,7 @@ function buildGraphModel(){
   // compress base geometry so full tree stays readable on one screen more often
   const targetW=1500, targetH=920;
   const gx = maxCols > 9 ? 12 : 16;
-  const gy = 120; // Increased gap to allow clear routing channels
+  const gy = 90; // Reduced back to compact layout
 
   const nodeW = Math.max(104, Math.min(170,
     Math.floor((targetW - 2*margin - Math.max(0,maxCols-1)*gx) / maxCols)
@@ -733,12 +733,6 @@ function drawGraph(){
       // But actually, we ALWAYS want to exit 'bottom' for parents typically.
       const startY = a.yBottom; 
       
-      // We want to go to yMid.
-      // STRATEGY: 
-      // 1. Go down vertically from a.x for a "Clearance" distance.
-      // 2. Jog horizontally to ax.
-      // 3. Continue vertically at ax to yMid.
-      
       let clearance = 10;
       if(yMid < startY) clearance = -10; 
       if(Math.abs(yMid - startY) < Math.abs(clearance)) clearance = yMid - startY;
@@ -748,12 +742,27 @@ function drawGraph(){
       // Calculate provisional ax for the initial jog level
       let ax = findFreeXLane(a.x, initialJogY, yMid, famMembers);
 
+      // Snap to exact card alignment if close (avoids micro-jogs/serrations)
+      if(Math.abs(ax - a.x) < 4) ax = a.x;
+
       // 2. Find clean horizontal lane for the jog using provisional ax
       const safeJogY = findFreeYLane(initialJogY, a.x, ax, startY-30, startY+30, famMembers);
       
       // Refine ax if jogY moved significantly
       if(Math.abs(safeJogY - initialJogY) > 1){
          ax = findFreeXLane(a.x, safeJogY, yMid, famMembers);
+         if(Math.abs(ax - a.x) < 4) ax = a.x;
+      }
+      
+      // Optimization: if straight vertical is possible, draw single continuous line
+      if(Math.abs(ax - a.x) < 0.2){
+        const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1',ax); line.setAttribute('y1',startY);
+        line.setAttribute('x2',ax); line.setAttribute('y2',yMid);
+        famG.appendChild(line);
+        reserveXLane(ax, startY, yMid);
+        a._ax = ax;
+        return;
       }
 
       // 1. Vertical stub out of card
@@ -856,12 +865,26 @@ function drawGraph(){
       // Calculate provisional ax for the initial jog level
       let ax = findFreeXLane(a.x, yChildBar, initialJogY, famMembers);
 
+      // Snap to exact card alignment if close (avoids micro-jogs/serrations)
+      if(Math.abs(ax - a.x) < 4) ax = a.x;
+
       // Find a clean Y-lane for the jog (refine Y)
       const safeJogY = findFreeYLane(initialJogY, a.x, ax, endY-30, endY+30, famMembers);
 
       // Re-calculate ax for the final safeJogY if it changed significantly
       if(Math.abs(safeJogY - initialJogY) > 1){
          ax = findFreeXLane(a.x, yChildBar, safeJogY, famMembers);
+         if(Math.abs(ax - a.x) < 4) ax = a.x;
+      }
+
+      // Optimization: if straight vertical is possible, draw single continuous line
+      if(Math.abs(ax - a.x) < 0.2){
+        const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1',ax); line.setAttribute('y1',yChildBar);
+        line.setAttribute('x2',ax); line.setAttribute('y2',endY);
+        famG.appendChild(line);
+        reserveXLane(ax, yChildBar, endY);
+        return;
       }
 
       // 1. Main vertical drop from bar
