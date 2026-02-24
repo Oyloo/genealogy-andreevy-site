@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2305';
-const APP_BUILT_AT_ISO='2026-02-24T23:05:00+02:00';
+const APP_VERSION='20260224_2310';
+const APP_BUILT_AT_ISO='2026-02-24T23:10:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1263,8 +1263,17 @@ function bindGraphInteractions(){
       const dy = currentY - prevMouse.y;
       
       if(dt > 0) {
-        vx = dx; 
-        vy = dy;
+        // Calculate velocity (px per 16ms frame)
+        // If dt is tiny, velocity might spike. If dt is huge, velocity drops.
+        // We want a rolling average.
+        const rawVx = dx;
+        const rawVy = dy;
+        
+        // Use simpler smoothing for touch: 0.5/0.5
+        // Touch events fire often.
+        vx = vx * 0.5 + rawVx * 0.5;
+        vy = vy * 0.5 + rawVy * 0.5;
+
         lastMoveTime = now;
       }
       prevMouse = {x: currentX, y: currentY};
@@ -1320,9 +1329,12 @@ function bindGraphInteractions(){
     touchStartDist = 0;
 
     // Start inertia if velocity is significant and recent
-    if (isDrag && Date.now() - lastMoveTime < 50) {
-      if (Math.abs(vx) > 1 || Math.abs(vy) > 1) {
+    // Use slightly larger threshold for touch (more noise)
+    if (isDrag && (Date.now() - lastMoveTime) < 80) { // increased to 80ms
+      if (Math.abs(vx) > 1.5 || Math.abs(vy) > 1.5) {
         applyInertia();
+      } else {
+        vx=0; vy=0;
       }
     } else {
       vx=0; vy=0;
