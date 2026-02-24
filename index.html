@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260225_0020';
-const APP_BUILT_AT_ISO='2026-02-25T00:20:00+02:00';
+const APP_VERSION='20260225_0025';
+const APP_BUILT_AT_ISO='2026-02-25T00:25:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -513,25 +513,25 @@ function drawGraph(){
   edgeLayer.setAttribute('data-layer','edges');
   edgeLayer.setAttribute('pointer-events','none');
 
-  // === FAMILY COLOR PALETTE (max perceptual contrast) ===
+  // === FAMILY COLOR PALETTE (alternating cool/warm to reduce conflicts) ===
   const FAMILY_COLORS = [
-    '#f7a072', // оранжевый
-    '#38bdf8', // ярко-голубой
-    '#fb7185', // красный
-    '#4ade80', // зелёный
-    '#fbbf24', // жёлтый
-    '#a78bfa', // пурпурный
-    '#5eead4', // бирюза
-    '#fb923c', // оранжево-жёлтый
-    '#a3e635', // лайм
-    '#f472b6', // маджента
-    '#67e8f9', // циан
-    '#e879f9', // розово-фиолетовый
-    '#c084fc', // светлый пурпур
-    '#fcd34d', // золотой
-    '#86efac', // светлый зелёный
-    '#f87171', // красный-2
-    '#6ec6ff', // светлый голубой
+    '#38bdf8', // ярко-голубой (cool)
+    '#f7a072', // оранжевый (warm)
+    '#5eead4', // бирюза (cool)
+    '#fb7185', // красный (warm)
+    '#67e8f9', // циан (cool)
+    '#a78bfa', // пурпурный (cool-warm)
+    '#c084fc', // светлый пурпур (cool-warm)
+    '#4ade80', // зелёный (cool)
+    '#a3e635', // лайм (cool-warm)
+    '#e879f9', // розово-фиолетовый (cool-warm)
+    '#fb923c', // оранжево-жёлтый (warm)
+    '#86efac', // светлый зелёный (cool)
+    '#f87171', // красный-2 (warm)
+    '#6ec6ff', // светлый голубой (cool)
+    '#fcd34d', // золотой (warm) — редко
+    '#f472b6', // маджента (cool-warm) — редко
+    '#fbbf24', // жёлтый (warm) — редко
   ];
 
   // Build occupancy grid: for each level, list of {left,right} rectangles
