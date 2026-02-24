@@ -113,8 +113,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1800';
-const APP_BUILT_AT='2026-02-24 18:00 Europe/Riga';
+const APP_VERSION='20260224_1822';
+const APP_BUILT_AT_ISO='2026-02-24T18:22:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -132,21 +132,36 @@ const centerBtn=document.getElementById('centerBtn');
 
 const esc=s=>(s??'').toString().replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+function formatAgo(ts){
+  const ms=Math.max(0, Date.now()-ts.getTime());
+  const m=Math.floor(ms/60000);
+  if(m<1) return 'только что';
+  if(m<60) return `${m} мин назад`;
+  const h=Math.floor(m/60);
+  if(h<24) return `${h} ч назад`;
+  const d=Math.floor(h/24);
+  return `${d} дн назад`;
+}
+
 function renderVersionInfo(){
   const cb = new URLSearchParams(location.search).get('cache_bust');
-  elVersion.textContent = `Версия: ${APP_VERSION} · Обновлён: ${APP_BUILT_AT}${cb?` · cache_bust=${cb}`:''}`;
+  const builtAt=new Date(APP_BUILT_AT_ISO);
+  const builtAgo = Number.isNaN(builtAt.getTime()) ? 'неизвестно' : formatAgo(builtAt);
 
-  // Optional server timestamp to see what CDN served right now.
+  elVersion.textContent = `Версия: ${APP_VERSION} · Обновлено: ${builtAgo}${cb?` · cache_bust=${cb}`:''}`;
+
+  // Live server marker (CDN edge): show relative age too.
   fetch(window.location.href, { method:'HEAD', cache:'no-store' })
     .then(r=>{
       const lm=r.headers.get('last-modified');
       if(!lm) return;
       const d=new Date(lm);
-      const lmText = Number.isNaN(d.getTime()) ? lm : d.toLocaleString('ru-RU', { hour12:false });
-      elVersion.textContent += ` · Сервер: ${lmText}`;
+      if(Number.isNaN(d.getTime())) return;
+      elVersion.textContent += ` · Сервер: ${formatAgo(d)}`;
     })
     .catch(()=>{});
 }
+
 
 function renderList(arr){
   elCount.textContent = `${arr.length}/${PEOPLE.length}`;
@@ -687,25 +702,36 @@ function drawGraph(){
     rect.setAttribute('width',nodeW); rect.setAttribute('height',nodeH);
     rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
 
-    const [line1, line2] = splitName2(p.name||p.name_raw,p.id, Math.max(12, Math.floor((nodeW-16)/7.6)));
+    const [rawLine1, rawLine2] = splitName2(p.name||p.name_raw,p.id, Math.max(12, Math.floor((nodeW-16)/7.6)));
+    const yy=years(p);
+
+    // Keep years from colliding with the second name line on compact nodes.
+    const nameY1 = pos.y + (nodeH<52 ? 16 : 18);
+    const lineGap = nodeW<120 ? 12 : 13;
+    const nameY2 = nameY1 + lineGap;
+    const yearsY = pos.y + nodeH - 7;
+    const showLine2 = !!rawLine2 && ((yearsY - nameY2) >= 11);
+
+    const line1 = rawLine1;
+    const line2 = showLine2 ? rawLine2 : '';
 
     const t1=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1.setAttribute('x',pos.x+8); t1.setAttribute('y',pos.y+18);
-    t1.setAttribute('font-size', nodeW<120 ? '10.2' : '11.5');
+    t1.setAttribute('x',pos.x+8); t1.setAttribute('y',nameY1);
+    t1.setAttribute('font-size', nodeW<120 ? '10.0' : '11.3');
     t1.setAttribute('fill','#121a27');
     t1.textContent=line1;
 
     const t1b=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1b.setAttribute('x',pos.x+8); t1b.setAttribute('y',pos.y+32);
-    t1b.setAttribute('font-size', nodeW<120 ? '10.2' : '11.5');
+    t1b.setAttribute('x',pos.x+8); t1b.setAttribute('y',nameY2);
+    t1b.setAttribute('font-size', nodeW<120 ? '10.0' : '11.3');
     t1b.setAttribute('fill','#121a27');
-    t1b.textContent=line2 || '';
+    t1b.textContent=line2;
 
     const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t2.setAttribute('x',pos.x+8); t2.setAttribute('y',pos.y+nodeH-8);
-    t2.setAttribute('font-size', nodeW<120 ? '9.6' : '10.6');
+    t2.setAttribute('x',pos.x+nodeW-8); t2.setAttribute('y',yearsY);
+    t2.setAttribute('text-anchor','end');
+    t2.setAttribute('font-size', nodeW<120 ? '9.2' : '10.2');
     t2.setAttribute('fill','#314764');
-    const yy=years(p);
     t2.textContent=yy || '';
 
     const title=document.createElementNS('http://www.w3.org/2000/svg','title');
@@ -850,6 +876,7 @@ async function init(){
 
   elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · ${DATA.meta.generator}`;
   renderVersionInfo();
+  setInterval(renderVersionInfo, 60000);
 
   renderList(PEOPLE);
   buildGraphModel();
