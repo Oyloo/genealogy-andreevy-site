@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1831';
-const APP_BUILT_AT_ISO='2026-02-24T18:31:00+02:00';
+const APP_VERSION='20260224_1838';
+const APP_BUILT_AT_ISO='2026-02-24T18:38:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -455,6 +455,11 @@ function drawGraph(){
 
   const {xy,nodeW,nodeH}=graph;
 
+  // Layers: nodes first, then family lines on top (as requested: lines never hide behind cards).
+  const edgeLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
+  edgeLayer.setAttribute('data-layer','edges');
+  edgeLayer.setAttribute('pointer-events','none');
+
   // === FAMILY COLOR PALETTE ===
   const FAMILY_COLORS = [
     '#6ec6ff', '#f7a072', '#a78bfa', '#4ade80', '#f472b6',
@@ -701,7 +706,7 @@ function drawGraph(){
       reserveXLane(ax, yChildBar, a.y);
     });
 
-    svg.appendChild(famG);
+    edgeLayer.appendChild(famG);
   });
 
   const nodes=document.createElementNS('http://www.w3.org/2000/svg','g');
@@ -765,6 +770,7 @@ function drawGraph(){
   });
 
   svg.appendChild(nodes);
+  svg.appendChild(edgeLayer);
   applyViewBox();
   highlightSelected();
 }
