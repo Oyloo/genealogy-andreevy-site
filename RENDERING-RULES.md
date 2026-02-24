@@ -2,7 +2,7 @@
 
 Updated: 2026-02-25
 Scope: `/Users/oyloo/.openclaw/workspace/genealogy-site/`
-Current Version: `20260225_0015` (multi-neighbor aware color allocation)
+Current Version: `20260225_0035` (intersection-aware coloring + thick lines + no-pink-blue palette)
 
 ## 1) Semantics first
 - Visual routing must never change genealogical meaning.
@@ -35,14 +35,23 @@ Current Version: `20260225_0015` (multi-neighbor aware color allocation)
 - Automated: every child path resolves through a family hub.
 - Manual: inspect known sensitive cluster around Minadora and siblings.
 
-## 7) Family line coloring
-- **Goal**: Intersecting/overlapping family lines should not share the same color.
-- **Algorithm**: Multi-neighbor aware greedy coloring:
-  1. Families sorted by horizontal position (parent center X).
-  2. Each family assigned a color that is not used by left or right neighbor.
-  3. Palette ordered for maximum perceptual contrast.
-- **Current palette** (v0015): Orange → Bright Blue → Red → Green → Yellow → Purple → Turquoise → ...
-- **Fallback**: If all neighbors use colors from palette (rare), use prime offset `(idx * 3) % length`.
+## 7) Family line coloring (v0035)
+- **Goal**: Intersecting/overlapping family lines must be distinguishable. Lines must not blend with node colors.
+- **Algorithm**: Intersection-aware graph coloring:
+  1. Calculate Y-range for each family (parent level to deepest child).
+  2. Build conflict graph: families with overlapping Y-ranges are "conflicting" (potential line crossing).
+  3. Greedy coloring: assign colors ensuring no two conflicting families share a color.
+  4. Families sorted by X position for deterministic ordering.
+  
+- **Palette exclusions**: Removed all colors similar to node colors:
+  - **Excluded**: Light pink (#f8b4d8, female nodes), light blue (#9cc8ff, male nodes)
+  - **Included**: Dark greens, reds, purples, teals (Tailwind palette)
+  - **Result**: Lines visually distinct from both male and female nodes
+  
+- **Line styling**:
+  - Stroke width: 2.5px (increased from 1.8 for visibility)
+  - Linecap/linejoin: round
+  - Opacity: opaque
 
 ## 8) Release gate
 If any check fails, release is blocked until corrected.
