@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1838';
-const APP_BUILT_AT_ISO='2026-02-24T18:38:00+02:00';
+const APP_VERSION='20260224_1847';
+const APP_BUILT_AT_ISO='2026-02-24T18:47:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -455,7 +455,8 @@ function drawGraph(){
 
   const {xy,nodeW,nodeH}=graph;
 
-  // Layers: nodes first, then family lines on top (as requested: lines never hide behind cards).
+  // Layers: edges first, nodes on top. Edges are routed around cards,
+  // and nodes remain visually clean/readable.
   const edgeLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
   edgeLayer.setAttribute('data-layer','edges');
   edgeLayer.setAttribute('pointer-events','none');
@@ -486,30 +487,45 @@ function drawGraph(){
     levelYRanges[ly].nodes.push({left:pos.x, right:pos.x+nodeW, id:p.id});
   });
 
-  // Find a clear vertical X channel that doesn't overlap any node on intermediate levels
-  function findClearChannel(fromY, toY, preferX, famMembers){
-    // Collect all node rects on levels between fromY and toY
-    const blocked = [];
-    const pad = 4; // padding around nodes
-    Object.values(levelYRanges).forEach(lr=>{
-      if(lr.top > fromY && lr.bottom < toY){ // strictly between
-        lr.nodes.forEach(n=>{
-          if(!famMembers.has(n.id)){
-            blocked.push({left:n.left-pad, right:n.right+pad});
-          }
-        });
-      }
+  // Node rectangles for obstacle avoidance (exclude current family members when routing their own links).
+  const nodeRects = PEOPLE.map(p=>{
+    const pos=xy[p.id];
+    if(!pos) return null;
+    return {id:p.id, left:pos.x, right:pos.x+nodeW, top:pos.y, bottom:pos.y+nodeH};
+  }).filter(Boolean);
+
+  function verticalHitsNode(x, y1, y2, famMembers){
+    const a=Math.min(y1,y2), b=Math.max(y1,y2);
+    const pad=3;
+    return nodeRects.some(n=>{
+      if(famMembers?.has(n.id)) return false;
+      const xHit = x > (n.left-pad) && x < (n.right+pad);
+      const yHit = a < (n.bottom+pad) && b > (n.top-pad);
+      return xHit && yHit;
     });
-    // Check if preferX is clear
-    if(!blocked.some(b => preferX > b.left && preferX < b.right)) return preferX;
-    // Try offsets left/right
+  }
+
+  function horizontalHitsNode(y, x1, x2, famMembers){
+    const a=Math.min(x1,x2), b=Math.max(x1,x2);
+    const pad=3;
+    return nodeRects.some(n=>{
+      if(famMembers?.has(n.id)) return false;
+      const yHit = y > (n.top-pad) && y < (n.bottom+pad);
+      const xHit = a < (n.right+pad) && b > (n.left-pad);
+      return xHit && yHit;
+    });
+  }
+
+  // Find a clear vertical X channel that avoids nodes for the whole segment.
+  function findClearChannel(fromY, toY, preferX, famMembers){
+    if(!verticalHitsNode(preferX, fromY, toY, famMembers)) return preferX;
     for(let d=8; d<graph.worldW; d+=6){
       const xl = preferX - d;
-      if(xl > 4 && !blocked.some(b => xl > b.left && xl < b.right)) return xl;
+      if(xl > 4 && !verticalHitsNode(xl, fromY, toY, famMembers)) return xl;
       const xr = preferX + d;
-      if(xr < graph.worldW-4 && !blocked.some(b => xr > b.left && xr < b.right)) return xr;
+      if(xr < graph.worldW-4 && !verticalHitsNode(xr, fromY, toY, famMembers)) return xr;
     }
-    return preferX; // fallback
+    return preferX;
   }
 
   const INTO = 6;
@@ -520,19 +536,28 @@ function drawGraph(){
   function reserveYLane(y, x1, x2){
     usedYLanes.push({y, x1: Math.min(x1,x2), x2: Math.max(x1,x2)});
   }
-  function isYLaneFree(y, x1, x2){
+  function isYLaneFree(y, x1, x2, famMembers){
     const a=Math.min(x1,x2), b=Math.max(x1,x2);
-    return !usedYLanes.some(l => Math.abs(l.y - y) < 5 && l.x1 < b && a < l.x2);
+    const lineFree = !usedYLanes.some(l => Math.abs(l.y - y) < 5 && l.x1 < b && a < l.x2);
+    if(!lineFree) return false;
+    // Horizontal bars should never cut through any person card.
+    return !horizontalHitsNode(y, a, b, null);
   }
-  function findFreeYLane(preferY, x1, x2, minY, maxY){
-    if(isYLaneFree(preferY, x1, x2)) return preferY;
-    for(let d=5; d < (maxY-minY)+60; d+=5){
-      const yUp = preferY - d;
-      if(yUp >= minY && isYLaneFree(yUp, x1, x2)) return yUp;
-      const yDown = preferY + d;
-      if(yDown <= maxY && isYLaneFree(yDown, x1, x2)) return yDown;
+  function findFreeYLane(preferY, x1, x2, minY, maxY, famMembers){
+    const baseMin=Math.min(minY,maxY), baseMax=Math.max(minY,maxY);
+    const hardMin=Math.max(2, baseMin - (nodeH + 22));
+    const hardMax=Math.min(graph.worldH-2, baseMax + (nodeH + 22));
+
+    const start=Math.max(hardMin, Math.min(hardMax, preferY));
+    if(isYLaneFree(start, x1, x2, famMembers)) return start;
+
+    for(let d=5; d < (hardMax-hardMin)+60; d+=5){
+      const yUp = start - d;
+      if(yUp >= hardMin && isYLaneFree(yUp, x1, x2, famMembers)) return yUp;
+      const yDown = start + d;
+      if(yDown <= hardMax && isYLaneFree(yDown, x1, x2, famMembers)) return yDown;
     }
-    return preferY;
+    return start;
   }
 
   // === GLOBAL X-LANE REGISTRY: prevent vertical lines from sharing the same X in same Y range ===
@@ -541,17 +566,19 @@ function drawGraph(){
   function reserveXLane(x, y1, y2){
     usedXLanes.push({x, y1: Math.min(y1,y2), y2: Math.max(y1,y2)});
   }
-  function isXLaneFree(x, y1, y2){
+  function isXLaneFree(x, y1, y2, famMembers){
     const a=Math.min(y1,y2), b=Math.max(y1,y2);
-    return !usedXLanes.some(l => Math.abs(l.x - x) < 3 && l.y1 < b && a < l.y2);
+    const lineFree = !usedXLanes.some(l => Math.abs(l.x - x) < 3 && l.y1 < b && a < l.y2);
+    if(!lineFree) return false;
+    return !verticalHitsNode(x, a, b, famMembers);
   }
-  function findFreeXLane(preferX, y1, y2){
-    if(isXLaneFree(preferX, y1, y2)) return preferX;
+  function findFreeXLane(preferX, y1, y2, famMembers){
+    if(isXLaneFree(preferX, y1, y2, famMembers)) return preferX;
     for(let d=5; d < graph.worldW; d+=5){
       const xl = preferX - d;
-      if(xl > 4 && isXLaneFree(xl, y1, y2)) return xl;
+      if(xl > 4 && isXLaneFree(xl, y1, y2, famMembers)) return xl;
       const xr = preferX + d;
-      if(xr < graph.worldW-4 && isXLaneFree(xr, y1, y2)) return xr;
+      if(xr < graph.worldW-4 && isXLaneFree(xr, y1, y2, famMembers)) return xr;
     }
     return preferX;
   }
@@ -599,8 +626,18 @@ function drawGraph(){
     famG.setAttribute('stroke-linejoin','round');
     famG.setAttribute('shape-rendering','geometricPrecision');
 
-    const parentAnchors=ps.map(id=>({x:xy[id].x+nodeW/2+getAnchorXOffset(id,'parent',fi), y:xy[id].y+nodeH-INTO}));
-    const childAnchors=ch.map(id=>({x:xy[id].x+nodeW/2+getAnchorXOffset(id,'child',fi), y:xy[id].y+INTO}));
+    const parentAnchors=ps.map(id=>({
+      id,
+      x:xy[id].x+nodeW/2+getAnchorXOffset(id,'parent',fi),
+      yTop:xy[id].y+INTO,
+      yBottom:xy[id].y+nodeH-INTO,
+    }));
+    const childAnchors=ch.map(id=>({
+      id,
+      x:xy[id].x+nodeW/2+getAnchorXOffset(id,'child',fi),
+      yTop:xy[id].y+INTO,
+      yBottom:xy[id].y+nodeH-INTO,
+    }));
 
     const parentBottomEdge = Math.max(...ps.map(id=>xy[id].y+nodeH));
     const childTopEdge = Math.min(...ch.map(id=>xy[id].y));
@@ -614,8 +651,8 @@ function drawGraph(){
 
     // Handle split-level families (where parents and children overlap in Y)
     // Use the actual vertical space available between parent anchors and child anchors
-    const parentAnchorBottom = Math.max(...parentAnchors.map(a=>a.y));
-    const childAnchorTop = Math.min(...childAnchors.map(a=>a.y));
+    const parentAnchorBottom = Math.max(...parentAnchors.map(a=>a.yBottom));
+    const childAnchorTop = Math.min(...childAnchors.map(a=>a.yTop));
     const effectiveGapTop = Math.min(parentAnchorBottom, childAnchorTop);
     const effectiveGapBottom = Math.max(parentAnchorBottom, childAnchorTop);
     const gapMidpoint = (effectiveGapTop + effectiveGapBottom) / 2;
@@ -624,20 +661,23 @@ function drawGraph(){
     const preferYMid = effectiveGapTop + Math.min(14, (effectiveGapBottom - effectiveGapTop) * 0.3);
     const preferYChild = effectiveGapBottom - Math.min(14, (effectiveGapBottom - effectiveGapTop) * 0.3);
     
-    const yMid = findFreeYLane(preferYMid, fullBarLeft, fullBarRight, effectiveGapTop, effectiveGapBottom);
-    const yChildBar = findFreeYLane(preferYChild, fullBarLeft, fullBarRight, effectiveGapTop, effectiveGapBottom);
+    const yMid = findFreeYLane(preferYMid, fullBarLeft, fullBarRight, effectiveGapTop, effectiveGapBottom, famMembers);
+    const yChildBar = findFreeYLane(preferYChild, fullBarLeft, fullBarRight, effectiveGapTop, effectiveGapBottom, famMembers);
 
     // Detect multi-level gap: if there are intermediate levels with nodes between parents and children
     const multiLevel = (effectiveGapBottom - effectiveGapTop) > (nodeH + 40);
 
     // === PARENT SIDE ===
     parentAnchors.forEach(a=>{
-      const ax = findFreeXLane(a.x, a.y, yMid);
+      // Exit the card from the side closer to the selected lane (top or bottom),
+      // so we don't run a full segment through the card body.
+      const startY = Math.abs(yMid-a.yTop) <= Math.abs(yMid-a.yBottom) ? a.yTop : a.yBottom;
+      const ax = findFreeXLane(a.x, startY, yMid, famMembers);
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-      line.setAttribute('x1',ax); line.setAttribute('y1',a.y);
+      line.setAttribute('x1',ax); line.setAttribute('y1',startY);
       line.setAttribute('x2',ax); line.setAttribute('y2',yMid);
       famG.appendChild(line);
-      reserveXLane(ax, a.y, yMid);
+      reserveXLane(ax, startY, yMid);
       a._ax = ax; // store adjusted X for bar
     });
     if(parentAnchors.length>1){
@@ -660,7 +700,7 @@ function drawGraph(){
     let hubEndX = hubX;
     if(multiLevel){
       const channelX = findClearChannel(yMid, yChildBar, hubX, famMembers);
-      const freeChX = findFreeXLane(channelX, yMid, yChildBar);
+      const freeChX = findFreeXLane(channelX, yMid, yChildBar, famMembers);
       hubEndX = freeChX;
 
       const path=document.createElementNS('http://www.w3.org/2000/svg','polyline');
@@ -674,7 +714,7 @@ function drawGraph(){
       reserveXLane(freeChX, yMid, yChildBar);
     } else {
       // Direct: hub → childBar
-      const freeHubX = findFreeXLane(hubX, yMid, yChildBar);
+      const freeHubX = findFreeXLane(hubX, yMid, yChildBar, famMembers);
       hubEndX = freeHubX;
       const vDown=document.createElementNS('http://www.w3.org/2000/svg','line');
       vDown.setAttribute('x1',freeHubX); vDown.setAttribute('y1',yMid);
@@ -696,14 +736,15 @@ function drawGraph(){
       reserveYLane(yChildBar, fullBarLeft, fullBarRight);
     }
 
-    // Each child: vertical from bar into node
+    // Each child: vertical from bar into node (enter from nearest side).
     childAnchors.forEach(a=>{
-      const ax = findFreeXLane(a.x, yChildBar, a.y);
+      const endY = Math.abs(yChildBar-a.yTop) <= Math.abs(yChildBar-a.yBottom) ? a.yTop : a.yBottom;
+      const ax = findFreeXLane(a.x, yChildBar, endY, famMembers);
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
       line.setAttribute('x1',ax); line.setAttribute('y1',yChildBar);
-      line.setAttribute('x2',ax); line.setAttribute('y2',a.y);
+      line.setAttribute('x2',ax); line.setAttribute('y2',endY);
       famG.appendChild(line);
-      reserveXLane(ax, yChildBar, a.y);
+      reserveXLane(ax, yChildBar, endY);
     });
 
     edgeLayer.appendChild(famG);
@@ -769,8 +810,8 @@ function drawGraph(){
     nodes.appendChild(g);
   });
 
-  svg.appendChild(nodes);
   svg.appendChild(edgeLayer);
+  svg.appendChild(nodes);
   applyViewBox();
   highlightSelected();
 }
