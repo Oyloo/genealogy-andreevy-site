@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2340';
-const APP_BUILT_AT_ISO='2026-02-24T23:40:00+02:00';
+const APP_VERSION='20260224_2345';
+const APP_BUILT_AT_ISO='2026-02-24T23:45:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -778,8 +778,9 @@ function drawGraph(){
 
     // Detect multi-level gap: if there are intermediate levels with nodes between parents and children
     const multiLevel = (effectiveGapBottom - effectiveGapTop) > (nodeH + 40);
-
-    // === PARENT SIDE ===
+    
+    // Store hubX for later use when drawing hub→childBar line
+    let preferredHubX = hubX;
     parentAnchors.forEach(a=>{
       // Exit the card from the side closer to the selected lane.
       // But actually, we ALWAYS want to exit 'bottom' for parents typically.
@@ -885,7 +886,11 @@ function drawGraph(){
       reserveXLane(freeChX, yMid, yChildBar);
     } else {
       // Direct: hub → childBar
-      const freeHubX = findFreeXLane(hubX, yMid, yChildBar, famMembers);
+      // Try to go straight down from hubX first; only deviate if blocked
+      let freeHubX = hubX;
+      if(!isXLaneFree(hubX, yMid, yChildBar, famMembers)) {
+        freeHubX = findFreeXLane(hubX, yMid, yChildBar, famMembers);
+      }
       hubEndX = freeHubX;
       const vDown=document.createElementNS('http://www.w3.org/2000/svg','line');
       vDown.setAttribute('x1',freeHubX); vDown.setAttribute('y1',yMid);
