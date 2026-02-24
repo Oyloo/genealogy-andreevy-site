@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2038';
-const APP_BUILT_AT_ISO='2026-02-24T20:38:00+02:00';
+const APP_VERSION='20260224_2056';
+const APP_BUILT_AT_ISO='2026-02-24T20:56:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1022,6 +1022,79 @@ function bindGraphInteractions(){
   });
 
   window.addEventListener('mouseup',()=>{ dragging=false; });
+
+  // Touch support (Pan + Pinch)
+  let touchStartDist = 0;
+  let touchStartView = null;
+  let touchStartCenter = null;
+
+  host.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      dragging = true;
+      start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      startView = { ...view };
+    } else if (e.touches.length === 2) {
+      dragging = false;
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      touchStartDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      touchStartView = { ...view };
+      touchStartCenter = {
+        x: (t1.clientX + t2.clientX) / 2,
+        y: (t1.clientY + t2.clientY) / 2
+      };
+    }
+  }, { passive: false });
+
+  host.addEventListener('touchmove', (e) => {
+    if (e.cancelable) e.preventDefault(); // Prevent native scroll
+    
+    if (e.touches.length === 1 && dragging) {
+      const dxPx = e.touches[0].clientX - start.x;
+      const dyPx = e.touches[0].clientY - start.y;
+      const scaleX = startView.w / host.clientWidth;
+      const scaleY = startView.h / host.clientHeight;
+      view.x = startView.x - dxPx * scaleX;
+      view.y = startView.y - dyPx * scaleY;
+      clampView();
+      applyViewBox();
+    } else if (e.touches.length === 2 && touchStartDist > 0) {
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      const center = {
+        x: (t1.clientX + t2.clientX) / 2,
+        y: (t1.clientY + t2.clientY) / 2
+      };
+
+      const scale = touchStartDist / dist;
+      const newW = touchStartView.w * scale;
+      const newH = touchStartView.h * scale;
+
+      const rect = host.getBoundingClientRect();
+      const oldScreenX = touchStartCenter.x - rect.left;
+      const oldScreenY = touchStartCenter.y - rect.top;
+      
+      const oldSvgX = touchStartView.x + oldScreenX * (touchStartView.w / host.clientWidth);
+      const oldSvgY = touchStartView.y + oldScreenY * (touchStartView.h / host.clientHeight);
+
+      const newScreenX = center.x - rect.left;
+      const newScreenY = center.y - rect.top;
+
+      view.w = newW;
+      view.h = newH;
+      view.x = oldSvgX - newScreenX * (newW / host.clientWidth);
+      view.y = oldSvgY - newScreenY * (newH / host.clientHeight);
+
+      clampView();
+      applyViewBox();
+    }
+  }, { passive: false });
+
+  host.addEventListener('touchend', () => {
+    dragging = false;
+    touchStartDist = 0;
+  });
 
   // Deterministic trackpad behavior:
   // - 2-finger scroll = PAN
