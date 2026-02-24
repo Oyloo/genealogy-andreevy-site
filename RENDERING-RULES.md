@@ -1,7 +1,8 @@
 # Genealogy Rendering Rules (Source of Truth)
 
-Updated: 2026-02-24
+Updated: 2026-02-25
 Scope: `/Users/oyloo/.openclaw/workspace/genealogy-site/`
+Current Version: `20260225_0015` (multi-neighbor aware color allocation)
 
 ## 1) Semantics first
 - Visual routing must never change genealogical meaning.
@@ -34,5 +35,14 @@ Scope: `/Users/oyloo/.openclaw/workspace/genealogy-site/`
 - Automated: every child path resolves through a family hub.
 - Manual: inspect known sensitive cluster around Minadora and siblings.
 
-## 7) Release gate
+## 7) Family line coloring
+- **Goal**: Intersecting/overlapping family lines should not share the same color.
+- **Algorithm**: Multi-neighbor aware greedy coloring:
+  1. Families sorted by horizontal position (parent center X).
+  2. Each family assigned a color that is not used by left or right neighbor.
+  3. Palette ordered for maximum perceptual contrast.
+- **Current palette** (v0015): Orange → Bright Blue → Red → Green → Yellow → Purple → Turquoise → ...
+- **Fallback**: If all neighbors use colors from palette (rare), use prime offset `(idx * 3) % length`.
+
+## 8) Release gate
 If any check fails, release is blocked until corrected.
