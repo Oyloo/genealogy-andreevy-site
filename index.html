@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2100';
-const APP_BUILT_AT_ISO='2026-02-24T21:00:00+02:00';
+const APP_VERSION='20260224_2108';
+const APP_BUILT_AT_ISO='2026-02-24T21:08:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1091,10 +1091,53 @@ function bindGraphInteractions(){
     }
   }, { passive: false });
 
-  host.addEventListener('touchend', () => {
+  host.addEventListener('touchend', (e) => {
     dragging = false;
     touchStartDist = 0;
+
+    // Custom double-tap detection for touch devices
+    // (native dblclick might be suppressed by touch-action: manipulation)
+    const now = Date.now();
+    if (now - lastTap < 300 && !dragging) {
+       // Check if target is interactive (button, input, etc.)
+       if(e.target.closest('button, input, a, .node')) {
+         lastTap = 0; // consume tap
+         return;
+       }
+
+       if(e.changedTouches.length > 0) {
+         e.preventDefault();
+         const t = e.changedTouches[0];
+         doZoomAt(t.clientX, t.clientY);
+       }
+    }
+    lastTap = now;
   });
+
+  function doZoomAt(clientX, clientY){
+    const rect = host.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
+
+    // Convert screen pixel to SVG unit
+    const scaleX = view.w / host.clientWidth;
+    const scaleY = view.h / host.clientHeight;
+    const svgX = view.x + clickX * scaleX;
+    const svgY = view.y + clickY * scaleY;
+
+    // Zoom in 2x
+    const factor = 0.5;
+    const newW = view.w * factor;
+    const newH = view.h * factor;
+
+    view.x = svgX - newW / 2;
+    view.y = svgY - newH / 2;
+    view.w = newW;
+    view.h = newH;
+
+    clampView();
+    applyViewBox();
+  }
 
   // Deterministic trackpad behavior:
   // - 2-finger scroll = PAN
@@ -1163,34 +1206,11 @@ function bindGraphInteractions(){
   }, {passive:false});
 
   host.addEventListener('dblclick', (e) => {
+    // Ignore double click on interactive elements
+    if(e.target.closest('button, input, a, .node')) return;
+    
     e.preventDefault();
-    const rect = host.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
-
-    // Convert screen pixel to SVG unit
-    const scaleX = view.w / host.clientWidth;
-    const scaleY = view.h / host.clientHeight;
-    const svgX = view.x + clickX * scaleX;
-    const svgY = view.y + clickY * scaleY;
-
-    // Zoom logic: if we are zoomed out (view.w > 2000), zoom in to 1000.
-    // If we are already close, zoom in further or reset?
-    // Let's just do a standard "zoom in at point" (magnify 2x).
-    const factor = 0.5;
-
-    // New view dimensions
-    const newW = view.w * factor;
-    const newH = view.h * factor;
-
-    // Center view on the clicked point
-    view.x = svgX - newW / 2;
-    view.y = svgY - newH / 2;
-    view.w = newW;
-    view.h = newH;
-
-    clampView();
-    applyViewBox();
+    doZoomAt(e.clientX, e.clientY);
   });
 
   fitBtn.onclick=()=>fitView();
