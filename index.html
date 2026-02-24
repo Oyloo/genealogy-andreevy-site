@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2230';
-const APP_BUILT_AT_ISO='2026-02-24T22:30:00+02:00';
+const APP_VERSION='20260224_2245';
+const APP_BUILT_AT_ISO='2026-02-24T22:45:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -237,24 +237,36 @@ function shortName(raw,id,max=24){
   return n.length>max ? (n.slice(0,max-1)+'…') : n;
 }
 
-function splitName2(raw,id,maxLine=16){
+function splitName3(raw,id,maxLine=10){
   const full=(raw||id||'').replaceAll('/','').trim();
   const words=full.split(/\s+/).filter(Boolean);
-  if(!words.length) return [id,''];
-  let l1='', l2='';
+  if(!words.length) return [id,'',''];
+  
+  let lines=['','',''];
+  let current=0;
+  
   for(const w of words){
-    if((l1 ? l1+' '+w : w).length <= maxLine){
-      l1 = l1 ? (l1+' '+w) : w;
+    if(current > 2) break; // max 3 lines
+    
+    // Try append to current
+    const proposed = lines[current] ? (lines[current]+' '+w) : w;
+    if(proposed.length <= maxLine){
+      lines[current] = proposed;
     } else {
-      l2 = (l2 ? l2+' '+w : w);
+      // Move to next line if available
+      if(current < 2) {
+        current++;
+        lines[current] = w; // force wrap even if w > maxLine
+      } else {
+        // Truncate on last line
+        lines[current] = (lines[current] + ' ' + w);
+      }
     }
   }
-  if(!l2 && l1.length > maxLine){
-    l2 = l1.slice(maxLine-1);
-    l1 = l1.slice(0,maxLine-1);
-  }
-  if(l2.length > maxLine+2) l2 = l2.slice(0,maxLine+1)+'…';
-  return [l1, l2];
+  
+  // Hard limit length per line
+  lines = lines.map(l => l.length > maxLine+3 ? l.slice(0,maxLine+2)+'…' : l);
+  return lines;
 }
 
 function years(p){
@@ -941,53 +953,52 @@ function drawGraph(){
     rect.setAttribute('width',nodeW); rect.setAttribute('height',nodeH);
     rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
 
-    const [rawLine1, rawLine2] = splitName2(p.name||p.name_raw,p.id, Math.max(9, Math.floor((nodeW-8)/7)));
-    const yy=years(p);
-
-    // Adjust for taller square cards (allowing 3 lines if needed)
-    // nodeH is approx 64-78px.
-    const nameY1 = pos.y + 14;
-    const lineGap = 11;
-    const yearsY = pos.y + nodeH - 8;
+    const [l1, l2, l3] = splitName3(p.name||p.name_raw,p.id, Math.max(8, Math.floor((nodeW-6)/7)));
     
-    // Split text logic: try to break into up to 3 lines for narrow cards
-    // Reuse splitName2 logic but maybe adapt if we want 3 lines?
-    // Current splitName2 does 2 lines max.
-    // Let's stick to 2 lines + truncation for now, but optimize font size.
+    // Layout: 3 lines of text + years.
+    // Base Y is pos.y + 12 (padding top). Line height ~10.
+    const startY = pos.y + 13;
+    const lh = 10;
     
-    const showLine2 = !!rawLine2;
-
-    const line1 = rawLine1;
-    const line2 = showLine2 ? rawLine2 : '';
-
+    // Shift up if we only have 1 or 2 lines to center vertically?
+    // Or keep top alignment for consistency?
+    // Let's align to top.
+    
     const t1=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1.setAttribute('x',pos.x+nodeW/2); t1.setAttribute('y',nameY1);
-    t1.setAttribute('font-size', '9.5'); // smaller for 3-word names
+    t1.setAttribute('x',pos.x+nodeW/2); t1.setAttribute('y',startY);
+    t1.setAttribute('font-size', '9.5');
     t1.setAttribute('text-anchor','middle');
     t1.setAttribute('fill','#121a27');
-    t1.textContent=line1;
+    t1.textContent=l1;
+    g.appendChild(t1);
 
-    const t1b=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1b.setAttribute('x',pos.x+nodeW/2); t1b.setAttribute('y',nameY1+lineGap);
-    t1b.setAttribute('font-size', '9.5');
-    t1b.setAttribute('text-anchor','middle');
-    t1b.setAttribute('fill','#121a27');
-    t1b.textContent=line2;
-    
-    // If line2 is empty, we could vertically center line1?
-    // But consistent alignment is usually better.
+    if(l2){
+      const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t2.setAttribute('x',pos.x+nodeW/2); t2.setAttribute('y',startY+lh);
+      t2.setAttribute('font-size', '9.5');
+      t2.setAttribute('text-anchor','middle');
+      t2.setAttribute('fill','#121a27');
+      t2.textContent=l2;
+      g.appendChild(t2);
+    }
 
-    const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t2.setAttribute('x',pos.x+nodeW/2); t2.setAttribute('y',yearsY);
-    t2.setAttribute('text-anchor','middle');
-    t2.setAttribute('font-size', '9.0');
-    t2.setAttribute('fill','#314764');
-    t2.textContent=yy || '';
+    if(l3){
+      const t3=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t3.setAttribute('x',pos.x+nodeW/2); t3.setAttribute('y',startY+lh*2);
+      t3.setAttribute('font-size', '9.5');
+      t3.setAttribute('text-anchor','middle');
+      t3.setAttribute('fill','#121a27');
+      t3.textContent=l3;
+      g.appendChild(t3);
+    }
 
-    const title=document.createElementNS('http://www.w3.org/2000/svg','title');
-    title.textContent=`${(p.name||p.name_raw||p.id).replaceAll('/','').trim()}${yy?(' · '+yy):''}`;
-
-    g.appendChild(rect); g.appendChild(t1); g.appendChild(t1b); g.appendChild(t2); g.appendChild(title);
+    const tY=document.createElementNS('http://www.w3.org/2000/svg','text');
+    tY.setAttribute('x',pos.x+nodeW/2); tY.setAttribute('y',pos.y+nodeH-7);
+    tY.setAttribute('text-anchor','middle');
+    tY.setAttribute('font-size', '9.0');
+    tY.setAttribute('fill','#314764');
+    tY.textContent=yy || '';
+    g.appendChild(tY);
     g.onclick=()=>select(p.id,true);
     nodes.appendChild(g);
   });
