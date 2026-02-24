@@ -16,7 +16,7 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt)}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt);touch-action:manipulation}
 header{padding:10px 16px;border-bottom:1px solid var(--line);background:#0b1220eb;backdrop-filter:blur(6px);position:sticky;top:0;z-index:20}
 .headerRow{display:flex;align-items:center;gap:12px;min-width:0;white-space:nowrap;overflow:hidden}
 h1{margin:0;font-size:16px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2108';
-const APP_BUILT_AT_ISO='2026-02-24T21:08:00+02:00';
+const APP_VERSION='20260224_2120';
+const APP_BUILT_AT_ISO='2026-02-24T21:20:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1027,14 +1027,18 @@ function bindGraphInteractions(){
   let touchStartDist = 0;
   let touchStartView = null;
   let touchStartCenter = null;
+  let lastTapTime = 0;
+  let isDrag = false;
 
   host.addEventListener('touchstart', (e) => {
     if (e.touches.length === 1) {
       dragging = true;
+      isDrag = false;
       start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       startView = { ...view };
     } else if (e.touches.length === 2) {
       dragging = false;
+      isDrag = false;
       const t1 = e.touches[0];
       const t2 = e.touches[1];
       touchStartDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
@@ -1052,6 +1056,9 @@ function bindGraphInteractions(){
     if (e.touches.length === 1 && dragging) {
       const dxPx = e.touches[0].clientX - start.x;
       const dyPx = e.touches[0].clientY - start.y;
+      
+      if(Math.abs(dxPx) > 5 || Math.abs(dyPx) > 5) isDrag = true;
+
       const scaleX = startView.w / host.clientWidth;
       const scaleY = startView.h / host.clientHeight;
       view.x = startView.x - dxPx * scaleX;
@@ -1096,22 +1103,18 @@ function bindGraphInteractions(){
     touchStartDist = 0;
 
     // Custom double-tap detection for touch devices
-    // (native dblclick might be suppressed by touch-action: manipulation)
-    const now = Date.now();
-    if (now - lastTap < 300 && !dragging) {
-       // Check if target is interactive (button, input, etc.)
-       if(e.target.closest('button, input, a, .node')) {
-         lastTap = 0; // consume tap
-         return;
-       }
-
-       if(e.changedTouches.length > 0) {
+    if (!isDrag && e.changedTouches.length > 0) {
+       const now = Date.now();
+       if (now - lastTapTime < 400) {
+         // Double tap!
          e.preventDefault();
          const t = e.changedTouches[0];
          doZoomAt(t.clientX, t.clientY);
+         lastTapTime = 0; // consume tap
+       } else {
+         lastTapTime = now;
        }
     }
-    lastTap = now;
   });
 
   function doZoomAt(clientX, clientY){
