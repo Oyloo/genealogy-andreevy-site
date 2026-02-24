@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2258';
-const APP_BUILT_AT_ISO='2026-02-24T22:58:00+02:00';
+const APP_VERSION='20260224_2305';
+const APP_BUILT_AT_ISO='2026-02-24T23:05:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1085,25 +1085,47 @@ function bindGraphInteractions(){
   window.addEventListener('mousemove',(e)=>{
     if(!dragging) return;
     const now = Date.now();
+    
+    // Skip if too frequent (throttle?) No, we need smooth.
+    // But we need accurate dt.
     const dt = now - lastMoveTime;
-    lastMoveTime = now;
-
-    const dxPx=e.clientX-start.x;
-    const dyPx=e.clientY-start.y;
     
-    // Calculate instantaneous velocity (pixels per frame approx)
-    // We just track the delta of this movement relative to previous 'start'??
-    // Wait, 'start' is fixed at mousedown. 'dxPx' grows.
-    // We need delta since last frame for velocity.
-    // Let's track 'previous mouse pos' for velocity calculation.
+    // Only update velocity if enough time passed or movement happened
+    const currentX = e.clientX;
+    const currentY = e.clientY;
     
-    // Actually, simpler: just use movementX/movementY if available, or track prevX/prevY.
-    // Let's use a simpler heuristic: just take the last movement delta.
-    // But 'start' is static. So dxPx is total delta.
-    // We need delta-of-delta.
+    const dx = currentX - prevMouse.x;
+    const dy = currentY - prevMouse.y;
     
-    // Better: update 'start' every frame? No, that drifts 'view.x' calculation accumulation.
-    // Keep 'start' static for position accuracy, but track separate prevX/prevY for velocity.
+    // Calculate instantaneous velocity (pixels per 16ms frame)
+    if (dt > 0) {
+      // Current raw velocity
+      const rawVx = dx;
+      const rawVy = dy;
+      
+      // Simple exponential smoothing to reduce jitter
+      // 0.4 * new + 0.6 * old
+      vx = vx * 0.6 + rawVx * 0.4;
+      vy = vy * 0.6 + rawVy * 0.4;
+      
+      lastMoveTime = now;
+    }
+    
+    prevMouse = {x: currentX, y: currentY};
+    
+    // Update view position based on absolute delta from start
+    // This prevents drift.
+    const scaleX = startView.w / host.clientWidth;
+    const scaleY = startView.h / host.clientHeight;
+    
+    const totalDx = currentX - start.x;
+    const totalDy = currentY - start.y;
+    
+    view.x = startView.x - totalDx * scaleX;
+    view.y = startView.y - totalDy * scaleY;
+    
+    clampView();
+    applyViewBox();
   });
   
   // Re-implement mousemove to support velocity tracking
@@ -1163,15 +1185,15 @@ function bindGraphInteractions(){
     prevMouse = {x: currentX, y: currentY};
   });
 
-  window.addEventListener('mouseup',()=>{ 
-    dragging=false; 
-    // If last move was too long ago (>50ms), drop velocity (stopped holding)
-    if (Date.now() - lastMoveTime > 50) {
-      vx = 0; vy = 0;
-    }
-    // Start inertia
-    if (Math.abs(vx) > 1 || Math.abs(vy) > 1) {
+  window.addEventListener('mouseup', () => {
+    if(!dragging) return;
+    dragging=false;
+    // Start inertia only if last move was recent (<50ms)
+    // And velocity is significant
+    if (Date.now() - lastMoveTime < 50 && (Math.abs(vx) > 1.5 || Math.abs(vy) > 1.5)) {
       applyInertia();
+    } else {
+      vx=0; vy=0;
     }
   });
 
