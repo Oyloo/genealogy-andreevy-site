@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2330';
-const APP_BUILT_AT_ISO='2026-02-24T23:30:00+02:00';
+const APP_VERSION='20260224_2335';
+const APP_BUILT_AT_ISO='2026-02-24T23:35:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -685,26 +685,42 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
-  // === COLOR ASSIGNMENT: Spatially-aware coloring ===
+  // === COLOR ASSIGNMENT: Local greedy coloring per person ===
   const famColors = new Array(FAMS.length).fill(null);
   
-  // Calculate "center X" for each family to determine spatial order
-  const famCenters = FAMS.map((f, fi) => {
-    const ps = [...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
-    if(!ps.length) return {fi, x: 0};
-    const avgX = ps.reduce((sum, id) => sum + xy[id].x, 0) / ps.length;
-    return {fi, x: avgX};
+  // For each person appearing in multiple families, assign different colors
+  Object.entries(anchorUsage).forEach(([personId, usage]) => {
+    const allFams = [...new Set([...usage.asParent, ...usage.asChild])].sort((a,b)=>a-b);
+    if(allFams.length <= 1) return;
+    
+    // For each family connected to this person, assign a color
+    // that hasn't been used by other families of this person
+    allFams.forEach((fi, idx) => {
+      if(famColors[fi] !== null) return; // Already assigned
+      
+      // Collect colors already used by sibling families of this person
+      const siblingColors = new Set();
+      allFams.forEach(sibling => {
+        if(famColors[sibling] !== null) siblingColors.add(famColors[sibling]);
+      });
+      
+      // Pick a color not used by siblings
+      let cIdx = 0;
+      while(cIdx < FAMILY_COLORS.length && siblingColors.has(FAMILY_COLORS[cIdx])) {
+        cIdx++;
+      }
+      if(cIdx >= FAMILY_COLORS.length) cIdx = idx % FAMILY_COLORS.length;
+      
+      famColors[fi] = FAMILY_COLORS[cIdx];
+    });
   });
   
-  // Sort families by X coordinate (left to right)
-  famCenters.sort((a, b) => a.x - b.x);
-  
-  // Assign colors cyclically based on spatial order.
-  // This ensures that any two families drawn next to each other have different colors.
-  famCenters.forEach((item, index) => {
-    // Use a large prime step or simple cycle to distribute colors
-    famColors[item.fi] = FAMILY_COLORS[index % FAMILY_COLORS.length];
-  });
+  // Assign remaining colors (families not yet colored)
+  for(let fi = 0; fi < FAMS.length; fi++) {
+    if(famColors[fi] === null) {
+      famColors[fi] = FAMILY_COLORS[fi % FAMILY_COLORS.length];
+    }
+  }
 
   FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
