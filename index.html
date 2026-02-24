@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260225_0015';
-const APP_BUILT_AT_ISO='2026-02-25T00:15:00+02:00';
+const APP_VERSION='20260225_0020';
+const APP_BUILT_AT_ISO='2026-02-25T00:20:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -698,41 +698,63 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
-  // === COLOR ASSIGNMENT: Multi-neighbor aware coloring ===
-  // Calculate center X for each family (from their parents)
+  // === COLOR ASSIGNMENT: Intersection-aware graph coloring ===
+  // Calculate center X and Y range for each family
   const famBounds = FAMS.map((f, fi) => {
     const ps = [...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
-    if(!ps.length) return {fi, x: 0};
+    const ch = (f.children||[]).filter(id=>xy[id]);
+    if(!ps.length) return {fi, x: 0, yMin: 0, yMax: 0};
+    
     const xs = ps.map(id => xy[id].x);
+    const ys = [...ps, ...ch].map(id => xy[id].y);
+    
     const centerX = (Math.min(...xs) + Math.max(...xs)) / 2;
-    return {fi, x: centerX};
+    const yMin = Math.min(...ys);
+    const yMax = Math.max(...ys) + nodeH;
+    
+    return {fi, x: centerX, yMin, yMax};
   });
   
-  // Sort by X position
-  famBounds.sort((a, b) => a.x - b.x);
+  // Build conflict graph: families that have overlapping Y ranges are potential conflicts
+  const conflicts = new Array(FAMS.length);
+  for(let i = 0; i < FAMS.length; i++) conflicts[i] = new Set();
   
-  // Assign colors: ensure no adjacent families share the same color
+  for(let i = 0; i < FAMS.length; i++) {
+    for(let j = i+1; j < FAMS.length; j++) {
+      const f1 = famBounds[i];
+      const f2 = famBounds[j];
+      
+      // Families conflict if their Y ranges overlap (potential for line crossing)
+      if(f1.yMin < f2.yMax && f2.yMin < f1.yMax) {
+        conflicts[i].add(j);
+        conflicts[j].add(i);
+      }
+    }
+  }
+  
+  // Greedy coloring: assign colors ensuring conflicting families have different colors
   const famColors = new Array(FAMS.length).fill(null);
   
-  famBounds.forEach((item, idx) => {
-    // Collect colors of left and right neighbors
-    const neighborColors = new Set();
-    if(idx > 0) neighborColors.add(famColors[famBounds[idx-1].fi]);
-    if(idx < famBounds.length-1 && famColors[famBounds[idx+1].fi]) {
-      neighborColors.add(famColors[famBounds[idx+1].fi]);
-    }
+  // Sort families by X position for consistent ordering
+  const sortedIdx = famBounds.map((_, i) => i).sort((i, j) => famBounds[i].x - famBounds[j].x);
+  
+  sortedIdx.forEach(fi => {
+    // Collect colors used by conflicting families
+    const conflictColors = new Set();
+    conflicts[fi].forEach(cf => {
+      if(famColors[cf] !== null) conflictColors.add(famColors[cf]);
+    });
     
-    // Find a color not used by neighbors
+    // Find first color not used by conflicts
     let colorIdx = 0;
-    while(colorIdx < FAMILY_COLORS.length && neighborColors.has(FAMILY_COLORS[colorIdx])) {
+    while(colorIdx < FAMILY_COLORS.length && conflictColors.has(FAMILY_COLORS[colorIdx])) {
       colorIdx++;
     }
-    // Fallback if all colors are taken by neighbors (shouldn't happen with 17 colors)
     if(colorIdx >= FAMILY_COLORS.length) {
-      colorIdx = (idx * 3) % FAMILY_COLORS.length; // Use prime-like offset
+      colorIdx = (fi * 3) % FAMILY_COLORS.length;
     }
     
-    famColors[item.fi] = FAMILY_COLORS[colorIdx];
+    famColors[fi] = FAMILY_COLORS[colorIdx];
   });
 
   FAMS.forEach((f, fi)=>{
