@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2011';
-const APP_BUILT_AT_ISO='2026-02-24T20:11:00+02:00';
+const APP_VERSION='20260224_2016';
+const APP_BUILT_AT_ISO='2026-02-24T20:16:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -745,12 +745,16 @@ function drawGraph(){
       
       const initialJogY = startY + clearance;
       
-      // 2. Find clean horizontal lane for the jog
-      // Search range: slightly above/below initial guess
-      const safeJogY = findFreeYLane(initialJogY, a.x, ax, startY-30, startY+30, famMembers);
+      // Calculate provisional ax for the initial jog level
+      let ax = findFreeXLane(a.x, initialJogY, yMid, famMembers);
 
-      // Find safe vertical for the main drop from safeJogY to yMid
-      const ax = findFreeXLane(a.x, safeJogY, yMid, famMembers);
+      // 2. Find clean horizontal lane for the jog using provisional ax
+      const safeJogY = findFreeYLane(initialJogY, a.x, ax, startY-30, startY+30, famMembers);
+      
+      // Refine ax if jogY moved significantly
+      if(Math.abs(safeJogY - initialJogY) > 1){
+         ax = findFreeXLane(a.x, safeJogY, yMid, famMembers);
+      }
 
       // 1. Vertical stub out of card
       if(Math.abs(safeJogY - startY) > 0.1){
