@@ -179,7 +179,7 @@
    "spouses": [
     "I321"
    ],
-   "raw": "1 _UPD 16 APR 2025 04:10:48 GMT -0600 \n1 NAME Прасковья Спиридоновна //\n2 GIVN Прасковья Спиридоновна\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1837\n2 PLAC Прейльская волость\n1 DEAT Y\n2 QUAY 4\n2 DATA\n3 TEXT Прасковья Спиридоновна Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1837 - Прейльская волость&a\n4 CONC mp;lt;br&amp;gt;Отец: Спиридон Неизвестно&amp;lt;br&amp;gt;Муж: Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Дети: Пётр Евстигнеев\n4 CONC ич Андреев, Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:58805366:\n1 RIN MH:I322\n1 _UID 67C8160F759CA3224025E5A60AF7F2E8"
+   "raw": "1 _UPD 16 APR 2025 04:10:48 GMT -0600 \n1 NAME Прасковья Спиридоновна //\n2 GIVN Прасковья Спиридоновна\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1837\n2 PLAC Прейльская волость\n1 DEAT Y\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:58805366:\n1 RIN MH:I322\n1 _UID 67C8160F759CA3224025E5A60AF7F2E8"
   },
   {
    "id": "I324",
@@ -282,7 +282,7 @@
    "spouses": [
     "I47"
    ],
-   "raw": "1 _UPD 8 JUN 2025 10:58:18 GMT -0600 \n1 NAME Фетиния Игнатьевна //\n2 GIVN Фетиния Игнатьевна\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 1884\n1 DEAT Y\n2 DATE 1963\n2 AGE 78-79\n1 OCCU Домохозяйка\n2 QUAY 4\n2 DATA\n3 TEXT Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 1884&amp;lt;br&amp;gt;Занятие: Домох�\n4 CONC �зяйка&amp;lt;br&amp;gt;Смерть: 1963&amp;lt;br&amp;gt;Отец: Агап Богданов&amp;lt;br&amp;gt;Муж: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Д\n4 CONC ети: Мария Дмитриевна Семёнова (Амбросова), Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Ефр\n4 CONC осиния Бриц (Амбросова), Анфим Димитриевич Амбросов, Иван Димитривич Амбросов&amp;lt;br&amp;gt;Родные брат/сестра: Ек\n4 CONC атерина Игнатьевна Карпова (Богданова), Февруса Агаповна Рыхлова (Богданова), Милания Богданова\n2 EVEN Record\n3 ROLE 40000:26093243:\n1 NOTE Жила и работала в Vārkavas pagasta Znutiņu s.\n1 RIN MH:I48\n1 _UID 67C8160F6F4EF310C025E5A60AF7F2E8"
+   "raw": "1 _UPD 8 JUN 2025 10:58:18 GMT -0600 \n1 NAME Фетиния Игнатьевна //\n2 GIVN Фетиния Игнатьевна\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 1884\n1 DEAT Y\n2 DATE 1963\n2 AGE 78-79\n1 OCCU Домохозяйка\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093243:\n1 NOTE Жила и работала в Vārkavas pagasta Znutiņu s.\n1 RIN MH:I48\n1 _UID 67C8160F6F4EF310C025E5A60AF7F2E8"
   },
   {
    "id": "I441",
@@ -359,7 +359,7 @@
    "spouses": [
     "I48"
    ],
-   "raw": "1 _UPD 4 APR 2025 03:50:33 GMT -0600 \n1 NAME Димитрий Данильевич /Амбросов/\n2 GIVN Димитрий Данильевич\n2 SURN Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1880\n2 PLAC Viški\n1 DEAT Y\n2 DATE 29 DEC 1953\n2 AGE 72-73\n1 OCCU Плотник. Мастерил колёса\n2 QUAY 4\n2 DATA\n3 TEXT Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1880&amp;lt;br&amp;gt;Занятие: Плотник. Мастерил\n4 CONC  колёса&amp;lt;br&amp;gt;Смерть: 29 дек 1953&amp;lt;br&amp;gt;Отец: Даниил Амбросов&amp;lt;br&amp;gt;Мать: Неизвестно Амбросова&amp;lt;br&amp;gt\n4 CONC ;Жена: Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Дети: Мария Дмитриевна Семёнова (Амбросова), Иван Дим\n4 CONC итривич Амбросов, Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, \n4 CONC Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093242:\n1 RIN MH:I47\n1 _UID 67C8160F6F43E310A025E5A60AF7F2E8"
+   "raw": "1 _UPD 4 APR 2025 03:50:33 GMT -0600 \n1 NAME Димитрий Данильевич /Амбросов/\n2 GIVN Димитрий Данильевич\n2 SURN Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1880\n2 PLAC Viški\n1 DEAT Y\n2 DATE 29 DEC 1953\n2 AGE 72-73\n1 OCCU Плотник. Мастерил колёса\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093242:\n1 RIN MH:I47\n1 _UID 67C8160F6F43E310A025E5A60AF7F2E8"
   },
   {
    "id": "I16",
@@ -411,7 +411,7 @@
    "spouses": [
     "I17"
    ],
-   "raw": "1 _UPD 12 MAY 2025 04:03:02 GMT -0600 \n1 NAME Кузьма /Амбросов/\n2 GIVN Кузьма\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 5 NOV 1918\n1 DEAT Y\n2 DATE 11 JAN 2009\n2 PLAC Riga, Латвия\n2 AGE 90\n2 CAUS Естественная смерть/старость\n1 BURI Ivana kapi, Rīga, Latvija\n2 DATE 15 JAN 2009\n2 PLAC Riga, Латвия\n2 QUAY 4\n2 DATA\n3 TEXT Кузьма Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 5 ноя 1918&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Мане\n4 CONC фа Амбросова (Васильева) - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Смерть: 11 янв 2009 - Riga, Латвия&amp;lt;br&amp;gt;Захоронение: 15 янв 20\n4 CONC 09 - Riga, Латвия&amp;lt;br&amp;gt;Отец: Димитрий Данильевич Амбросов&amp;lt;br&amp;gt;Мать: Фетиния Игнатьевна Амбросова (Богда�\n4 CONC �ова)&amp;lt;br&amp;gt;Жена: Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt\n4 CONC ;br&amp;gt;Родные брат/сестра: Мария Дмитриевна Семёнова (Амбросова), Иван Димитривич Амбросов, Марина Vaivode (Амброс\n4 CONC ова), Неизвестно Амбросова, Анфим Димитриевич Амбросов, Ефросиния Бриц (Амбросова)\n2 EVEN Record\n3 ROLE 40000:26093229:\n1 RIN MH:I16\n1 _UID 67C8160F6E61D30E9025E5A60AF7F2E8"
+   "raw": "1 _UPD 12 MAY 2025 04:03:02 GMT -0600 \n1 NAME Кузьма /Амбросов/\n2 GIVN Кузьма\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 5 NOV 1918\n1 DEAT Y\n2 DATE 11 JAN 2009\n2 PLAC Riga, Латвия\n2 AGE 90\n2 CAUS Естественная смерть/старость\n1 BURI Ivana kapi, Rīga, Latvija\n2 DATE 15 JAN 2009\n2 PLAC Riga, Латвия\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093229:\n1 RIN MH:I16\n1 _UID 67C8160F6E61D30E9025E5A60AF7F2E8"
   },
   {
    "id": "I7",
@@ -473,7 +473,7 @@
    "spouses": [
     "I6"
    ],
-   "raw": "1 _UPD 29 MAR 2025 14:46:43 GMT -0600 \n1 NAME Людмила Кузьминична /Амбросова/\n2 GIVN Людмила Кузьминична\n2 SURN Амбросова\n2 _MARNM Ильина\n1 SEX F\n1 BIRT\n2 DATE 10 AUG 1948\n1 RESI\n2 ADDR\n3 CITY Riga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n1 RESI\n2 ADDR\n3 ADRЛатвия\n1 RESI\n2 QUAY 4\n2 DATA\n3 TEXT Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Кузьма Амбросов&amp;lt;br&amp;gt;Мать: Ма\n4 CONC нефа Амбросова (Васильева)&amp;lt;br&amp;gt;Муж: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Фактический(-ая) супруг(-а): &lt;&lt;Priva\n4 CONC te&gt;&gt; Paja&amp;lt;br&amp;gt;Дети: Виктория Митрофанова (Ильина), Эдуард Валентинович Ильин\n2 EVEN Record\n3 ROLE 40000:26093227:\n1 RIN MH:I7\n1 _UID 67C8160F6DFDC30E0025E5A60AF7F2E8"
+   "raw": "1 _UPD 29 MAR 2025 14:46:43 GMT -0600 \n1 NAME Людмила Кузьминична /Амбросова/\n2 GIVN Людмила Кузьминична\n2 SURN Амбросова\n2 _MARNM Ильина\n1 SEX F\n1 BIRT\n2 DATE 10 AUG 1948\n1 RESI\n2 ADDR\n3 CITY Riga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n1 RESI\n2 ADDR\n3 ADRЛатвия\n1 RESI\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093227:\n1 RIN MH:I7\n1 _UID 67C8160F6DFDC30E0025E5A60AF7F2E8"
   },
   {
    "id": "I631",
@@ -710,7 +710,7 @@
    "spouses": [
     "I322"
    ],
-   "raw": "1 _UPD 1 JUL 2025 11:57:20 GMT -0600 \n1 NAME Евстигней Трофимович /Андреев/\n2 GIVN Евстигней Трофимович\n2 SURN Андреев\n1 SEX M\n1 BIRT\n2 DATE 1827\n1 OCCU землевладелец\n2 QUAY 4\n2 DATA\n3 TEXT Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: Примерно в 1827&amp;lt;br&amp;gt;Занятие: землев\n4 CONC ладелец&amp;lt;br&amp;gt;Отец: Трофим Андреев&amp;lt;br&amp;gt;Жена: Прасковья Спиридоновна Андреева&amp;lt;br&amp;gt;Дети: Пётр Евс\n4 CONC тигнеевич Андреев, Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:57596071:\n1 RIN MH:I321\n1 _UID 67C8160F7595D3223025E5A60AF7F2E8"
+   "raw": "1 _UPD 1 JUL 2025 11:57:20 GMT -0600 \n1 NAME Евстигней Трофимович /Андреев/\n2 GIVN Евстигней Трофимович\n2 SURN Андреев\n1 SEX M\n1 BIRT\n2 DATE 1827\n1 OCCU землевладелец\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:57596071:\n1 RIN MH:I321\n1 _UID 67C8160F7595D3223025E5A60AF7F2E8"
   },
   {
    "id": "I484",
@@ -953,7 +953,7 @@
    "spouses": [
     "I156"
    ],
-   "raw": "1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Пётр Евстигнеевич /Андреев/\n2 GIVN Пётр Евстигнеевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1860\n2 PLAC Germany\n1 DEAT Y\n2 DATE 22 APR 1929\n2 AGE 68-69\n1 OCCU десятский, земледелец при отце\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n2 QUAY 4\n2 DATA\n3 TEXT Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: Примерно в 1860&amp;lt;br&amp;gt;Занятие: десятский\n4 CONC , земледелец при отце&amp;lt;br&amp;gt;Смерть: 22 апр 1929&amp;lt;br&amp;gt;Отец: Евстигней Трофимович Андреев&amp;lt;br&amp;gt;Мать: Пра\n4 CONC сковья Спиридоновна Андреева&amp;lt;br&amp;gt;Жена: Марья Петровна Андреева&amp;lt;br&amp;gt;Дети: Агафия Петровна Егорова, \n4 CONC Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинья Петровна Иванова (Андреева), Манефа А�\n4 CONC �дреева&amp;lt;br&amp;gt;Родные брат/сестра: Василий Евстигнеевич Андреев, Прокопий Евстигнеевич Андреев\n2 EVEN Record\n3 ROLE 40000:49561619:\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500236\n1 RIN MH:I155\n1 _UID 67C8160F722523179025E5A60AF7F2E8"
+   "raw": "1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Пётр Евстигнеевич /Андреев/\n2 GIVN Пётр Евстигнеевич\n2 SURN Андреев\n2 _MARNM Андреев\n1 SEX M\n1 BIRT\n2 DATE 1860\n2 PLAC Germany\n1 DEAT Y\n2 DATE 22 APR 1929\n2 AGE 68-69\n1 OCCU десятский, земледелец при отце\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:49561619:\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500236\n1 RIN MH:I155\n1 _UID 67C8160F722523179025E5A60AF7F2E8"
   },
   {
    "id": "I480",
@@ -1022,7 +1022,7 @@
    ],
    "children": [],
    "spouses": [],
-   "raw": "1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Агафия \"Ганька\" Петровна /Андреева/\n2 GIVN Агафия \"Ганька\" Петровна\n2 SURN Андреева\n2 _MARNM Егорова\n1 SEX F\n1 DEAT Y\n2 PLAC Ермаки\n1 BIRT\n2 DATE 1902\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500240\n1 RIN MH:I159\n1 _UID 67C8160F7246E317E025E5A60AF7F2E8"
+   "raw": "1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Агафия \"Ганька\" Петровна /Андреева/\n2 GIVN Агафия \"Ганька\" Петровна\n2 SURN Андреева\n2 _MARNM Егорова\n1 SEX F\n1 DEAT Y\n2 PLAC Ермаки\n1 BIRT\n2 DATE 1902\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500240\n1 RIN MH:I159\n1 _UID 67C8160F7246E317E025E5A60AF7F2E8"
   },
   {
    "id": "I158",
@@ -1065,7 +1065,7 @@
    ],
    "children": [],
    "spouses": [],
-   "raw": "1 _UPD 1 MAY 2025 17:00:17 GMT -0600 \n1 NAME Агрипина \"Рипа\" Петровна /Андреева/\n2 GIVN Агрипина \"Рипа\" Петровна\n2 SURN Андреева\n2 _MARNM Иванова\n1 SEX F\n1 BIRT\n2 DATE BET 1895 AND 1897\n1 DEAT Y\n2 DATE 7 MAR 1967\n2 AGE 71-72\n2 QUAY 4\n2 DATA\n3 TEXT Рипинья Петровна Иванова (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1895&amp;lt;br&amp;gt;Смерть: 7 �\n4 CONC �ар 1967&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андреева&amp;lt;br&amp;gt;Бывший муж: Н�\n4 CONC �кита Иванов&amp;lt;br&amp;gt;Дети: Михаил Иванов, Григорий Иванов, &amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Иванова, Неизвестно Иванов, &\n4 CONC amp;lt;&amp;lt;Private&amp;gt;&amp;gt; Иванов&amp;lt;br&amp;gt;Родные брат/сестра: Агафия Петровна Егорова (Андреева), Марфа Петровна А\n4 CONC ндреева, Евдокия Петровна Васильева (Андреева), Манефа Андреева\n2 EVEN Record\n3 ROLE 40000:49561328:\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500239\n1 RIN MH:I158\n1 _UID 67C8160F72405317D025E5A60AF7F2E8"
+   "raw": "1 _UPD 1 MAY 2025 17:00:17 GMT -0600 \n1 NAME Агрипина \"Рипа\" Петровна /Андреева/\n2 GIVN Агрипина \"Рипа\" Петровна\n2 SURN Андреева\n2 _MARNM Иванова\n1 SEX F\n1 BIRT\n2 DATE BET 1895 AND 1897\n1 DEAT Y\n2 DATE 7 MAR 1967\n2 AGE 71-72\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:49561328:\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500239\n1 RIN MH:I158\n1 _UID 67C8160F72405317D025E5A60AF7F2E8"
   },
   {
    "id": "I633",
@@ -1168,7 +1168,7 @@
    "spouses": [
     "I56"
    ],
-   "raw": "1 _UPD 4 JUN 2025 13:34:47 GMT -0600 \n1 NAME Евдокия Петровна /Андреева/\n2 GIVN Евдокия Петровна\n2 SURN Андреева\n2 _MARNM Васильева\n1 SEX F\n1 BIRT\n2 DATE 1892\n2 PLAC Клапары, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Клапары, Латвия\n2 AGE 76-77\n2 QUAY 4\n2 DATA\n3 TEXT Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: Примерно в 1892 - Клапары&amp;lt;br&amp\n4 CONC ;gt;Смерть: Примерно в 1969 - Клапары&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна Андр�\n4 CONC �ева&amp;lt;br&amp;gt;Муж: Иван Петрович Васильев&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Васильев, Таиси\n4 CONC я Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев, Степанида Архипова?&amp;lt;br&amp;gt;Родные бра\n4 CONC т/сестра: Агафия Петровна Егорова, Марфа Петровна Андреева, Рипинья Петровна Иванова (Андреева), Манефа Андре�\n4 CONC �ва\n2 EVEN Record\n3 ROLE 40000:26093247:\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500215\n1 RIN MH:I57\n1 _UID 67C8160F6FB1B3115025E5A60AF7F2E8"
+   "raw": "1 _UPD 4 JUN 2025 13:34:47 GMT -0600 \n1 NAME Евдокия Петровна /Андреева/\n2 GIVN Евдокия Петровна\n2 SURN Андреева\n2 _MARNM Васильева\n1 SEX F\n1 BIRT\n2 DATE 1892\n2 PLAC Клапары, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Клапары, Латвия\n2 AGE 76-77\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093247:\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500215\n1 RIN MH:I57\n1 _UID 67C8160F6FB1B3115025E5A60AF7F2E8"
   },
   {
    "id": "I160",
@@ -1196,7 +1196,7 @@
    ],
    "children": [],
    "spouses": [],
-   "raw": "1 _UPD 19 MAR 2025 14:46:21 GMT -0600 \n1 NAME Манефа /Андреева/\n2 GIVN Манефа\n2 SURN Андреева\n1 SEX F\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Отец: Пётр Евстигнеевич Андреев&amp;lt;br&amp;gt;Мать: Марья Петровна\n4 CONC  Андреева&amp;lt;br&amp;gt;Родные брат/сестра: Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинь\n4 CONC я Петровна Иванова (Андреева), Агафия Петровна Егорова\n2 EVEN Record\n3 ROLE 40000:60652329:\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500242\n1 RIN MH:I160\n1 _UID 67C8160F72496317F025E5A60AF7F2E8"
+   "raw": "1 _UPD 19 MAR 2025 14:46:21 GMT -0600 \n1 NAME Манефа /Андреева/\n2 GIVN Манефа\n2 SURN Андреева\n1 SEX F\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:60652329:\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500242\n1 RIN MH:I160\n1 _UID 67C8160F72496317F025E5A60AF7F2E8"
   },
   {
    "id": "I630",
@@ -1265,7 +1265,7 @@
    ],
    "children": [],
    "spouses": [],
-   "raw": "1 _UPD 19 MAR 2025 14:47:11 GMT -0600 \n1 NAME Марфа Петровна /Андреева/\n2 GIVN Марфа Петровна\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500238\n1 RIN MH:I157\n1 _UID 67C8160F72377317C025E5A60AF7F2E8"
+   "raw": "1 _UPD 19 MAR 2025 14:47:11 GMT -0600 \n1 NAME Марфа Петровна /Андреева/\n2 GIVN Марфа Петровна\n2 SURN Андреева\n1 SEX F\n1 BIRT\n2 DATE 1890\n1 DEAT Y\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500238\n1 RIN MH:I157\n1 _UID 67C8160F72377317C025E5A60AF7F2E8"
   },
   {
    "id": "I156",
@@ -1314,7 +1314,7 @@
    "spouses": [
     "I155"
    ],
-   "raw": "1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Марья Петровна /Андреева/\n2 GIVN Марья Петровна\n2 NICK Марфа\n2 SURN Андреева\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1862\n2 PLAC Borbaļi, Vārkava, Латвия\n1 DEAT Y\n2 DATE 28 JAN 1958\n2 AGE 95-96\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n2 QUAY 4\n2 DATA\n3 TEXT Марья Петровна Андреева&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Псевдоним: Марфа&amp;lt;br&amp;gt;Рождение: Примерно в 1862 - Borba\n4 CONC ļi, Vārkava, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в 1958&amp;lt;br&amp;gt;Отец: Пётр Неизвестно&amp;lt;br&amp;gt;Муж: Пётр Евстигнеевич \n4 CONC Андреев&amp;lt;br&amp;gt;Дети: Марфа Петровна Андреева, Евдокия Петровна Васильева (Андреева), Рипинья Петровна Иван�\n4 CONC �ва (Андреева), Агафия Петровна Егорова, Манефа Андреева\n2 EVEN Record\n3 ROLE 40000:49561630:\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500237\n1 NOTE <p>LVVA фонд 2258 опись 5 дело 602:</p><p><p></p></p><p><p>Предыдущий пасспорт №3515 был выдан 1922 году 16 сентября.</p></p><p><p></p></p><p><p>П\n2 CONC ассаорт JZ № 021036, №4236 был выдан 1929 году 5 ноября.</p></p><p><p></p></p><p><p>Фотки нет, но есть отпечаток пальца.</p></p><p><p></p></p>\n2 CONC <p><p>Жила в Анчкино</p></p><p><p></p></p><p><p>Мед помощь право первой группы 1933 год 21 сентября</p></p><p><p></p></p><p>в 1931 году голос\n2 CONC овала (сейм и пагастс)</p>\n1 RIN MH:I156\n1 _UID 67C8160F72314317B025E5A60AF7F2E8"
+   "raw": "1 _UPD 4 JUN 2025 13:34:46 GMT -0600 \n1 NAME Марья Петровна /Андреева/\n2 GIVN Марья Петровна\n2 NICK Марфа\n2 SURN Андреева\n2 _MARNM Андреева\n1 SEX F\n1 BIRT\n2 DATE 1862\n2 PLAC Borbaļi, Vārkava, Латвия\n1 DEAT Y\n2 DATE 28 JAN 1958\n2 AGE 95-96\n1 CENS\n2 DATE 1900\n2 PLAC Dundee & Benson villages, Douglas, Nebraska, USA\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:49561630:\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500237\n1 NOTE <p>LVVA фонд 2258 опись 5 дело 602:</p><p><p></p></p><p><p>Предыдущий пасспорт №3515 был выдан 1922 году 16 сентября.</p></p><p><p></p></p><p><p>П\n2 CONC ассаорт JZ № 021036, №4236 был выдан 1929 году 5 ноября.</p></p><p><p></p></p><p><p>Фотки нет, но есть отпечаток пальца.</p></p><p><p></p></p>\n2 CONC <p><p>Жила в Анчкино</p></p><p><p></p></p><p><p>Мед помощь право первой группы 1933 год 21 сентября</p></p><p><p></p></p><p>в 1931 году голос\n2 CONC овала (сейм и пагастс)</p>\n1 RIN MH:I156\n1 _UID 67C8160F72314317B025E5A60AF7F2E8"
   },
   {
    "id": "I135",
@@ -1642,7 +1642,7 @@
    "spouses": [
     "I57"
    ],
-   "raw": "1 _UPD 5 MAR 2025 03:31:21 GMT -0600 \n1 NAME Иван Петрович /Васильев/\n2 GIVN Иван Петрович\n2 SURN Васильев\n2 _MARNM Васильев\n1 SEX M\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 1897\n2 PLAC д. Гай, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Varkava, Латвия\n2 AGE 71-72\n2 QUAY 4\n2 DATA\n3 TEXT Иван Петрович Васильев&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1897 - д. Гай, Латвия&amp;lt;br&amp;gt;Смерть: Примерно в\n4 CONC  1969 - Varkava, Латвия&amp;lt;br&amp;gt;Захоронение: Klapari&amp;lt;br&amp;gt;Отец: Пётр Васильев&amp;lt;br&amp;gt;Мать: Матрена Васильева&amp;lt;\n4 CONC br&amp;gt;Жена: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Дети: Манефа Амбросова (Васильева), Василий Василье\n4 CONC в, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев&amp;lt;br&amp;gt;Родные брат/сестра: Ник�\n4 CONC �нор Васильев, Агафон Васильев, Анисия Васильева, Семен Васильев, Василий Васильев, Савелий Васильев, Стюшка В\n4 CONC асильев, Матрена Васильева, Степан Васильев\n2 EVEN Record\n3 ROLE 40000:26093246:\n1 RIN MH:I56\n1 _UID 67C8160F6FA693114025E5A60AF7F2E8"
+   "raw": "1 _UPD 5 MAR 2025 03:31:21 GMT -0600 \n1 NAME Иван Петрович /Васильев/\n2 GIVN Иван Петрович\n2 SURN Васильев\n2 _MARNM Васильев\n1 SEX M\n1 BURI\n2 PLAC Klapari\n1 BIRT\n2 DATE 1897\n2 PLAC д. Гай, Латвия\n1 DEAT Y\n2 DATE 1969\n2 PLAC Varkava, Латвия\n2 AGE 71-72\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093246:\n1 RIN MH:I56\n1 _UID 67C8160F6FA693114025E5A60AF7F2E8"
   },
   {
    "id": "I17",
@@ -1688,7 +1688,7 @@
    "spouses": [
     "I16"
    ],
-   "raw": "1 _UPD 12 MAY 2025 04:04:06 GMT -0600 \n1 NAME Манефа /Васильева/\n2 GIVN Манефа\n2 SURN Васильева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 6 NOV 1924\n2 PLAC д.Аньчкино, Варкавская волость, Латвия\n1 DEAT Y\n2 DATE 10 MAY 2000\n2 PLAC Rīga, Latvija\n2 AGE 75\n2 CAUS Инсульт\n2 QUAY 4\n2 DATA\n3 TEXT Манефа Амбросова (Васильева)&amp;lt;br&amp;gt;Пол: женщина&amp;lt;br&amp;gt;Рождение: 6 ноя 1924 - д.Аньчкино, Варкавская волость\n4 CONC , Латвия&amp;lt;br&amp;gt;Семейное положение: Супруг(-а): Кузьма Амбросов - 8 май 1948 - Varkavas pagasts&amp;lt;br&amp;gt;Развод: Супруг(-а\n4 CONC ): Дмитрий Федосеевич Егоров - Примерно в 1946&amp;lt;br&amp;gt;Смерть: 10 май 2000&amp;lt;br&amp;gt;Отец: Иван Петрович Васильев&amp;l\n4 CONC t;br&amp;gt;Мать: Евдокия Петровна Васильева (Андреева)&amp;lt;br&amp;gt;Муж: Кузьма Амбросов&amp;lt;br&amp;gt;Бывший муж: Дмитрий \n4 CONC Федосеевич Егоров&amp;lt;br&amp;gt;Ребенок: Людмила Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Родные брат/сестра: Васи\n4 CONC лий Васильев, Таисия Трофимова (Васильева), Елизавета Иванова (Васильева), Иван Васильев\n2 EVEN Record\n3 ROLE 40000:26093230:\n2 QUAY 3\n2 DATA\n3 TEXT Добавлено с помощью подтвеждения совпадения Smart Match\n2 EVEN Smart Matching\n3 ROLE 1500134\n1 RIN MH:I17\n1 _UID 67C8160F6E6BE30EA025E5A60AF7F2E8"
+   "raw": "1 _UPD 12 MAY 2025 04:04:06 GMT -0600 \n1 NAME Манефа /Васильева/\n2 GIVN Манефа\n2 SURN Васильева\n2 _MARNM Амбросова\n1 SEX F\n1 BIRT\n2 DATE 6 NOV 1924\n2 PLAC д.Аньчкино, Варкавская волость, Латвия\n1 DEAT Y\n2 DATE 10 MAY 2000\n2 PLAC Rīga, Latvija\n2 AGE 75\n2 CAUS Инсульт\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093230:\n2 QUAY 3\n2 DATA\n2 EVEN Smart Matching\n3 ROLE 1500134\n1 RIN MH:I17\n1 _UID 67C8160F6E6BE30EA025E5A60AF7F2E8"
   },
   {
    "id": "I1",
@@ -1780,11 +1780,11 @@
    ],
    "children": [],
    "spouses": [],
-   "raw": "1 NAME Эдуард Валентинович /Ильин/\n2 GIVN Эдуард Валентинович\n2 SURN Ильин\n1 SEX M\n1 BIRT\n2 DATE 20 MAR 1978\n2 PLAC Rīga, Latvia\n1 GRAD\n2 DATE ABT 1 JUN 1996\n2 PLAC Rīga, Latvia\n2 AGE 18\n1 GRAD\n2 DATE 1999\n2 PLAC Rīga, Latvia\n2 AGE 20-21\n1 OCCU ITI Solutuions Consultant\n2 DATE 3 JUL 2002\n2 PLAC Rīga, Latvia\n2 AGE 24\n1 GRAD\n2 DATE 2003\n2 PLAC Transporta un sakaru institūts\n2 AGE 24-25\n1 OCCU ITI Systems Engineer\n1 RESI\n2 ADDR\n3 CITY Rīga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n1 RESI\n1 RESI\n2 ADDR\n1 RESI\n1 RESI\n2 ADDR\n1 RESI\n1 RESI\n2 ADDR\n1 DSCR <DSCR><HAIR>Brown</HAIR><EYES>Brown</EYES></DSCR>\n1 RESI\n2 QUAY 4\n2 DATA\n3 TEXT Эдуард Валентинович Ильин&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Отец: Валентин Фёдорович Ильин&amp;lt;br&amp;gt;Мать: Людми\n4 CONC ла Кузьминична Ильина (Амбросова)&amp;lt;br&amp;gt;Супруг(-а): &lt;&lt;Private&gt;&gt; Ильина (Сумбаева)&amp;lt;br&amp;gt;Братья / сестры: \n4 CONC Виктория Митрофанова (Ильина)\n2 EVEN Record\n3 ROLE 40000:26090289:\n1 RIN MH:I1\n1 _UID 67C8160F6DBD430DA025E5A60AF7F2E8"
+   "raw": "1 NAME Эдуард Валентинович /Ильин/\n2 GIVN Эдуард Валентинович\n2 SURN Ильин\n1 SEX M\n1 BIRT\n2 DATE 20 MAR 1978\n2 PLAC Rīga, Latvia\n1 GRAD\n2 DATE ABT 1 JUN 1996\n2 PLAC Rīga, Latvia\n2 AGE 18\n1 GRAD\n2 DATE 1999\n2 PLAC Rīga, Latvia\n2 AGE 20-21\n1 OCCU ITI Solutuions Consultant\n2 DATE 3 JUL 2002\n2 PLAC Rīga, Latvia\n2 AGE 24\n1 GRAD\n2 DATE 2003\n2 PLAC Transporta un sakaru institūts\n2 AGE 24-25\n1 OCCU ITI Systems Engineer\n1 RESI\n2 ADDR\n3 CITY Rīga\n3 CTRY Latvia\n1 RESI\n2 ADDR\n1 RESI\n1 RESI\n2 ADDR\n1 RESI\n1 RESI\n2 ADDR\n1 RESI\n1 RESI\n2 ADDR\n1 DSCR <DSCR><HAIR>Brown</HAIR><EYES>Brown</EYES></DSCR>\n1 RESI\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26090289:\n1 RIN MH:I1\n1 _UID 67C8160F6DBD430DA025E5A60AF7F2E8"
   },
   {
    "id": "I54",
-   "raw": "1 _UPD 4 APR 2025 03:50:35 GMT -0600 \n1 NAME Иван Димитривич /Амбросов/\n2 GIVN Иван Димитривич\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1911\n2 PLAC Vārkava, Латвия\n1 DEAT Y\n2 DATE 1944\n2 AGE 32-33\n2 QUAY 4\n2 DATA\n3 TEXT Иван Димитривич Амбросов&amp;lt;br&amp;gt;Пол: мужчина&amp;lt;br&amp;gt;Рождение: 1911 - Vārkava, Латвия&amp;lt;br&amp;gt;Семейное положен\n4 CONC ие: Супруг(-а): Минадора Васильевна Амбросова (Андреева) - 4 авг 1940&amp;lt;br&amp;gt;Смерть: 1944&amp;lt;br&amp;gt;Отец: Димитрий Д�\n4 CONC �нильевич Амбросов&amp;lt;br&amp;gt;Мать: Фетиния Игнатьевна Амбросова (Богданова)&amp;lt;br&amp;gt;Жена: Минадора Васильевн\n4 CONC а Амбросова (Андреева)&amp;lt;br&amp;gt;Ребенок: &lt;&lt;Private&gt;&gt; Михайлова (Амбросова)&amp;lt;br&amp;gt;Родные брат/сестра: Мари�\n4 CONC � Дмитриевна Семёнова (Амбросова), Кузьма Амбросов, Марина Vaivode (Амбросова), Неизвестно Амбросова, Ефросиния Бр\n4 CONC иц (Амбросова), Анфим Димитриевич Амбросов\n2 EVEN Record\n3 ROLE 40000:26093282:\n1 RIN MH:I54\n1 _UID 67C8160F6F9043112025E5A60AF7F2E8",
+   "raw": "1 _UPD 4 APR 2025 03:50:35 GMT -0600 \n1 NAME Иван Димитривич /Амбросов/\n2 GIVN Иван Димитривич\n2 SURN Амбросов\n2 _MARNM Амбросов\n1 SEX M\n1 BIRT\n2 DATE 1911\n2 PLAC Vārkava, Латвия\n1 DEAT Y\n2 DATE 1944\n2 AGE 32-33\n2 QUAY 4\n2 DATA\n2 EVEN Record\n3 ROLE 40000:26093282:\n1 RIN MH:I54\n1 _UID 67C8160F6F9043112025E5A60AF7F2E8",
    "name_raw": "Иван Димитривич /Амбросов/",
    "name": "Иван Димитривич",
    "surname": "Амбросов",
