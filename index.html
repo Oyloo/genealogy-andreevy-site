@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260225_0005';
-const APP_BUILT_AT_ISO='2026-02-25T00:05:00+02:00';
+const APP_VERSION='20260225_0010';
+const APP_BUILT_AT_ISO='2026-02-25T00:10:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -513,12 +513,25 @@ function drawGraph(){
   edgeLayer.setAttribute('data-layer','edges');
   edgeLayer.setAttribute('pointer-events','none');
 
-  // === FAMILY COLOR PALETTE ===
+  // === FAMILY COLOR PALETTE (perceptually ordered for max contrast) ===
   const FAMILY_COLORS = [
-    '#6ec6ff', '#f7a072', '#a78bfa', '#4ade80', '#f472b6',
-    '#fbbf24', '#67e8f9', '#c084fc', '#fb923c', '#86efac',
-    '#f87171', '#38bdf8', '#a3e635', '#e879f9', '#fcd34d',
-    '#5eead4', '#fb7185',
+    '#f7a072', // оранжевый
+    '#4ade80', // зелёный
+    '#38bdf8', // ярко-голубой
+    '#fb7185', // красный
+    '#fbbf24', // жёлтый
+    '#a78bfa', // пурпурный
+    '#5eead4', // бирюза
+    '#f472b6', // маджента
+    '#a3e635', // лайм
+    '#c084fc', // светлый пурпур
+    '#f87171', // красный-2
+    '#67e8f9', // циан
+    '#86efac', // светлый зелёный
+    '#fb923c', // жёлто-оранжевый
+    '#e879f9', // розово-фиолетовый
+    '#fcd34d', // золотой
+    '#6ec6ff', // светлый голубой
   ];
 
   // Build occupancy grid: for each level, list of {left,right} rectangles
@@ -685,7 +698,7 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
-  // === COLOR ASSIGNMENT: Spatial stripe coloring ===
+  // === COLOR ASSIGNMENT: Spatial stripe coloring with neighbor avoidance ===
   // Calculate center X for each family (from their parents)
   const famBounds = FAMS.map((f, fi) => {
     const ps = [...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
@@ -698,13 +711,22 @@ function drawGraph(){
   // Sort by X position
   famBounds.sort((a, b) => a.x - b.x);
   
-  // Assign colors using larger steps to ensure neighbors are visually distinct
-  // Use ~2-3 families apart to pick colors
+  // Assign colors: ensure no two adjacent families share the same color
   const famColors = new Array(FAMS.length).fill(null);
+  const usedColors = new Set();
+  
   famBounds.forEach((item, idx) => {
-    // Use step-based indexing into palette for visual separation
-    const step = Math.ceil(FAMILY_COLORS.length / 4); // 4-5 colors apart
-    const colorIdx = (idx * step) % FAMILY_COLORS.length;
+    // Collect colors of neighbors (previous family)
+    const neighborColors = new Set();
+    if(idx > 0) neighborColors.add(famColors[famBounds[idx-1].fi]);
+    
+    // Find first unused color (prefer ones not used by neighbors)
+    let colorIdx = 0;
+    while(colorIdx < FAMILY_COLORS.length && neighborColors.has(FAMILY_COLORS[colorIdx])) {
+      colorIdx++;
+    }
+    if(colorIdx >= FAMILY_COLORS.length) colorIdx = idx % FAMILY_COLORS.length;
+    
     famColors[item.fi] = FAMILY_COLORS[colorIdx];
   });
 
