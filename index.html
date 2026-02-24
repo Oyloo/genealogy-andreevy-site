@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2120';
-const APP_BUILT_AT_ISO='2026-02-24T21:20:00+02:00';
+const APP_VERSION='20260224_2128';
+const APP_BUILT_AT_ISO='2026-02-24T21:28:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1002,26 +1002,146 @@ function select(id,center=false){
 function bindGraphInteractions(){
   let dragging=false, start=null, startView=null;
 
+  // Inertia variables
+  let vx = 0, vy = 0;
+  let lastMoveTime = 0;
+  let inertiaRaf = 0;
+
+  function stopInertia() {
+    if (inertiaRaf) {
+      cancelAnimationFrame(inertiaRaf);
+      inertiaRaf = 0;
+    }
+    vx = 0;
+    vy = 0;
+  }
+
+  function applyInertia() {
+    if (Math.abs(vx) < 0.1 && Math.abs(vy) < 0.1) {
+      stopInertia();
+      return;
+    }
+    
+    // Friction factor
+    vx *= 0.95;
+    vy *= 0.95;
+
+    // Convert pixel velocity to SVG view units based on current zoom
+    const scaleX = view.w / host.clientWidth;
+    const scaleY = view.h / host.clientHeight;
+
+    view.x -= vx * scaleX;
+    view.y -= vy * scaleY;
+    
+    clampView();
+    applyViewBox();
+    
+    inertiaRaf = requestAnimationFrame(applyInertia);
+  }
+
   svg.addEventListener('mousedown',(e)=>{
     if(e.button!==0) return;
+    stopInertia(); // Stop any existing movement
     dragging=true;
     start={x:e.clientX,y:e.clientY};
     startView={...view};
+    lastMoveTime = Date.now();
+    vx = 0; vy = 0;
   });
 
   window.addEventListener('mousemove',(e)=>{
     if(!dragging) return;
+    const now = Date.now();
+    const dt = now - lastMoveTime;
+    lastMoveTime = now;
+
     const dxPx=e.clientX-start.x;
     const dyPx=e.clientY-start.y;
-    const scaleX=startView.w/host.clientWidth;
-    const scaleY=startView.h/host.clientHeight;
-    view.x=startView.x - dxPx*scaleX;
-    view.y=startView.y - dyPx*scaleY;
-    clampView();
-    applyViewBox();
+    
+    // Calculate instantaneous velocity (pixels per frame approx)
+    // We just track the delta of this movement relative to previous 'start'??
+    // Wait, 'start' is fixed at mousedown. 'dxPx' grows.
+    // We need delta since last frame for velocity.
+    // Let's track 'previous mouse pos' for velocity calculation.
+    
+    // Actually, simpler: just use movementX/movementY if available, or track prevX/prevY.
+    // Let's use a simpler heuristic: just take the last movement delta.
+    // But 'start' is static. So dxPx is total delta.
+    // We need delta-of-delta.
+    
+    // Better: update 'start' every frame? No, that drifts 'view.x' calculation accumulation.
+    // Keep 'start' static for position accuracy, but track separate prevX/prevY for velocity.
+  });
+  
+  // Re-implement mousemove to support velocity tracking
+  let prevMouse = {x:0, y:0};
+
+  svg.addEventListener('mousedown',(e)=>{
+    if(e.button!==0) return;
+    stopInertia();
+    dragging=true;
+    start={x:e.clientX,y:e.clientY};
+    prevMouse={x:e.clientX, y:e.clientY};
+    startView={...view};
+    vx = 0; vy = 0;
+    lastMoveTime = Date.now();
   });
 
-  window.addEventListener('mouseup',()=>{ dragging=false; });
+  window.addEventListener('mousemove',(e)=>{
+    if(!dragging) return;
+    e.preventDefault();
+    const now = Date.now();
+    const dt = now - lastMoveTime;
+    
+    const currentX = e.clientX;
+    const currentY = e.clientY;
+    
+    // Velocity = movement since last event
+    const dx = currentX - prevMouse.x;
+    const dy = currentY - prevMouse.y;
+    
+    // update view
+    const scaleX = startView.w / host.clientWidth;
+    const scaleY = startView.h / host.clientHeight;
+    
+    // We can't just use dx/dy incrementally because floating point errors accumulate.
+    // We must stick to: view = startView - totalDelta.
+    const totalDx = currentX - start.x;
+    const totalDy = currentY - start.y;
+    view.x = startView.x - totalDx * scaleX;
+    view.y = startView.y - totalDy * scaleY;
+    
+    clampView();
+    applyViewBox();
+
+    // Track velocity for inertia
+    // Smooth it a bit?
+    // If dt is huge, velocity is small?
+    // Let's just store the raw pixel delta as "velocity per event"
+    // But we need to decay it if user stops moving while holding.
+    if (dt > 0) {
+      // Simple moving average or just last delta?
+      // Last delta is fine for simple throw.
+      vx = dx;
+      vy = dy;
+      lastMoveTime = now;
+    }
+    
+    prevMouse = {x: currentX, y: currentY};
+  });
+
+  window.addEventListener('mouseup',()=>{ 
+    dragging=false; 
+    // If last move was too long ago (>50ms), drop velocity (stopped holding)
+    if (Date.now() - lastMoveTime > 50) {
+      vx = 0; vy = 0;
+    }
+    // Start inertia
+    if (Math.abs(vx) > 1 || Math.abs(vy) > 1) {
+      applyInertia();
+    }
+  });
+
 
   // Touch support (Pan + Pinch)
   let touchStartDist = 0;
@@ -1032,11 +1152,16 @@ function bindGraphInteractions(){
 
   host.addEventListener('touchstart', (e) => {
     if (e.touches.length === 1) {
+      stopInertia();
       dragging = true;
       isDrag = false;
       start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       startView = { ...view };
+      lastMoveTime = Date.now();
+      vx = 0; vy = 0;
     } else if (e.touches.length === 2) {
+      stopInertia();
       dragging = false;
       isDrag = false;
       const t1 = e.touches[0];
@@ -1052,10 +1177,13 @@ function bindGraphInteractions(){
 
   host.addEventListener('touchmove', (e) => {
     if (e.cancelable) e.preventDefault(); // Prevent native scroll
+    const now = Date.now();
     
     if (e.touches.length === 1 && dragging) {
-      const dxPx = e.touches[0].clientX - start.x;
-      const dyPx = e.touches[0].clientY - start.y;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const dxPx = currentX - start.x;
+      const dyPx = currentY - start.y;
       
       if(Math.abs(dxPx) > 5 || Math.abs(dyPx) > 5) isDrag = true;
 
@@ -1065,6 +1193,19 @@ function bindGraphInteractions(){
       view.y = startView.y - dyPx * scaleY;
       clampView();
       applyViewBox();
+      
+      // Velocity tracking for inertia
+      const dt = now - lastMoveTime;
+      const dx = currentX - prevMouse.x;
+      const dy = currentY - prevMouse.y;
+      
+      if(dt > 0) {
+        vx = dx; 
+        vy = dy;
+        lastMoveTime = now;
+      }
+      prevMouse = {x: currentX, y: currentY};
+
     } else if (e.touches.length === 2 && touchStartDist > 0) {
       const t1 = e.touches[0];
       const t2 = e.touches[1];
@@ -1101,6 +1242,15 @@ function bindGraphInteractions(){
   host.addEventListener('touchend', (e) => {
     dragging = false;
     touchStartDist = 0;
+
+    // Start inertia if velocity is significant and recent
+    if (isDrag && Date.now() - lastMoveTime < 50) {
+      if (Math.abs(vx) > 1 || Math.abs(vy) > 1) {
+        applyInertia();
+      }
+    } else {
+      vx=0; vy=0;
+    }
 
     // Custom double-tap detection for touch devices
     if (!isDrag && e.changedTouches.length > 0) {
