@@ -304,7 +304,7 @@ function buildGraphModel(){
   // compress base geometry so full tree stays readable on one screen more often
   const targetW=1500, targetH=920;
   const gx = maxCols > 9 ? 10 : 14;
-  const gy = depth > 7 ? 50 : 60;
+  const gy = depth > 7 ? 90 : 100;
 
   const nodeW = Math.max(104, Math.min(170,
     Math.floor((targetW - 2*margin - Math.max(0,maxCols-1)*gx) / maxCols)
@@ -450,34 +450,50 @@ function drawGraph(){
 
   const INTO = 6;
 
-  // === LANE ALLOCATION: spread horizontal bars so no two families overlap ===
-  // Group families by the generation gap they occupy (parentBottomEdge → childTopEdge)
-  const famGaps = []; // {fi, parentBottomEdge, childTopEdge, gapKey}
-  FAMS.forEach((f, fi)=>{
-    const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
-    const ch=(f.children||[]).filter(id=>xy[id]);
-    if(!ps.length || !ch.length) return;
-    const pbe = Math.max(...ps.map(id=>xy[id].y+nodeH));
-    const cte = Math.min(...ch.map(id=>xy[id].y));
-    const gapKey = `${Math.round(pbe)}_${Math.round(cte)}`;
-    famGaps.push({fi, pbe, cte, gapKey});
-  });
-  // Count families per gap and assign slot indices
-  const gapSlots = {};
-  famGaps.forEach(fg=>{
-    if(!gapSlots[fg.gapKey]) gapSlots[fg.gapKey] = [];
-    fg.slotIdx = gapSlots[fg.gapKey].length;
-    gapSlots[fg.gapKey].push(fg.fi);
-  });
-  const famSlotMap = {};
-  famGaps.forEach(fg=>{
-    const total = gapSlots[fg.gapKey].length;
-    famSlotMap[fg.fi] = {idx: fg.slotIdx, total, pbe: fg.pbe, cte: fg.cte};
-  });
+  // === GLOBAL Y-LANE REGISTRY: prevent ANY horizontal bars from sharing the same Y ===
+  const usedYLanes = []; // [{y, x1, x2}] — all reserved horizontal lane segments
+
+  function reserveYLane(y, x1, x2){
+    usedYLanes.push({y, x1: Math.min(x1,x2), x2: Math.max(x1,x2)});
+  }
+  function isYLaneFree(y, x1, x2){
+    const a=Math.min(x1,x2), b=Math.max(x1,x2);
+    return !usedYLanes.some(l => Math.abs(l.y - y) < 5 && l.x1 < b && a < l.x2);
+  }
+  function findFreeYLane(preferY, x1, x2, minY, maxY){
+    if(isYLaneFree(preferY, x1, x2)) return preferY;
+    for(let d=5; d < (maxY-minY)+60; d+=5){
+      const yUp = preferY - d;
+      if(yUp >= minY && isYLaneFree(yUp, x1, x2)) return yUp;
+      const yDown = preferY + d;
+      if(yDown <= maxY && isYLaneFree(yDown, x1, x2)) return yDown;
+    }
+    return preferY;
+  }
+
+  // === GLOBAL X-LANE REGISTRY: prevent vertical lines from sharing the same X in same Y range ===
+  const usedXLanes = []; // [{x, y1, y2}]
+
+  function reserveXLane(x, y1, y2){
+    usedXLanes.push({x, y1: Math.min(y1,y2), y2: Math.max(y1,y2)});
+  }
+  function isXLaneFree(x, y1, y2){
+    const a=Math.min(y1,y2), b=Math.max(y1,y2);
+    return !usedXLanes.some(l => Math.abs(l.x - x) < 3 && l.y1 < b && a < l.y2);
+  }
+  function findFreeXLane(preferX, y1, y2){
+    if(isXLaneFree(preferX, y1, y2)) return preferX;
+    for(let d=5; d < graph.worldW; d+=5){
+      const xl = preferX - d;
+      if(xl > 4 && isXLaneFree(xl, y1, y2)) return xl;
+      const xr = preferX + d;
+      if(xr < graph.worldW-4 && isXLaneFree(xr, y1, y2)) return xr;
+    }
+    return preferX;
+  }
 
   // === ANCHOR OFFSET: when a person appears in multiple families, offset attachment points ===
-  // Track how many times each person is used as parent-anchor or child-anchor
-  const anchorUsage = {}; // personId → {asParent: [fi,...], asChild: [fi,...]}
+  const anchorUsage = {};
   FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
@@ -492,12 +508,9 @@ function drawGraph(){
     });
   });
 
-  // For each person+role+family, compute X offset from center
   function getAnchorXOffset(personId, role, fi){
     const u = anchorUsage[personId];
     if(!u) return 0;
-    const list = role==='parent' ? u.asParent : u.asChild;
-    // Also count cross-role: if same node has both parent and child connections
     const allFams = [...new Set([...u.asParent, ...u.asChild])];
     if(allFams.length <= 1) return 0;
     const idx = allFams.indexOf(fi);
@@ -528,45 +541,49 @@ function drawGraph(){
     const parentBottomEdge = Math.max(...ps.map(id=>xy[id].y+nodeH));
     const childTopEdge = Math.min(...ch.map(id=>xy[id].y));
 
-    // Spread yMid and yChildBar across the gap so families don't overlap
-    const slot = famSlotMap[fi];
-    const gapH = childTopEdge - parentBottomEdge;
-    const midZone = parentBottomEdge + 6; // start of available zone
-    const childZone = childTopEdge - 6;   // end of available zone
-    const availH = childZone - midZone;
-    let yMid, yChildBar;
-    if(slot && slot.total > 1){
-      // Divide available space: top half for yMid slots, bottom half for yChildBar slots
-      const halfH = availH / 2;
-      const step = Math.max(4, Math.min(8, halfH / slot.total));
-      yMid = midZone + slot.idx * step;
-      yChildBar = childZone - slot.idx * step;
-    } else {
-      yMid = parentBottomEdge + 14;
-      yChildBar = childTopEdge - 14;
-    }
-
     const hubX = (Math.min(...parentAnchors.map(a=>a.x)) + Math.max(...parentAnchors.map(a=>a.x))) / 2;
 
-    // Detect multi-level gap
-    const multiLevel = (childTopEdge - parentBottomEdge) > (nodeH + 40);
+    // Estimate full X extents that bars will span (parents + hub + children)
+    const allBarX = [...parentAnchors.map(a=>a.x), ...childAnchors.map(a=>a.x), hubX];
+    const fullBarLeft = Math.min(...allBarX) - 10;
+    const fullBarRight = Math.max(...allBarX) + 10;
 
-    // Also offset channelX per family to avoid vertical line overlap
-    const channelOffset = slot ? (slot.idx - (slot.total-1)/2) * 5 : 0;
+    // Handle split-level families (where parents and children overlap in Y)
+    // Use the actual vertical space available between parent anchors and child anchors
+    const parentAnchorBottom = Math.max(...parentAnchors.map(a=>a.y));
+    const childAnchorTop = Math.min(...childAnchors.map(a=>a.y));
+    const effectiveGapTop = Math.min(parentAnchorBottom, childAnchorTop);
+    const effectiveGapBottom = Math.max(parentAnchorBottom, childAnchorTop);
+    const gapMidpoint = (effectiveGapTop + effectiveGapBottom) / 2;
+    
+    // Find free Y lanes using the FULL bar extent so no cross-family overlap
+    const preferYMid = effectiveGapTop + Math.min(14, (effectiveGapBottom - effectiveGapTop) * 0.3);
+    const preferYChild = effectiveGapBottom - Math.min(14, (effectiveGapBottom - effectiveGapTop) * 0.3);
+    
+    const yMid = findFreeYLane(preferYMid, fullBarLeft, fullBarRight, effectiveGapTop, effectiveGapBottom);
+    const yChildBar = findFreeYLane(preferYChild, fullBarLeft, fullBarRight, effectiveGapTop, effectiveGapBottom);
+
+    // Detect multi-level gap: if there are intermediate levels with nodes between parents and children
+    const multiLevel = (effectiveGapBottom - effectiveGapTop) > (nodeH + 40);
 
     // === PARENT SIDE ===
     parentAnchors.forEach(a=>{
+      const ax = findFreeXLane(a.x, a.y, yMid);
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-      line.setAttribute('x1',a.x); line.setAttribute('y1',a.y);
-      line.setAttribute('x2',a.x); line.setAttribute('y2',yMid);
+      line.setAttribute('x1',ax); line.setAttribute('y1',a.y);
+      line.setAttribute('x2',ax); line.setAttribute('y2',yMid);
       famG.appendChild(line);
+      reserveXLane(ax, a.y, yMid);
+      a._ax = ax; // store adjusted X for bar
     });
     if(parentAnchors.length>1){
       const h=document.createElementNS('http://www.w3.org/2000/svg','line');
-      h.setAttribute('x1', Math.min(...parentAnchors.map(a=>a.x)));
-      h.setAttribute('x2', Math.max(...parentAnchors.map(a=>a.x)));
+      const pxs = parentAnchors.map(a=>a._ax||a.x);
+      h.setAttribute('x1', Math.min(...pxs));
+      h.setAttribute('x2', Math.max(...pxs));
       h.setAttribute('y1', yMid); h.setAttribute('y2', yMid);
       famG.appendChild(h);
+      reserveYLane(yMid, fullBarLeft, fullBarRight);
     }
 
     // Marriage dot
@@ -576,35 +593,35 @@ function drawGraph(){
     famG.appendChild(dot);
 
     // === HUB → CHILDREN with obstacle avoidance ===
+    let hubEndX = hubX;
     if(multiLevel){
-      const channelX = findClearChannel(yMid, yChildBar, hubX + channelOffset, famMembers);
-      // hub → horizontal to channel → vertical through clear space → horizontal to childBar center → childBar
-      const childCenterX = (Math.min(...childAnchors.map(a=>a.x)) + Math.max(...childAnchors.map(a=>a.x))) / 2;
+      const channelX = findClearChannel(yMid, yChildBar, hubX, famMembers);
+      const freeChX = findFreeXLane(channelX, yMid, yChildBar);
+      hubEndX = freeChX;
 
       const path=document.createElementNS('http://www.w3.org/2000/svg','polyline');
       const pts = [
         `${hubX},${yMid}`,
-        `${channelX},${yMid}`,
-        `${channelX},${yChildBar}`,
+        `${freeChX},${yMid}`,
+        `${freeChX},${yChildBar}`,
       ];
       path.setAttribute('points', pts.join(' '));
       famG.appendChild(path);
+      reserveXLane(freeChX, yMid, yChildBar);
     } else {
       // Direct: hub → childBar
+      const freeHubX = findFreeXLane(hubX, yMid, yChildBar);
+      hubEndX = freeHubX;
       const vDown=document.createElementNS('http://www.w3.org/2000/svg','line');
-      vDown.setAttribute('x1',hubX); vDown.setAttribute('y1',yMid);
-      vDown.setAttribute('x2',hubX); vDown.setAttribute('y2',yChildBar);
+      vDown.setAttribute('x1',freeHubX); vDown.setAttribute('y1',yMid);
+      vDown.setAttribute('x2',freeHubX); vDown.setAttribute('y2',yChildBar);
       famG.appendChild(vDown);
+      reserveXLane(freeHubX, yMid, yChildBar);
     }
 
     // Horizontal bar across children + connect to routing
     const allX = childAnchors.map(a=>a.x);
-    if(multiLevel){
-      const channelX = findClearChannel(yMid, yChildBar, hubX + channelOffset, famMembers);
-      allX.push(channelX);
-    } else {
-      allX.push(hubX);
-    }
+    allX.push(hubEndX);
     const barLeft = Math.min(...allX);
     const barRight = Math.max(...allX);
     if(barLeft !== barRight){
@@ -612,14 +629,17 @@ function drawGraph(){
       hBar.setAttribute('x1', barLeft); hBar.setAttribute('x2', barRight);
       hBar.setAttribute('y1', yChildBar); hBar.setAttribute('y2', yChildBar);
       famG.appendChild(hBar);
+      reserveYLane(yChildBar, fullBarLeft, fullBarRight);
     }
 
     // Each child: vertical from bar into node
     childAnchors.forEach(a=>{
+      const ax = findFreeXLane(a.x, yChildBar, a.y);
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-      line.setAttribute('x1',a.x); line.setAttribute('y1',yChildBar);
-      line.setAttribute('x2',a.x); line.setAttribute('y2',a.y);
+      line.setAttribute('x1',ax); line.setAttribute('y1',yChildBar);
+      line.setAttribute('x2',ax); line.setAttribute('y2',a.y);
       famG.appendChild(line);
+      reserveXLane(ax, yChildBar, a.y);
     });
 
     svg.appendChild(famG);
@@ -718,36 +738,56 @@ function bindGraphInteractions(){
 
   window.addEventListener('mouseup',()=>{ dragging=false; });
 
-  // Apple trackpad: default two-finger scroll pans the canvas.
-  // Zoom only with ctrl/cmd + wheel (or +/- buttons or pinch).
-  let lastWheelTime=0, lastDeltaX=0, lastDeltaY=0;
-  svg.addEventListener('wheel',(e)=>{
+  // Apple trackpad: two-finger scroll should PAN reliably.
+  // Zoom only when browser explicitly marks gesture as zoom (Ctrl/Cmd modifiers),
+  // plus Safari's gesture events fallback for pinch.
+  function normalizeWheelDelta(e){
+    let dx=e.deltaX, dy=e.deltaY;
+    if(e.deltaMode===1){ // lines
+      dx*=16; dy*=16;
+    } else if(e.deltaMode===2){ // pages
+      dx*=host.clientWidth;
+      dy*=host.clientHeight;
+    }
+    return {dx,dy};
+  }
+
+  host.addEventListener('wheel',(e)=>{
     e.preventDefault();
-    const now=Date.now();
-    
-    // Detect zoom intent:
-    // 1. Explicit Ctrl/Cmd modifier key
-    // 2. macOS pinch: sometimes ctrlKey is set by browser
-    // 3. macOS pinch: simultaneous X+Y movement (pinch pattern)
-    const isZoom = e.ctrlKey || e.metaKey 
-      || (Math.abs(e.deltaX)>15 && Math.abs(e.deltaY)>15 && now-lastWheelTime<100);
-    
-    lastWheelTime=now;
-    lastDeltaX=e.deltaX;
-    lastDeltaY=e.deltaY;
-    
-    if(isZoom){
-      zoom(e.deltaY<0 ? 0.88 : 1.14);
+    const {dx,dy}=normalizeWheelDelta(e);
+
+    // Zoom only on explicit modifier (typical pinch in Chrome/Safari sets ctrlKey).
+    if(e.ctrlKey || e.metaKey){
+      const strength=Math.min(1.6, Math.max(0.6, Math.abs(dy)/140));
+      const factor = dy<0 ? (1 - 0.14*strength) : (1 + 0.14*strength);
+      zoom(Math.max(0.78, Math.min(1.24, factor)));
       return;
     }
-    
-    // Default: pan
-    const scaleX=view.w/host.clientWidth;
-    const scaleY=view.h/host.clientHeight;
-    view.x += e.deltaX * scaleX;
-    view.y += e.deltaY * scaleY;
+
+    // Default: pan with a small boost so it feels responsive on trackpads.
+    const panBoost=1.35;
+    const scaleX=(view.w/host.clientWidth)*panBoost;
+    const scaleY=(view.h/host.clientHeight)*panBoost;
+    view.x += dx * scaleX;
+    view.y += dy * scaleY;
     clampView();
     applyViewBox();
+  }, {passive:false});
+
+  // Safari fallback: pinch may come through gesture events rather than wheel+ctrlKey.
+  let lastGestureScale=1;
+  host.addEventListener('gesturestart',(e)=>{
+    e.preventDefault();
+    lastGestureScale=e.scale||1;
+  }, {passive:false});
+
+  host.addEventListener('gesturechange',(e)=>{
+    e.preventDefault();
+    const cur=e.scale||1;
+    const ratio=cur/lastGestureScale;
+    if(!Number.isFinite(ratio) || Math.abs(ratio-1)<0.01) return;
+    zoom(ratio>1 ? 0.92 : 1.08);
+    lastGestureScale=cur;
   }, {passive:false});
 
   fitBtn.onclick=()=>fitView();
