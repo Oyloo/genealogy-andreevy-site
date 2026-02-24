@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2142';
-const APP_BUILT_AT_ISO='2026-02-24T21:42:00+02:00';
+const APP_VERSION='20260224_2148';
+const APP_BUILT_AT_ISO='2026-02-24T21:48:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -400,12 +400,15 @@ function buildGraphModel(){
   // compress base geometry so full tree stays readable on one screen more often
   const targetW=1500, targetH=920;
   const gx = maxCols > 9 ? 12 : 16;
-  const gy = 90; // Reduced back to compact layout
+  const gy = 90; 
 
-  const nodeW = Math.max(104, Math.min(170,
+  // Reduce nodeW min/max to force narrower (more square) cards.
+  // Old: 104-170. New: 80-120.
+  // Increase nodeH slightly to accommodate wrapped text in narrower card.
+  const nodeW = Math.max(80, Math.min(120,
     Math.floor((targetW - 2*margin - Math.max(0,maxCols-1)*gx) / maxCols)
   ));
-  const nodeH = Math.max(46, Math.min(58,
+  const nodeH = Math.max(54, Math.min(68,
     Math.floor((targetH - 2*margin - Math.max(0,depth)*gy) / (depth+1))
   ));
 
@@ -938,35 +941,39 @@ function drawGraph(){
     rect.setAttribute('width',nodeW); rect.setAttribute('height',nodeH);
     rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
 
-    const [rawLine1, rawLine2] = splitName2(p.name||p.name_raw,p.id, Math.max(12, Math.floor((nodeW-16)/7.6)));
+    const [rawLine1, rawLine2] = splitName2(p.name||p.name_raw,p.id, Math.max(9, Math.floor((nodeW-8)/7)));
     const yy=years(p);
 
     // Keep years from colliding with the second name line on compact nodes.
-    const nameY1 = pos.y + (nodeH<52 ? 16 : 18);
-    const lineGap = nodeW<120 ? 12 : 13;
+    const nameY1 = pos.y + 16;
+    const lineGap = 12;
     const nameY2 = nameY1 + lineGap;
-    const yearsY = pos.y + nodeH - 7;
-    const showLine2 = !!rawLine2 && ((yearsY - nameY2) >= 11);
+    const yearsY = pos.y + nodeH - 9;
+    
+    // Always allow 2 lines of name if needed, because width is constrained.
+    const showLine2 = !!rawLine2;
 
     const line1 = rawLine1;
     const line2 = showLine2 ? rawLine2 : '';
 
     const t1=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1.setAttribute('x',pos.x+8); t1.setAttribute('y',nameY1);
-    t1.setAttribute('font-size', nodeW<120 ? '10.0' : '11.3');
+    t1.setAttribute('x',pos.x+nodeW/2); t1.setAttribute('y',nameY1);
+    t1.setAttribute('font-size', '10.5');
+    t1.setAttribute('text-anchor','middle');
     t1.setAttribute('fill','#121a27');
     t1.textContent=line1;
 
     const t1b=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t1b.setAttribute('x',pos.x+8); t1b.setAttribute('y',nameY2);
-    t1b.setAttribute('font-size', nodeW<120 ? '10.0' : '11.3');
+    t1b.setAttribute('x',pos.x+nodeW/2); t1b.setAttribute('y',nameY2);
+    t1b.setAttribute('font-size', '10.5');
+    t1b.setAttribute('text-anchor','middle');
     t1b.setAttribute('fill','#121a27');
     t1b.textContent=line2;
 
     const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t2.setAttribute('x',pos.x+nodeW-8); t2.setAttribute('y',yearsY);
-    t2.setAttribute('text-anchor','end');
-    t2.setAttribute('font-size', nodeW<120 ? '9.2' : '10.2');
+    t2.setAttribute('x',pos.x+nodeW/2); t2.setAttribute('y',yearsY);
+    t2.setAttribute('text-anchor','middle');
+    t2.setAttribute('font-size', '9.5');
     t2.setAttribute('fill','#314764');
     t2.textContent=yy || '';
 
