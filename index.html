@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2310';
-const APP_BUILT_AT_ISO='2026-02-24T23:10:00+02:00';
+const APP_VERSION='20260224_2320';
+const APP_BUILT_AT_ISO='2026-02-24T23:20:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -685,12 +685,52 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
+  // === COLOR ASSIGNMENT: Avoid same colors for connected families ===
+  const famColors = new Array(FAMS.length).fill(null);
+  const famAdjacency = new Map(); // fi -> Set(neighbor_fi)
+
+  // Build adjacency from anchorUsage (people shared between families)
+  Object.values(anchorUsage).forEach(u => {
+    const all = [...new Set([...u.asParent, ...u.asChild])];
+    for(let i=0; i<all.length; i++){
+      for(let j=i+1; j<all.length; j++){
+        const f1 = all[i], f2 = all[j];
+        if(!famAdjacency.has(f1)) famAdjacency.set(f1, new Set());
+        if(!famAdjacency.has(f2)) famAdjacency.set(f2, new Set());
+        famAdjacency.get(f1).add(f2);
+        famAdjacency.get(f2).add(f1);
+      }
+    }
+  });
+
+  // Greedy coloring
+  for(let i=0; i<FAMS.length; i++){
+    const neighbors = famAdjacency.get(i) || new Set();
+    const usedColors = new Set();
+    neighbors.forEach(n => {
+      // Check colors of neighbors that are already assigned
+      if(famColors[n] !== null) usedColors.add(famColors[n]);
+    });
+    
+    // Pick first unused color from palette
+    let cIdx = 0;
+    // Try to pick a color not used by neighbors.
+    // Use modulo to cycle through palette if we run out (though unlikely with 17 colors)
+    while(cIdx < FAMILY_COLORS.length && usedColors.has(FAMILY_COLORS[cIdx])){
+      cIdx++;
+    }
+    // If all palette colors are used by neighbors (rare), fall back to random or modulo
+    if(cIdx >= FAMILY_COLORS.length) cIdx = i % FAMILY_COLORS.length;
+    
+    famColors[i] = FAMILY_COLORS[cIdx];
+  }
+
   FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
     const ch=(f.children||[]).filter(id=>xy[id]);
     if(!ps.length || !ch.length) return;
 
-    const color = FAMILY_COLORS[fi % FAMILY_COLORS.length];
+    const color = famColors[fi];
     const famMembers = new Set([...ps, ...ch]);
 
     const famG=document.createElementNS('http://www.w3.org/2000/svg','g');
