@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2245';
-const APP_BUILT_AT_ISO='2026-02-24T22:45:00+02:00';
+const APP_VERSION='20260224_2255';
+const APP_BUILT_AT_ISO='2026-02-24T22:55:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -954,6 +954,7 @@ function drawGraph(){
     rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
 
     const [l1, l2, l3] = splitName3(p.name||p.name_raw,p.id, Math.max(8, Math.floor((nodeW-6)/7)));
+    const yy=years(p);
     
     // Layout: 3 lines of text + years.
     // Base Y is pos.y + 12 (padding top). Line height ~10.
