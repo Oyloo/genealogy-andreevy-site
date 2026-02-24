@@ -6,8 +6,8 @@
 <title>Генеалогия — custom</title>
 <style>
 :root{
-  --bg:#0b1220; --panel:#111a2b; --line:#24324d; --txt:#e8eef9; --muted:#9fb0cc;
-  --graph-bg:#0a1324; --edge:#87a4d4;
+  --bg:#000; --panel:#111a2b; --line:#24324d; --txt:#e8eef9; --muted:#9fb0cc;
+  --graph-bg:#0a0a0a; --edge:#87a4d4;
   --node:#b8a8ff; --node-stroke:#8f74ff;
   --male:#9cc8ff; --male-stroke:#3b82f6;
   --female:#f8b4d8; --female-stroke:#db2777;
@@ -15,9 +15,9 @@
   --node-mention:#fdba74; --node-mention-stroke:#ea580c;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0f1728);color:var(--txt);touch-action:manipulation}
-header{padding:10px 16px;border-bottom:1px solid var(--line);background:#0b1220eb;backdrop-filter:blur(6px);position:sticky;top:0;z-index:20}
+html,body{height:100%;margin:0}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#000;color:var(--txt);touch-action:manipulation}
+header{padding:10px 16px;border-bottom:1px solid var(--line);background:#000;backdrop-filter:blur(6px);position:sticky;top:0;z-index:20}
 .headerRow{display:flex;align-items:center;gap:12px;min-width:0;white-space:nowrap;overflow:hidden}
 h1{margin:0;font-size:16px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .titleShort{display:none}
@@ -60,7 +60,7 @@ input{width:100%;padding:9px 10px;border-radius:9px;border:1px solid #294063;bac
 .ctrls{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .btn{font-size:12px;padding:4px 8px;border-radius:8px;border:1px solid #3b4c6a;background:#101a2d;color:#d9e7ff;cursor:pointer}
 .btn:hover{border-color:#67b0ff;color:#fff}
-.hint{position:absolute;left:8px;bottom:8px;background:#0b1220cf;color:#d9e7ff;font-size:11px;padding:4px 7px;border-radius:6px;pointer-events:none}
+.hint{position:absolute;left:8px;bottom:8px;background:#000000d0;color:#d9e7ff;font-size:11px;padding:4px 7px;border-radius:6px;pointer-events:none}
 
 svg text{font-family:Arial,sans-serif}
 .node rect{rx:10;ry:10;stroke-width:1.4;cursor:pointer}
