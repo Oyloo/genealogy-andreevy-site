@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2025';
-const APP_BUILT_AT_ISO='2026-02-24T20:25:00+02:00';
+const APP_VERSION='20260224_2035';
+const APP_BUILT_AT_ISO='2026-02-24T20:35:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -1088,6 +1088,37 @@ function bindGraphInteractions(){
     pendingPanY += dy * scaleY;
     if(!panRaf) panRaf=requestAnimationFrame(flushPan);
   }, {passive:false});
+
+  host.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+    const rect = host.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+
+    // Convert screen pixel to SVG unit
+    const scaleX = view.w / host.clientWidth;
+    const scaleY = view.h / host.clientHeight;
+    const svgX = view.x + clickX * scaleX;
+    const svgY = view.y + clickY * scaleY;
+
+    // Zoom logic: if we are zoomed out (view.w > 2000), zoom in to 1000.
+    // If we are already close, zoom in further or reset?
+    // Let's just do a standard "zoom in at point" (magnify 2x).
+    const factor = 0.5;
+
+    // New view dimensions
+    const newW = view.w * factor;
+    const newH = view.h * factor;
+
+    // Center view on the clicked point
+    view.x = svgX - newW / 2;
+    view.y = svgY - newH / 2;
+    view.w = newW;
+    view.h = newH;
+
+    clampView();
+    applyViewBox();
+  });
 
   fitBtn.onclick=()=>fitView();
   zoomInBtn.onclick=()=>zoom(0.88);
