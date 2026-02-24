@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2355';
-const APP_BUILT_AT_ISO='2026-02-24T23:55:00+02:00';
+const APP_VERSION='20260225_0005';
+const APP_BUILT_AT_ISO='2026-02-25T00:05:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -685,8 +685,28 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
-  // === COLOR ASSIGNMENT: Simple modulo based on family index ===
-  const famColors = FAMS.map((f, fi) => FAMILY_COLORS[fi % FAMILY_COLORS.length]);
+  // === COLOR ASSIGNMENT: Spatial stripe coloring ===
+  // Calculate center X for each family (from their parents)
+  const famBounds = FAMS.map((f, fi) => {
+    const ps = [...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
+    if(!ps.length) return {fi, x: 0};
+    const xs = ps.map(id => xy[id].x);
+    const centerX = (Math.min(...xs) + Math.max(...xs)) / 2;
+    return {fi, x: centerX};
+  });
+  
+  // Sort by X position
+  famBounds.sort((a, b) => a.x - b.x);
+  
+  // Assign colors using larger steps to ensure neighbors are visually distinct
+  // Use ~2-3 families apart to pick colors
+  const famColors = new Array(FAMS.length).fill(null);
+  famBounds.forEach((item, idx) => {
+    // Use step-based indexing into palette for visual separation
+    const step = Math.ceil(FAMILY_COLORS.length / 4); // 4-5 colors apart
+    const colorIdx = (idx * step) % FAMILY_COLORS.length;
+    famColors[item.fi] = FAMILY_COLORS[colorIdx];
+  });
 
   FAMS.forEach((f, fi)=>{
     const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
