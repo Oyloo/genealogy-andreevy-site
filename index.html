@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260225_0025';
-const APP_BUILT_AT_ISO='2026-02-25T00:25:00+02:00';
+const APP_VERSION='20260225_0030';
+const APP_BUILT_AT_ISO='2026-02-25T00:30:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -513,25 +513,27 @@ function drawGraph(){
   edgeLayer.setAttribute('data-layer','edges');
   edgeLayer.setAttribute('pointer-events','none');
 
-  // === FAMILY COLOR PALETTE (alternating cool/warm to reduce conflicts) ===
+  // === FAMILY COLOR PALETTE ===
+  // Excluded: colors too similar to node colors (female:#f8b4d8 pink, male:#9cc8ff blue)
+  // This ensures family lines never blend with node backgrounds
   const FAMILY_COLORS = [
-    '#38bdf8', // ярко-голубой (cool)
-    '#f7a072', // оранжевый (warm)
-    '#5eead4', // бирюза (cool)
-    '#fb7185', // красный (warm)
-    '#67e8f9', // циан (cool)
-    '#a78bfa', // пурпурный (cool-warm)
-    '#c084fc', // светлый пурпур (cool-warm)
-    '#4ade80', // зелёный (cool)
-    '#a3e635', // лайм (cool-warm)
-    '#e879f9', // розово-фиолетовый (cool-warm)
-    '#fb923c', // оранжево-жёлтый (warm)
-    '#86efac', // светлый зелёный (cool)
-    '#f87171', // красный-2 (warm)
-    '#6ec6ff', // светлый голубой (cool)
-    '#fcd34d', // золотой (warm) — редко
-    '#f472b6', // маджента (cool-warm) — редко
-    '#fbbf24', // жёлтый (warm) — редко
+    '#15803d', // тёмно-зелёный (избегаем розового, голубого)
+    '#dc2626', // ярко-красный (контрастирует с обоими)
+    '#7c3aed', // фиолетовый (холодный, но не голубой)
+    '#db2777', // глубокий пурпурный-розовый (но более тёмный, чем узлы)
+    '#0369a1', // глубокий голубой (тёмнее, чем узлы)
+    '#ea580c', // оранжевый
+    '#059669', // зелёный (средний)
+    '#ca8a04', // жёлто-коричневый
+    '#9333ea', // светлый пурпурный
+    '#0ea5e9', // небесный голубой (достаточно отличается)
+    '#d97706', // оранжево-коричневый
+    '#6b21a8', // очень тёмный пурпурный
+    '#065f46', // тёмная бирюза
+    '#7f1d1d', // тёмно-красный
+    '#042f2e', // тёмно-бирюзовый
+    '#4c1d95', // плотный пурпурный
+    '#831843', // тёмный пурпурный-розовый
   ];
 
   // Build occupancy grid: for each level, list of {left,right} rectangles
