@@ -17,8 +17,9 @@
   --node-mention:#fdba74; --node-mention-stroke:#ea580c;
 }
 *{box-sizing:border-box}
-html{height:100%;margin:0;background:#000}
-body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#000;color:var(--txt);touch-action:manipulation}
+html,body{margin:0;padding:0;background:#000;width:100%}
+html{height:100dvh;height:100vh}
+body{height:100dvh;height:100vh;font-family:Inter,Segoe UI,Arial,sans-serif;background:#000;color:var(--txt);touch-action:manipulation;display:flex;flex-direction:column}
 header{padding:10px 16px;border-bottom:1px solid var(--line);background:#000;backdrop-filter:blur(6px);position:sticky;top:0;z-index:20}
 .headerRow{display:flex;align-items:center;gap:12px;min-width:0;white-space:nowrap;overflow:hidden}
 h1{margin:0;font-size:16px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -39,7 +40,7 @@ h1{margin:0;font-size:16px;flex:0 1 auto;min-width:0;overflow:hidden;text-overfl
 @media(max-width:560px){
   h1{max-width:40vw}
 }
-.layout{display:grid;grid-template-columns:280px 1fr 370px;gap:10px;padding:10px;height:calc(100vh - 68px)}
+.layout{display:grid;grid-template-columns:280px 1fr 370px;gap:10px;padding:10px;flex:1;min-height:0;width:100%;overflow:hidden}
 .panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden;min-height:0;display:flex;flex-direction:column}
 .panel h2{margin:0;padding:9px 12px;border-bottom:1px solid var(--line);font-size:13px;color:#c6d6f2;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .content{padding:10px;overflow:auto;min-height:0;flex:1}
