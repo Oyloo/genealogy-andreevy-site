@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260225_0030';
-const APP_BUILT_AT_ISO='2026-02-25T00:30:00+02:00';
+const APP_VERSION='20260225_0035';
+const APP_BUILT_AT_ISO='2026-02-25T00:35:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -770,7 +770,7 @@ function drawGraph(){
     const famG=document.createElementNS('http://www.w3.org/2000/svg','g');
     famG.setAttribute('stroke', color);
     famG.setAttribute('fill','none');
-    famG.setAttribute('stroke-width','1.8');
+    famG.setAttribute('stroke-width','2.5'); // увеличено с 1.8 для лучшей видимости
     famG.setAttribute('stroke-linecap','round');
     famG.setAttribute('stroke-linejoin','round');
     famG.setAttribute('shape-rendering','geometricPrecision');
