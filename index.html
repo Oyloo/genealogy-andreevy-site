@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_2255';
-const APP_BUILT_AT_ISO='2026-02-24T22:55:00+02:00';
+const APP_VERSION='20260224_2258';
+const APP_BUILT_AT_ISO='2026-02-24T22:58:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -952,6 +952,7 @@ function drawGraph(){
     rect.setAttribute('x',pos.x); rect.setAttribute('y',pos.y);
     rect.setAttribute('width',nodeW); rect.setAttribute('height',nodeH);
     rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
+    g.appendChild(rect); // Background first
 
     const [l1, l2, l3] = splitName3(p.name||p.name_raw,p.id, Math.max(8, Math.floor((nodeW-6)/7)));
     const yy=years(p);
@@ -1000,6 +1001,12 @@ function drawGraph(){
     tY.setAttribute('fill','#314764');
     tY.textContent=yy || '';
     g.appendChild(tY);
+    
+    // Add title (tooltip)
+    const title=document.createElementNS('http://www.w3.org/2000/svg','title');
+    title.textContent=`${(p.name||p.name_raw||p.id).replaceAll('/','').trim()}${yy?(' · '+yy):''}`;
+    g.appendChild(title);
+    
     g.onclick=()=>select(p.id,true);
     nodes.appendChild(g);
   });
