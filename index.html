@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1928';
-const APP_BUILT_AT_ISO='2026-02-24T19:28:00+02:00';
+const APP_VERSION='20260224_1933';
+const APP_BUILT_AT_ISO='2026-02-24T19:33:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -726,6 +726,17 @@ function drawGraph(){
       // so we don't run a full segment through the card body.
       const startY = Math.abs(yMid-a.yTop) <= Math.abs(yMid-a.yBottom) ? a.yTop : a.yBottom;
       const ax = findFreeXLane(a.x, startY, yMid, famMembers);
+
+      // If lane shifted in X, add a small elbow connector on the card edge
+      // to avoid "floating fragments".
+      if(Math.abs(ax - a.x) > 0.2){
+        const jog=document.createElementNS('http://www.w3.org/2000/svg','line');
+        jog.setAttribute('x1',a.x); jog.setAttribute('y1',startY);
+        jog.setAttribute('x2',ax);  jog.setAttribute('y2',startY);
+        famG.appendChild(jog);
+        reserveYLane(startY, a.x, ax);
+      }
+
       const line=document.createElementNS('http://www.w3.org/2000/svg','line');
       line.setAttribute('x1',ax); line.setAttribute('y1',startY);
       line.setAttribute('x2',ax); line.setAttribute('y2',yMid);
@@ -800,6 +811,15 @@ function drawGraph(){
       line.setAttribute('x2',ax); line.setAttribute('y2',endY);
       famG.appendChild(line);
       reserveXLane(ax, yChildBar, endY);
+
+      // Close the elbow to the card edge when X lane is shifted.
+      if(Math.abs(ax - a.x) > 0.2){
+        const jog=document.createElementNS('http://www.w3.org/2000/svg','line');
+        jog.setAttribute('x1',ax); jog.setAttribute('y1',endY);
+        jog.setAttribute('x2',a.x); jog.setAttribute('y2',endY);
+        famG.appendChild(jog);
+        reserveYLane(endY, ax, a.x);
+      }
     });
 
     edgeLayer.appendChild(famG);
