@@ -35,7 +35,7 @@ input{width:100%;padding:9px 10px;border-radius:9px;border:1px solid #294063;bac
 .content::-webkit-scrollbar-thumb{background:#35507a;border-radius:8px}
 .content::-webkit-scrollbar-thumb:hover{background:#4a6ea8}
 
-#graphHost{position:relative;height:100%;background:var(--graph-bg);border-radius:8px;border:1px solid #253b5f;overflow:hidden}
+#graphHost{position:relative;height:100%;background:var(--graph-bg);border-radius:8px;border:1px solid #253b5f;overflow:hidden;overscroll-behavior:none}
 #graphSvg{position:absolute;inset:0;width:100%;height:100%;user-select:none}
 .legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .legend span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#cbd8ef}
@@ -738,9 +738,10 @@ function bindGraphInteractions(){
 
   window.addEventListener('mouseup',()=>{ dragging=false; });
 
-  // Apple trackpad: two-finger scroll should PAN reliably.
-  // Zoom only when browser explicitly marks gesture as zoom (Ctrl/Cmd modifiers),
-  // plus Safari's gesture events fallback for pinch.
+  // Deterministic trackpad behavior:
+  // - 2-finger scroll = PAN
+  // - zoom only on explicit Ctrl+wheel/pinch signal
+  // This avoids random mode switching on noisy gesture streams.
   function normalizeWheelDelta(e){
     let dx=e.deltaX, dy=e.deltaY;
     if(e.deltaMode===1){ // lines
@@ -752,42 +753,55 @@ function bindGraphInteractions(){
     return {dx,dy};
   }
 
+  let wheelMode='pan';
+  let wheelModeUntil=0;
+  let pendingPanX=0, pendingPanY=0, panRaf=0;
+
+  function flushPan(){
+    panRaf=0;
+    if(!pendingPanX && !pendingPanY) return;
+    view.x += pendingPanX;
+    view.y += pendingPanY;
+    pendingPanX=0; pendingPanY=0;
+    clampView();
+    applyViewBox();
+  }
+
   host.addEventListener('wheel',(e)=>{
     e.preventDefault();
-    const {dx,dy}=normalizeWheelDelta(e);
+    e.stopPropagation();
 
-    // Zoom only on explicit modifier (typical pinch in Chrome/Safari sets ctrlKey).
-    if(e.ctrlKey || e.metaKey){
-      const strength=Math.min(1.6, Math.max(0.6, Math.abs(dy)/140));
+    const now=performance.now();
+    const {dx,dy}=normalizeWheelDelta(e);
+    if(Math.abs(dx)<0.01 && Math.abs(dy)<0.01) return;
+
+    const wantsZoom = !!e.ctrlKey; // keep strict: Ctrl/pinch only
+
+    // Lock interaction mode for a short burst to prevent flicker pan<->zoom.
+    if(now > wheelModeUntil){
+      wheelMode = wantsZoom ? 'zoom' : 'pan';
+    } else if(wheelMode==='zoom' && !wantsZoom){
+      // Keep zoom mode until burst ends.
+    } else if(wheelMode==='pan' && wantsZoom){
+      // Only switch to zoom in-burst for clearly zoom-like movement.
+      if(Math.abs(dy) > Math.abs(dx)*1.25) wheelMode='zoom';
+    }
+    wheelModeUntil = now + (wheelMode==='zoom' ? 180 : 120);
+
+    if(wheelMode==='zoom'){
+      const strength=Math.min(1.7, Math.max(0.6, Math.abs(dy)/140));
       const factor = dy<0 ? (1 - 0.14*strength) : (1 + 0.14*strength);
       zoom(Math.max(0.78, Math.min(1.24, factor)));
       return;
     }
 
-    // Default: pan with a small boost so it feels responsive on trackpads.
-    const panBoost=1.35;
+    // Pan path (scheduled on RAF to avoid choppy delayed response).
+    const panBoost=1.45;
     const scaleX=(view.w/host.clientWidth)*panBoost;
     const scaleY=(view.h/host.clientHeight)*panBoost;
-    view.x += dx * scaleX;
-    view.y += dy * scaleY;
-    clampView();
-    applyViewBox();
-  }, {passive:false});
-
-  // Safari fallback: pinch may come through gesture events rather than wheel+ctrlKey.
-  let lastGestureScale=1;
-  host.addEventListener('gesturestart',(e)=>{
-    e.preventDefault();
-    lastGestureScale=e.scale||1;
-  }, {passive:false});
-
-  host.addEventListener('gesturechange',(e)=>{
-    e.preventDefault();
-    const cur=e.scale||1;
-    const ratio=cur/lastGestureScale;
-    if(!Number.isFinite(ratio) || Math.abs(ratio-1)<0.01) return;
-    zoom(ratio>1 ? 0.92 : 1.08);
-    lastGestureScale=cur;
+    pendingPanX += dx * scaleX;
+    pendingPanY += dy * scaleY;
+    if(!panRaf) panRaf=requestAnimationFrame(flushPan);
   }, {passive:false});
 
   fitBtn.onclick=()=>fitView();
