@@ -64,6 +64,7 @@ details summary{cursor:pointer;color:#b9cef4;font-size:12px}
 <header>
   <h1>Генеалогия (custom renderer с нуля, без Graphviz)</h1>
   <div class="meta" id="meta">Загрузка...</div>
+  <div class="meta" id="version" style="margin-top:4px;opacity:.88"></div>
 </header>
 
 <div class="layout">
@@ -111,7 +112,12 @@ let DATA, MAP={}, PEOPLE=[], FAMS=[], selected=null;
 let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
+// Manual build marker: updates on each publish commit.
+const APP_VERSION='20260224_1800';
+const APP_BUILT_AT='2026-02-24 18:00 Europe/Riga';
+
 const elMeta=document.getElementById('meta');
+const elVersion=document.getElementById('version');
 const elList=document.getElementById('list');
 const elQ=document.getElementById('q');
 const elDetails=document.getElementById('details');
@@ -125,6 +131,22 @@ const zoomOutBtn=document.getElementById('zoomOutBtn');
 const centerBtn=document.getElementById('centerBtn');
 
 const esc=s=>(s??'').toString().replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function renderVersionInfo(){
+  const cb = new URLSearchParams(location.search).get('cache_bust');
+  elVersion.textContent = `Версия: ${APP_VERSION} · Обновлён: ${APP_BUILT_AT}${cb?` · cache_bust=${cb}`:''}`;
+
+  // Optional server timestamp to see what CDN served right now.
+  fetch(window.location.href, { method:'HEAD', cache:'no-store' })
+    .then(r=>{
+      const lm=r.headers.get('last-modified');
+      if(!lm) return;
+      const d=new Date(lm);
+      const lmText = Number.isNaN(d.getTime()) ? lm : d.toLocaleString('ru-RU', { hour12:false });
+      elVersion.textContent += ` · Сервер: ${lmText}`;
+    })
+    .catch(()=>{});
+}
 
 function renderList(arr){
   elCount.textContent = `${arr.length}/${PEOPLE.length}`;
@@ -827,6 +849,7 @@ async function init(){
   MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
 
   elMeta.textContent=`Людей: ${DATA.meta.people_count} · Семей: ${DATA.meta.families_count} · ${DATA.meta.generator}`;
+  renderVersionInfo();
 
   renderList(PEOPLE);
   buildGraphModel();
