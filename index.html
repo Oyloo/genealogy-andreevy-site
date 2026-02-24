@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1955';
-const APP_BUILT_AT_ISO='2026-02-24T19:55:00+02:00';
+const APP_VERSION='20260224_2003';
+const APP_BUILT_AT_ISO='2026-02-24T20:03:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -730,59 +730,38 @@ function drawGraph(){
     // === PARENT SIDE ===
     parentAnchors.forEach(a=>{
       // Exit the card from the side closer to the selected lane.
-      // But actually, we ALWAYS want to exit 'bottom' for parents typically,
-      // unless we are doing some wild routing.
-      // Standard tree: Parents on top, Children below.
-      // So Parent Exit is Bottom. Child Entry is Top.
-      // Let's enforce that for visual sanity unless it's a loop.
+      // But actually, we ALWAYS want to exit 'bottom' for parents typically.
       const startY = a.yBottom; 
       
       // We want to go to yMid.
-      // We found a safe vertical lane 'ax' for the main drop.
-      // But we can't just jog horizontally at 'startY' (the card edge) because
-      // that cuts through neighbor cards.
       // STRATEGY: 
       // 1. Go down vertically from a.x for a "Clearance" distance.
       // 2. Jog horizontally to ax.
       // 3. Continue vertically at ax to yMid.
       
       let clearance = 10;
-      if(yMid < startY) clearance = -10; // Should not happen in standard tree
+      if(yMid < startY) clearance = -10; 
+      if(Math.abs(yMid - startY) < Math.abs(clearance)) clearance = yMid - startY;
       
-      // Don't overshoot yMid
-      if(Math.abs(yMid - startY) < Math.abs(clearance)){
-         clearance = yMid - startY;
-      }
+      const initialJogY = startY + clearance;
       
-      const jogY = startY + clearance;
-      
-      // Find safe vertical for the main drop from jogY to yMid
-      const ax = findFreeXLane(a.x, jogY, yMid, famMembers);
+      // 2. Find clean horizontal lane for the jog
+      // Search range: slightly above/below initial guess
+      const safeJogY = findFreeYLane(initialJogY, a.x, ax, startY-30, startY+30, famMembers);
+
+      // Find safe vertical for the main drop from safeJogY to yMid
+      const ax = findFreeXLane(a.x, safeJogY, yMid, famMembers);
 
       // 1. Vertical stub out of card
-      if(Math.abs(clearance) > 0.1){
+      if(Math.abs(safeJogY - startY) > 0.1){
         const stub = document.createElementNS('http://www.w3.org/2000/svg','line');
         stub.setAttribute('x1', a.x); stub.setAttribute('y1', startY);
-        stub.setAttribute('x2', a.x); stub.setAttribute('y2', jogY);
+        stub.setAttribute('x2', a.x); stub.setAttribute('y2', safeJogY);
         famG.appendChild(stub);
-        reserveXLane(a.x, startY, jogY);
+        reserveXLane(a.x, startY, safeJogY);
       }
 
-      // 2. Horizontal jog (if needed)
-      // Find a clean Y-lane for the jog to avoid stacking with neighbors
-      const safeJogY = findFreeYLane(jogY, a.x, ax, startY-20, startY+40, famMembers);
-      
-      // If safeJogY differs from jogY, extend the stub to reach it
-      if(Math.abs(safeJogY - jogY) > 0.1){
-         // update stub endpoint
-         const prevStub = famG.lastElementChild;
-         if(prevStub && prevStub.tagName === 'line' && Math.abs(prevStub.getAttribute('x1')-a.x)<0.1){
-             prevStub.setAttribute('y2', safeJogY);
-             // reserve extended vertical
-             reserveXLane(a.x, jogY, safeJogY);
-         }
-      }
-
+      // 2. Horizontal jog
       if(Math.abs(ax - a.x) > 0.2){
         const jog=document.createElementNS('http://www.w3.org/2000/svg','line');
         jog.setAttribute('x1',a.x); jog.setAttribute('y1',safeJogY);
@@ -862,21 +841,16 @@ function drawGraph(){
 
     // Each child: vertical from bar into node.
     childAnchors.forEach(a=>{
-      const endY = a.yTop; // Standard entry from top
+      const endY = a.yTop; 
       
-      let clearance = -10; // Up from child
-      if(yChildBar > endY) clearance = 10; // Should not happen
+      let clearance = -10; 
+      if(yChildBar > endY) clearance = 10;
+      if(Math.abs(yChildBar - endY) < Math.abs(clearance)) clearance = yChildBar - endY;
       
-      if(Math.abs(yChildBar - endY) < Math.abs(clearance)){
-         clearance = yChildBar - endY;
-      }
+      const initialJogY = endY + clearance;
       
-      const jogY = endY + clearance;
-      
-      // Find a clean Y-lane for the jog (searching downwards from child usually)
-      // Actually we search UP because child is below. endY is top of card. clearance is negative.
-      // So jogY is above endY.
-      const safeJogY = findFreeYLane(jogY, a.x, ax, jogY-20, endY+10, famMembers);
+      // Find a clean Y-lane for the jog
+      const safeJogY = findFreeYLane(initialJogY, a.x, ax, endY-30, endY+30, famMembers);
 
       // Find safe lane for main drop from yChildBar to safeJogY
       const ax = findFreeXLane(a.x, yChildBar, safeJogY, famMembers);
