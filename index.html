@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1940';
-const APP_BUILT_AT_ISO='2026-02-24T19:40:00+02:00';
+const APP_VERSION='20260224_1955';
+const APP_BUILT_AT_ISO='2026-02-24T19:55:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -592,10 +592,13 @@ function drawGraph(){
 
   function isYLaneFree(y, x1, x2, famMembers){
     const a=Math.min(x1,x2), b=Math.max(x1,x2);
-    const lineFree = !usedYLanes.some(l => Math.abs(l.y - y) < 5 && l.x1 < b && a < l.x2);
+    // Strict avoidance of parallel overlap (other horizontal lines on same Y)
+    const lineFree = !usedYLanes.some(l => Math.abs(l.y - y) < 6 && l.x1 < b && a < l.x2);
     if(!lineFree) return false;
-    if(crossesVerticalLane(y, a, b)) return false;
-    // Horizontal bars should never cut through any person card.
+    
+    // Allow orthogonal crossings (vertical lines cutting through this horizontal),
+    // because blocking them makes routing impossible in dense graphs.
+    // We only strictly block cutting through CARDS.
     return !horizontalHitsNode(y, a, b, null);
   }
 
@@ -604,10 +607,13 @@ function drawGraph(){
     const hardMin=Math.max(2, baseMin - (nodeH + 22));
     const hardMax=Math.min(graph.worldH-2, baseMax + (nodeH + 22));
 
+    // Try preferred Y first
     const start=Math.max(hardMin, Math.min(hardMax, preferY));
     if(isYLaneFree(start, x1, x2, famMembers)) return start;
 
-    for(let d=5; d < (hardMax-hardMin)+60; d+=5){
+    // Search outwards with wider step to prevent "stripe" clusters
+    const step = 8; 
+    for(let d=step; d < (hardMax-hardMin)+60; d+=step){
       const yUp = start - d;
       if(yUp >= hardMin && isYLaneFree(yUp, x1, x2, famMembers)) return yUp;
       const yDown = start + d;
@@ -618,10 +624,11 @@ function drawGraph(){
 
   function isXLaneFree(x, y1, y2, famMembers){
     const a=Math.min(y1,y2), b=Math.max(y1,y2);
-    const lineFree = !usedXLanes.some(l => Math.abs(l.x - x) < 3 && l.y1 < b && a < l.y2);
+    // Strict avoidance of parallel overlap (other vertical lines on same X)
+    const lineFree = !usedXLanes.some(l => Math.abs(l.x - x) < 6 && l.y1 < b && a < l.y2);
     if(!lineFree) return false;
-    if(crossesHorizontalLane(x, a, b)) return false;
-    // Vertical segments must avoid all cards, including members of the same family.
+
+    // Allow orthogonal crossings (horizontal lines cutting through this vertical)
     return !verticalHitsNode(x, a, b, null);
   }
 
@@ -762,21 +769,35 @@ function drawGraph(){
       }
 
       // 2. Horizontal jog (if needed)
+      // Find a clean Y-lane for the jog to avoid stacking with neighbors
+      const safeJogY = findFreeYLane(jogY, a.x, ax, startY-20, startY+40, famMembers);
+      
+      // If safeJogY differs from jogY, extend the stub to reach it
+      if(Math.abs(safeJogY - jogY) > 0.1){
+         // update stub endpoint
+         const prevStub = famG.lastElementChild;
+         if(prevStub && prevStub.tagName === 'line' && Math.abs(prevStub.getAttribute('x1')-a.x)<0.1){
+             prevStub.setAttribute('y2', safeJogY);
+             // reserve extended vertical
+             reserveXLane(a.x, jogY, safeJogY);
+         }
+      }
+
       if(Math.abs(ax - a.x) > 0.2){
         const jog=document.createElementNS('http://www.w3.org/2000/svg','line');
-        jog.setAttribute('x1',a.x); jog.setAttribute('y1',jogY);
-        jog.setAttribute('x2',ax);  jog.setAttribute('y2',jogY);
+        jog.setAttribute('x1',a.x); jog.setAttribute('y1',safeJogY);
+        jog.setAttribute('x2',ax);  jog.setAttribute('y2',safeJogY);
         famG.appendChild(jog);
-        reserveYLane(jogY, a.x, ax);
+        reserveYLane(safeJogY, a.x, ax);
       }
 
       // 3. Main vertical drop
-      if(Math.abs(yMid - jogY) > 0.1){
+      if(Math.abs(yMid - safeJogY) > 0.1){
         const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-        line.setAttribute('x1',ax); line.setAttribute('y1',jogY);
+        line.setAttribute('x1',ax); line.setAttribute('y1',safeJogY);
         line.setAttribute('x2',ax); line.setAttribute('y2',yMid);
         famG.appendChild(line);
-        reserveXLane(ax, jogY, yMid);
+        reserveXLane(ax, safeJogY, yMid);
       }
       
       a._ax = ax; // store adjusted X for bar
@@ -852,34 +873,39 @@ function drawGraph(){
       
       const jogY = endY + clearance;
       
-      // Find safe lane for main drop from yChildBar to jogY
-      const ax = findFreeXLane(a.x, yChildBar, jogY, famMembers);
+      // Find a clean Y-lane for the jog (searching downwards from child usually)
+      // Actually we search UP because child is below. endY is top of card. clearance is negative.
+      // So jogY is above endY.
+      const safeJogY = findFreeYLane(jogY, a.x, ax, jogY-20, endY+10, famMembers);
+
+      // Find safe lane for main drop from yChildBar to safeJogY
+      const ax = findFreeXLane(a.x, yChildBar, safeJogY, famMembers);
 
       // 1. Main vertical drop from bar
-      if(Math.abs(jogY - yChildBar) > 0.1){
+      if(Math.abs(safeJogY - yChildBar) > 0.1){
         const line=document.createElementNS('http://www.w3.org/2000/svg','line');
         line.setAttribute('x1',ax); line.setAttribute('y1',yChildBar);
-        line.setAttribute('x2',ax); line.setAttribute('y2',jogY);
+        line.setAttribute('x2',ax); line.setAttribute('y2',safeJogY);
         famG.appendChild(line);
-        reserveXLane(ax, yChildBar, jogY);
+        reserveXLane(ax, yChildBar, safeJogY);
       }
 
       // 2. Horizontal jog
       if(Math.abs(ax - a.x) > 0.2){
         const jog=document.createElementNS('http://www.w3.org/2000/svg','line');
-        jog.setAttribute('x1',ax);  jog.setAttribute('y1',jogY);
-        jog.setAttribute('x2',a.x); jog.setAttribute('y2',jogY);
+        jog.setAttribute('x1',ax);  jog.setAttribute('y1',safeJogY);
+        jog.setAttribute('x2',a.x); jog.setAttribute('y2',safeJogY);
         famG.appendChild(jog);
-        reserveYLane(jogY, ax, a.x);
+        reserveYLane(safeJogY, ax, a.x);
       }
 
       // 3. Vertical stub into card
-      if(Math.abs(clearance) > 0.1){
+      if(Math.abs(endY - safeJogY) > 0.1){
         const stub = document.createElementNS('http://www.w3.org/2000/svg','line');
-        stub.setAttribute('x1', a.x); stub.setAttribute('y1', jogY);
+        stub.setAttribute('x1', a.x); stub.setAttribute('y1', safeJogY);
         stub.setAttribute('x2', a.x); stub.setAttribute('y2', endY);
         famG.appendChild(stub);
-        reserveXLane(a.x, jogY, endY);
+        reserveXLane(a.x, safeJogY, endY);
       }
     });
 
