@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260224_1910';
-const APP_BUILT_AT_ISO='2026-02-24T19:10:00+02:00';
+const APP_VERSION='20260224_1928';
+const APP_BUILT_AT_ISO='2026-02-24T19:28:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -296,48 +296,49 @@ function buildGraphModel(){
   // Fill still-unset nodes with neutral baseline first.
   PEOPLE.forEach(p=>{ if(!gen.has(p.id)) gen.set(p.id,0); });
 
-  // Semantic normalization (strict):
-  // - spouses in one family stay on one generation
-  // - siblings in one family stay on one generation
-  // - every parent must be at least one generation above each child
-  // Monotonic "raise only" relaxation avoids flip-flop and keeps meaning stable.
-  const MAX_RELAX_PASSES = 64;
+  // Semantic normalization (compact mode):
+  // - parents must stay above children
+  // - spouses share one generation
+  // - siblings in one family are collapsed to one generation (nearest compact level)
+  // This avoids "row explosion" while preserving parent/child meaning.
+  const MAX_RELAX_PASSES = 24;
   for(let pass=0; pass<MAX_RELAX_PASSES; pass++){
     let changed=false;
 
     FAMS.forEach(f=>{
       const ps=[...(f.husband||[]), ...(f.wife||[])].filter(id=>MAP[id]);
       const ch=(f.children||[]).filter(id=>MAP[id]);
-      if(!ps.length && !ch.length) return;
+      if(!ps.length || !ch.length) return;
 
-      if(ps.length){
-        const pg=Math.max(...ps.map(id=>gen.get(id)));
-        ps.forEach(id=>{
-          if(gen.get(id) < pg){
-            gen.set(id, pg);
-            changed=true;
-          }
-        });
-      }
+      const maxChildGen = Math.max(...ch.map(id=>gen.get(id)));
+      const minParentNeed = maxChildGen + 1;
 
-      if(ch.length){
-        const cg=Math.max(...ch.map(id=>gen.get(id)));
-        ch.forEach(id=>{
-          if(gen.get(id) < cg){
-            gen.set(id, cg);
-            changed=true;
-          }
-        });
-      }
+      // Raise only under-elevated parents to keep parent->child direction strict.
+      ps.forEach(id=>{
+        if(gen.get(id) < minParentNeed){
+          gen.set(id, minParentNeed);
+          changed=true;
+        }
+      });
 
-      ps.forEach(p=>{
-        ch.forEach(c=>{
-          const needParent = gen.get(c) + 1;
-          if(gen.get(p) < needParent){
-            gen.set(p, needParent);
-            changed=true;
-          }
-        });
+      // Spouses on same level.
+      const parentGen = Math.max(...ps.map(id=>gen.get(id)));
+      ps.forEach(id=>{
+        if(gen.get(id) !== parentGen){
+          gen.set(id, parentGen);
+          changed=true;
+        }
+      });
+
+      // Compact siblings: pull higher outliers down to the lowest sibling level,
+      // but never above parentGen-1.
+      const currentChildMin = Math.min(...ch.map(id=>gen.get(id)));
+      const targetChildGen = Math.min(currentChildMin, parentGen - 1);
+      ch.forEach(id=>{
+        if(gen.get(id) > targetChildGen){
+          gen.set(id, targetChildGen);
+          changed=true;
+        }
       });
     });
 
@@ -554,12 +555,12 @@ function drawGraph(){
 
   // Find a clear vertical X channel that avoids nodes for the whole segment.
   function findClearChannel(fromY, toY, preferX, famMembers){
-    if(!verticalHitsNode(preferX, fromY, toY, famMembers)) return preferX;
+    if(!verticalHitsNode(preferX, fromY, toY, null)) return preferX;
     for(let d=8; d<graph.worldW; d+=6){
       const xl = preferX - d;
-      if(xl > 4 && !verticalHitsNode(xl, fromY, toY, famMembers)) return xl;
+      if(xl > 4 && !verticalHitsNode(xl, fromY, toY, null)) return xl;
       const xr = preferX + d;
-      if(xr < graph.worldW-4 && !verticalHitsNode(xr, fromY, toY, famMembers)) return xr;
+      if(xr < graph.worldW-4 && !verticalHitsNode(xr, fromY, toY, null)) return xr;
     }
     return preferX;
   }
@@ -620,7 +621,8 @@ function drawGraph(){
     const lineFree = !usedXLanes.some(l => Math.abs(l.x - x) < 3 && l.y1 < b && a < l.y2);
     if(!lineFree) return false;
     if(crossesHorizontalLane(x, a, b)) return false;
-    return !verticalHitsNode(x, a, b, famMembers);
+    // Vertical segments must avoid all cards, including members of the same family.
+    return !verticalHitsNode(x, a, b, null);
   }
 
   function findFreeXLane(preferX, y1, y2, famMembers){
@@ -680,14 +682,14 @@ function drawGraph(){
     const parentAnchors=ps.map(id=>({
       id,
       x:xy[id].x+nodeW/2+getAnchorXOffset(id,'parent',fi),
-      yTop:xy[id].y+INTO,
-      yBottom:xy[id].y+nodeH-INTO,
+      yTop:xy[id].y,
+      yBottom:xy[id].y+nodeH,
     }));
     const childAnchors=ch.map(id=>({
       id,
       x:xy[id].x+nodeW/2+getAnchorXOffset(id,'child',fi),
-      yTop:xy[id].y+INTO,
-      yBottom:xy[id].y+nodeH-INTO,
+      yTop:xy[id].y,
+      yBottom:xy[id].y+nodeH,
     }));
 
     const parentBottomEdge = Math.max(...ps.map(id=>xy[id].y+nodeH));
