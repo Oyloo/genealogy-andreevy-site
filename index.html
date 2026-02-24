@@ -132,8 +132,8 @@ let graph=null; // {xy,nodeW,nodeH,worldW,worldH}
 let view={x:0,y:0,w:100,h:100};
 
 // Manual build marker: updates on each publish commit.
-const APP_VERSION='20260225_0010';
-const APP_BUILT_AT_ISO='2026-02-25T00:10:00+02:00';
+const APP_VERSION='20260225_0015';
+const APP_BUILT_AT_ISO='2026-02-25T00:15:00+02:00';
 
 const elMeta=document.getElementById('meta');
 const elVersion=document.getElementById('version');
@@ -513,24 +513,24 @@ function drawGraph(){
   edgeLayer.setAttribute('data-layer','edges');
   edgeLayer.setAttribute('pointer-events','none');
 
-  // === FAMILY COLOR PALETTE (perceptually ordered for max contrast) ===
+  // === FAMILY COLOR PALETTE (max perceptual contrast) ===
   const FAMILY_COLORS = [
     '#f7a072', // оранжевый
-    '#4ade80', // зелёный
     '#38bdf8', // ярко-голубой
     '#fb7185', // красный
+    '#4ade80', // зелёный
     '#fbbf24', // жёлтый
     '#a78bfa', // пурпурный
     '#5eead4', // бирюза
-    '#f472b6', // маджента
+    '#fb923c', // оранжево-жёлтый
     '#a3e635', // лайм
-    '#c084fc', // светлый пурпур
-    '#f87171', // красный-2
+    '#f472b6', // маджента
     '#67e8f9', // циан
-    '#86efac', // светлый зелёный
-    '#fb923c', // жёлто-оранжевый
     '#e879f9', // розово-фиолетовый
+    '#c084fc', // светлый пурпур
     '#fcd34d', // золотой
+    '#86efac', // светлый зелёный
+    '#f87171', // красный-2
     '#6ec6ff', // светлый голубой
   ];
 
@@ -698,7 +698,7 @@ function drawGraph(){
     return (idx - (total-1)/2) * (spread / Math.max(1, total-1));
   }
 
-  // === COLOR ASSIGNMENT: Spatial stripe coloring with neighbor avoidance ===
+  // === COLOR ASSIGNMENT: Multi-neighbor aware coloring ===
   // Calculate center X for each family (from their parents)
   const famBounds = FAMS.map((f, fi) => {
     const ps = [...(f.husband||[]), ...(f.wife||[])].filter(id=>xy[id]);
@@ -711,21 +711,26 @@ function drawGraph(){
   // Sort by X position
   famBounds.sort((a, b) => a.x - b.x);
   
-  // Assign colors: ensure no two adjacent families share the same color
+  // Assign colors: ensure no adjacent families share the same color
   const famColors = new Array(FAMS.length).fill(null);
-  const usedColors = new Set();
   
   famBounds.forEach((item, idx) => {
-    // Collect colors of neighbors (previous family)
+    // Collect colors of left and right neighbors
     const neighborColors = new Set();
     if(idx > 0) neighborColors.add(famColors[famBounds[idx-1].fi]);
+    if(idx < famBounds.length-1 && famColors[famBounds[idx+1].fi]) {
+      neighborColors.add(famColors[famBounds[idx+1].fi]);
+    }
     
-    // Find first unused color (prefer ones not used by neighbors)
+    // Find a color not used by neighbors
     let colorIdx = 0;
     while(colorIdx < FAMILY_COLORS.length && neighborColors.has(FAMILY_COLORS[colorIdx])) {
       colorIdx++;
     }
-    if(colorIdx >= FAMILY_COLORS.length) colorIdx = idx % FAMILY_COLORS.length;
+    // Fallback if all colors are taken by neighbors (shouldn't happen with 17 colors)
+    if(colorIdx >= FAMILY_COLORS.length) {
+      colorIdx = (idx * 3) % FAMILY_COLORS.length; // Use prime-like offset
+    }
     
     famColors[item.fi] = FAMILY_COLORS[colorIdx];
   });
