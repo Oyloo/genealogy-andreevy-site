@@ -620,6 +620,8 @@ function centerOnSelected(){
     const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
     if (leftPanel && rightPanel) {
       const scaleX = view.w / host.clientWidth;
+      // Смещение = (rightWidth - leftWidth) / 2 в пикселях экрана
+      // Переводим в мировые координаты
       cx += ((rightPanel.offsetWidth - leftPanel.offsetWidth) / 2) * scaleX;
     }
   }
