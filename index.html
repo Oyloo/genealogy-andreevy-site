@@ -613,7 +613,17 @@ function zoom(factor){
 function centerOnSelected(){
   if(!graph || !selected || !graph.xy[selected]) return;
   const c=graph.xy[selected];
-  const cx=c.x+graph.nodeW/2, cy=c.y+graph.nodeH/2;
+  let cx=c.x+graph.nodeW/2, cy=c.y+graph.nodeH/2;
+  
+  if(window.innerWidth > 1100) {
+    const leftPanel = document.querySelector('.layout > .panel:nth-child(1)');
+    const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
+    if (leftPanel && rightPanel) {
+      const scaleX = view.w / host.clientWidth;
+      cx += ((rightPanel.offsetWidth - leftPanel.offsetWidth) / 2) * scaleX;
+    }
+  }
+
   view.x=cx-view.w/2; view.y=cy-view.h/2;
   clampView();
   applyViewBox();
