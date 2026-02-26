@@ -279,6 +279,21 @@ function renderVersionInfo(){
 }
 
 
+function getSurnameFirst(p){
+  if(p.cachedSurnameFirst) return p.cachedSurnameFirst;
+  let raw = p.name_raw || '';
+  let m = raw.match(/^(.*?)?\/(.*?)\/(.*)?$/);
+  if(m){
+    let g=(m[1]||'').trim(), s=(m[2]||'').trim(), suf=(m[3]||'').trim();
+    if(s) {
+      p.cachedSurnameFirst = `${s} ${g} ${suf}`.trim();
+      return p.cachedSurnameFirst;
+    }
+  }
+  p.cachedSurnameFirst = p.name || p.name_raw || p.id;
+  return p.cachedSurnameFirst;
+}
+
 function renderList(arr){
   elCount.textContent = `${arr.length}/${PEOPLE.length}`;
   elList.innerHTML='';
@@ -286,7 +301,7 @@ function renderList(arr){
     const d=document.createElement('div');
     d.className='item'+(selected===p.id?' active':'');
     d.dataset.id=p.id;
-    d.innerHTML=`<div><b>${p.emoji} ${esc(p.name||p.name_raw||p.id)}</b></div>`;
+    d.innerHTML=`<div><b>${p.emoji||''} ${esc(getSurnameFirst(p))}</b></div>`;
     d.onclick=()=>select(p.id,true);
     elList.appendChild(d);
   });
@@ -299,7 +314,7 @@ function fmtEvents(arr){
 
 function links(ids){
   if(!ids||!ids.length) return '<span class="small">—</span>';
-  return ids.map(id=>{const p=MAP[id]; return `<a href='#' data-j='${id}' class='j'>${p?.emoji||'👤'} ${esc((p?.name)||p?.name_raw||'')}</a>`}).join('<br>');
+  return ids.map(id=>{const p=MAP[id]; return `<a href='#' data-j='${id}' class='j'>${p?.emoji||'👤'} ${esc(p?getSurnameFirst(p):id)}</a>`}).join('<br>');
 }
 
 function renderDetails(id){
@@ -310,8 +325,8 @@ function renderDetails(id){
   const row=(title,val)=>`<div class='row'><div class='k'>${title}</div><div class='v'>${val}</div></div>`;
 
   let html=`
-    <div class='row'><b style='font-size:18px'>${esc(p.name||p.name_raw||id)}</b></div>
-    <div class='row small'>${p.emoji} · ${p.sex?esc(p.sex):''}</div>
+    <div class='row'><b style='font-size:18px'>${esc(getSurnameFirst(p))}</b></div>
+    <div class='row small'>${p.emoji||'👤'} · ${p.sex?esc(p.sex):''}</div>
     ${row('Рождение', fmtEvents(p.birth))}
     ${hasEvents(p.death) ? row('Смерть', fmtEvents(p.death)) : ''}
     ${hasEvents(p.burial) ? row('Погребение', fmtEvents(p.burial)) : ''}
@@ -1128,7 +1143,7 @@ function drawGraph(){
     rect.setAttribute('fill',fill); rect.setAttribute('stroke',stroke);
     g.appendChild(rect); // Background first
 
-    const [l1, l2, l3] = splitName3(p.name||p.name_raw,p.id, Math.max(8, Math.floor((nodeW-6)/7)));
+    const [l1, l2, l3] = splitName3(getSurnameFirst(p),p.id, Math.max(8, Math.floor((nodeW-6)/7)));
     const yy=years(p);
     
     // Layout: emoji + 3 lines of text + years.
@@ -1655,6 +1670,8 @@ async function init(){
   const r=await fetch('data.json');
   DATA=await r.json();
   PEOPLE=DATA.people;
+  PEOPLE.forEach(p=>getSurnameFirst(p));
+  PEOPLE.sort((a,b)=>getSurnameFirst(a).localeCompare(getSurnameFirst(b)));
   FAMS=DATA.families;
   MAP=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
 
