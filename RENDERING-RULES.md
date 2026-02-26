@@ -1,8 +1,8 @@
 # Genealogy Rendering Rules (Source of Truth)
 
-Updated: 2026-02-25
+Updated: 2026-02-26
 Scope: `/Users/oyloo/.openclaw/workspace/genealogy-site/`
-Current Version: `20260225_0035` (intersection-aware coloring + thick lines + no-pink-blue palette)
+Current Version: `20260226_0039` (intersection-aware coloring + thick lines + no-pink-blue palette + panel-aware fitView)
 
 ## 1) Semantics first
 - Visual routing must never change genealogical meaning.
@@ -29,10 +29,24 @@ Current Version: `20260225_0035` (intersection-aware coloring + thick lines + no
 - Cards stay visually readable.
 - Edge layering is allowed only if semantics remain unambiguous and no card-cuts occur.
 
+## 5.5) View/Viewport rules (fitView + center between panels)
+- **Goal**: Tree must fit entirely between left panel (ЛЮДИ) and right panel (КАРТОЧКА + ВСЕ ПОЛЯ), horizontally centered.
+- **fitView logic**:
+  1. Calculate available width: `availableWidth = svgWidth - leftPanelWidth - rightPanelWidth`
+  2. Calculate zoom factors: `zoomX = availableWidth / graphWorldW`, `zoomY = svgHeight / graphWorldH`
+  3. Apply minimum zoom: `zoom = min(zoomX, zoomY)` (never overflow)
+  4. Set view dimensions: `viewW = graphWorldW / zoom`, `viewH = graphWorldH / zoom`
+  5. Center horizontally between panels using pixel offset → world offset conversion
+  6. Center vertically in available height
+  
+- **Result**: Tree scales down if needed to fit, and is always centered between panels with 7±2px precision.
+- **Test**: `scripts/test_centering_proper.py` validates tree bounds and centering.
+
 ## 6) Required pre-release checks
 - Automated: zero line-card intersections.
 - Automated: no forbidden line-line crossings.
 - Automated: every child path resolves through a family hub.
+- Automated: tree fits between panels (no overlap), centered within ±20px (`test_centering_proper.py`).
 - Manual: inspect known sensitive cluster around Minadora and siblings.
 
 ## 7) Family line coloring (v0035)
