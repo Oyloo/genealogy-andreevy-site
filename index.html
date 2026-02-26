@@ -579,7 +579,41 @@ function applyViewBox(){
 
 function fitView(){
   if(!graph) return;
+  
+  // Start with full graph
   view={x:0,y:0,w:graph.worldW,h:graph.worldH};
+  
+  // Fit and center between side panels
+  if(window.innerWidth > 1100) {
+    const leftPanel = document.querySelector('.layout > .panel:nth-child(1)');
+    const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
+    if (leftPanel && rightPanel) {
+      const panelLeft = leftPanel.offsetWidth;
+      const panelRight = rightPanel.offsetWidth;
+      const availableWidth = host.clientWidth - panelLeft - panelRight;
+      const availableHeight = host.clientHeight;
+      
+      // Calculate zoom to fit tree in available space
+      const zoomX = availableWidth / graph.worldW;
+      const zoomY = availableHeight / graph.worldH;
+      const zoom = Math.min(zoomX, zoomY);
+      
+      // Set new view dimensions
+      view.w = graph.worldW / zoom;
+      view.h = graph.worldH / zoom;
+      
+      // Center in available space
+      const visibleCenterPixels = panelLeft + availableWidth / 2;
+      const screenCenterPixels = host.clientWidth / 2;
+      const pixelOffset = visibleCenterPixels - screenCenterPixels;
+      const worldOffset = pixelOffset / zoom;
+      
+      const worldCenter = graph.worldW / 2;
+      view.x = worldCenter - worldOffset - view.w / 2;
+      view.y = graph.worldH / 2 - view.h / 2;
+    }
+  }
+  
   applyViewBox();
 }
 
@@ -1691,7 +1725,7 @@ async function init(){
   bindGraphInteractions();
 
   const start = MAP['I1'] ? 'I1' : PEOPLE[0]?.id;
-  if(start) select(start,true);
+  if(start) select(start,false);  // false - don't center, fitView already positioned it
 
   elQ.oninput=()=>{
     const q=elQ.value.trim();
