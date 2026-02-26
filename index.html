@@ -580,29 +580,6 @@ function applyViewBox(){
 function fitView(){
   if(!graph) return;
   view={x:0,y:0,w:graph.worldW,h:graph.worldH};
-  
-  // Center the graph between side panels
-  if(window.innerWidth > 1100) {
-    const leftPanel = document.querySelector('.layout > .panel:nth-child(1)');
-    const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
-    if (leftPanel && rightPanel) {
-      // Visible center in pixels on screen
-      const panelLeft = leftPanel.offsetWidth;
-      const panelRight = rightPanel.offsetWidth;
-      const visibleCenterPixels = panelLeft + (host.clientWidth - panelLeft - panelRight) / 2;
-      const screenCenterPixels = host.clientWidth / 2;
-      const pixelOffset = visibleCenterPixels - screenCenterPixels;
-      
-      // Convert to world coordinates
-      const scaleX = view.w / host.clientWidth;
-      const worldOffset = pixelOffset * scaleX;
-      
-      // Center the world
-      const worldCenter = graph.worldW / 2;
-      view.x = worldCenter + worldOffset - view.w / 2;
-    }
-  }
-  
   applyViewBox();
 }
 
@@ -632,25 +609,7 @@ function zoom(factor){
 function centerOnSelected(){
   if(!graph || !selected || !graph.xy[selected]) return;
   const c=graph.xy[selected];
-  let cx=c.x+graph.nodeW/2, cy=c.y+graph.nodeH/2;
-  
-  // Apply the same compensation as fitView
-  if(window.innerWidth > 1100) {
-    const leftPanel = document.querySelector('.layout > .panel:nth-child(1)');
-    const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
-    if (leftPanel && rightPanel) {
-      const panelLeft = leftPanel.offsetWidth;
-      const panelRight = rightPanel.offsetWidth;
-      const visibleCenterPixels = panelLeft + (host.clientWidth - panelLeft - panelRight) / 2;
-      const screenCenterPixels = host.clientWidth / 2;
-      const pixelOffset = visibleCenterPixels - screenCenterPixels;
-      
-      const scaleX = view.w / host.clientWidth;
-      const worldOffset = pixelOffset * scaleX;
-      cx += worldOffset;
-    }
-  }
-
+  const cx=c.x+graph.nodeW/2, cy=c.y+graph.nodeH/2;
   view.x=cx-view.w/2; view.y=cy-view.h/2;
   clampView();
   applyViewBox();
