@@ -579,11 +579,30 @@ function applyViewBox(){
 
 function fitView(){
   if(!graph) return;
-  // Start slightly zoomed out to ensure the entire graph is visible, 
-  // and give some breathing room for panning to work immediately
-  // without hitting bounds too early if bounds were tight.
-  view={x: -graph.worldW*0.1, y: -graph.worldH*0.1, w: graph.worldW*1.2, h: graph.worldH*1.2};
-  clampView();
+  view={x:0,y:0,w:graph.worldW,h:graph.worldH};
+  
+  // Center the graph between side panels
+  if(window.innerWidth > 1100) {
+    const leftPanel = document.querySelector('.layout > .panel:nth-child(1)');
+    const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
+    if (leftPanel && rightPanel) {
+      // Visible center in pixels on screen
+      const panelLeft = leftPanel.offsetWidth;
+      const panelRight = rightPanel.offsetWidth;
+      const visibleCenterPixels = panelLeft + (host.clientWidth - panelLeft - panelRight) / 2;
+      const screenCenterPixels = host.clientWidth / 2;
+      const pixelOffset = visibleCenterPixels - screenCenterPixels;
+      
+      // Convert to world coordinates
+      const scaleX = view.w / host.clientWidth;
+      const worldOffset = pixelOffset * scaleX;
+      
+      // Center the world
+      const worldCenter = graph.worldW / 2;
+      view.x = worldCenter + worldOffset - view.w / 2;
+    }
+  }
+  
   applyViewBox();
 }
 
@@ -615,14 +634,20 @@ function centerOnSelected(){
   const c=graph.xy[selected];
   let cx=c.x+graph.nodeW/2, cy=c.y+graph.nodeH/2;
   
+  // Apply the same compensation as fitView
   if(window.innerWidth > 1100) {
     const leftPanel = document.querySelector('.layout > .panel:nth-child(1)');
     const rightPanel = document.querySelector('.layout > .panel:nth-child(3)');
     if (leftPanel && rightPanel) {
+      const panelLeft = leftPanel.offsetWidth;
+      const panelRight = rightPanel.offsetWidth;
+      const visibleCenterPixels = panelLeft + (host.clientWidth - panelLeft - panelRight) / 2;
+      const screenCenterPixels = host.clientWidth / 2;
+      const pixelOffset = visibleCenterPixels - screenCenterPixels;
+      
       const scaleX = view.w / host.clientWidth;
-      // Смещение = (rightWidth - leftWidth) / 2 в пикселях экрана
-      // Переводим в мировые координаты
-      cx += ((rightPanel.offsetWidth - leftPanel.offsetWidth) / 2) * scaleX;
+      const worldOffset = pixelOffset * scaleX;
+      cx += worldOffset;
     }
   }
 

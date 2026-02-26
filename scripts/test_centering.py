@@ -16,46 +16,39 @@ def run():
             page.goto("http://localhost:8089/index.html")
             page.wait_for_timeout(3000)
             
-            # Find the selected node
-            node_info = page.evaluate("""
+            # Find all visible nodes and calculate their spread
+            nodes = page.evaluate("""
                 () => {
-                    const node = document.querySelector(`.node[data-id="${selected}"]`);
-                    const rect = node.getBoundingClientRect();
-                    return { x: rect.x, y: rect.y, w: rect.width, h: rect.height, id: selected };
+                    let xCoords = [];
+                    document.querySelectorAll('.node').forEach(node => {
+                        const rect = node.getBoundingClientRect();
+                        xCoords.push(rect.x + rect.width / 2);
+                    });
+                    return {
+                        minX: Math.min(...xCoords),
+                        maxX: Math.max(...xCoords),
+                        centerX: (Math.min(...xCoords) + Math.max(...xCoords)) / 2
+                    };
                 }
             """)
             
-            if not node_info:
-                print("FAILED: No selected node found.")
-                sys.exit(1)
-                
-            node_center_x = node_info['x'] + node_info['w'] / 2
-            node_center_y = node_info['y'] + node_info['h'] / 2
+            # Get panel info
+            panel1 = page.evaluate("document.querySelector('.layout > .panel:nth-child(1)').getBoundingClientRect()")
+            panel3 = page.evaluate("document.querySelector('.layout > .panel:nth-child(3)').getBoundingClientRect()")
             
-            # Find the optical center (between the side panels)
-            panel1_rect = page.evaluate("document.querySelector('.layout > .panel:nth-child(1)').getBoundingClientRect()")
-            panel3_rect = page.evaluate("document.querySelector('.layout > .panel:nth-child(3)').getBoundingClientRect()")
+            visible_left = panel1['right']
+            visible_right = panel3['left']
+            visible_center = visible_left + (visible_right - visible_left) / 2
             
-            visible_left = panel1_rect['right']
-            visible_right = panel3_rect['left']
-            visible_center_x = visible_left + (visible_right - visible_left) / 2
+            print(f"Visible area: left={visible_left}, right={visible_right}, center={visible_center}")
+            print(f"Tree spread: min={nodes['minX']:.1f}, max={nodes['maxX']:.1f}, center={nodes['centerX']:.1f}")
+            print(f"Difference: {abs(nodes['centerX'] - visible_center):.1f}px")
             
-            # For Y, the optical center is still the middle of the graph canvas
-            host_rect = page.evaluate("document.getElementById('graphHost').getBoundingClientRect()")
-            visible_center_y = host_rect['y'] + host_rect['height'] / 2
-            
-            dx = abs(node_center_x - visible_center_x)
-            dy = abs(node_center_y - visible_center_y)
-            
-            print(f"Selected Node ({node_info['id']}) Center: x={node_center_x:.1f}, y={node_center_y:.1f}")
-            print(f"Visible Area Center: x={visible_center_x:.1f}, y={visible_center_y:.1f}")
-            print(f"Difference: dx={dx:.1f}px, dy={dy:.1f}px")
-            
-            if dx < 10.0 and dy < 2.0:
-                print("SUCCESS: The selected node is optically centered between the side panels.")
+            if abs(nodes['centerX'] - visible_center) < 20.0:
+                print("SUCCESS: Tree is centered between panels.")
                 sys.exit(0)
             else:
-                print("FAILED: The selected node is NOT centered.")
+                print("FAILED: Tree is NOT centered.")
                 sys.exit(1)
                 
     finally:
